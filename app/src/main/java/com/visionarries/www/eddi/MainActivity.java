@@ -1,17 +1,31 @@
 package com.visionarries.www.eddi;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 
 public class MainActivity extends ActionBarActivity {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        final Button switchact =(Button)findViewById(R.id.startbutton);
+        switchact.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent act2 = new Intent(view.getContext(),MainActivity.class);
+                startActivity(act2);
+            }
+        });
     }
 
 
