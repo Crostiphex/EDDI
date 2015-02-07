@@ -22,7 +22,7 @@ public class MainActivity extends ActionBarActivity {
         switchact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent act2 = new Intent(view.getContext(),MainActivity.class);
+                Intent act2 = new Intent(view.getContext(),CustomerName.class);
                 startActivity(act2);
             }
         });
