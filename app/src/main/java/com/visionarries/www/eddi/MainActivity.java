@@ -1,5 +1,6 @@
 package com.visionarries.www.eddi;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -7,6 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.Toast;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -19,11 +22,30 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         final Button switchact =(Button)findViewById(R.id.startbutton);
+        final CheckBox want_user = (CheckBox) findViewById(R.id.newUserCheckBox);
+
         switchact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
+if(want_user.isChecked()){
                 Intent act2 = new Intent(view.getContext(),CustomerName.class);
-                startActivity(act2);
+                startActivity(act2);}
+                else{
+
+    Context context = getApplicationContext();
+    CharSequence text = "You didn't check the box!";
+    int duration = Toast.LENGTH_SHORT;
+    Toast toast = Toast.makeText(context, text, duration);
+    toast.show();
+}
+
+
+
+
+
             }
         });
     }

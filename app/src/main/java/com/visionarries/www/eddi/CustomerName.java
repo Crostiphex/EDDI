@@ -27,9 +27,8 @@ public class CustomerName extends MainActivity {
 
                 EditText edit_text = (EditText) findViewById(R.id.nameString);
                 CharSequence edit_text_value = edit_text.getText();
-                setTitle("EditText:" + edit_text_value);
+
                 Context context = getApplicationContext();
-                CharSequence text = "Hello toast!";
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, edit_text_value, duration);

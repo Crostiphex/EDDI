@@ -11,10 +11,10 @@
     <Button
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="Press To Start"
+        android:text="Tap To Start"
         android:id="@+id/startbutton"
         android:background="#179288ff"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/newUserCheckBox"
         android:layout_centerHorizontal="true" />
 
     <ImageView
@@ -25,5 +25,16 @@
         android:layout_marginTop="48dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add User Profile"
+        android:id="@+id/newUserCheckBox"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="74dp"
+        android:layout_marginEnd="74dp" />
 
 </RelativeLayout>
