@@ -8,8 +8,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import java.io.File;
-import java.io.FileOutputStream;
 
 
 public class CustomerName extends MainActivity {
@@ -21,11 +19,11 @@ public class CustomerName extends MainActivity {
         setContentView(R.layout.customer_data);
 
 
-        final Button switchact =(Button) findViewById(R.id.nameInput);
-        switchact.setOnClickListener(new View.OnClickListener() {
+        final Button switch_act =(Button) findViewById(R.id.nameInput);
+        switch_act.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent act2 = new Intent(view.getContext(),TestScreen.class);
+                Intent act2 = new Intent(view.getContext(), TestScreen.class);
                 startActivity(act2);
 
                 EditText edit_text = (EditText) findViewById(R.id.nameString);
@@ -34,7 +32,7 @@ public class CustomerName extends MainActivity {
                 Context context = getApplicationContext();
                 int duration = Toast.LENGTH_SHORT;
 
-                Toast toast = Toast.makeText(context, "Customer Data saved as: "+edit_text_value, duration);
+                Toast toast = Toast.makeText(context, "Customer Data saved as: " + edit_text_value, duration);
                 toast.show();
 
 
