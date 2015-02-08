@@ -37,16 +37,7 @@ public class CustomerName extends MainActivity {
                 Toast toast = Toast.makeText(context, "Customer Data saved as: "+edit_text_value, duration);
                 toast.show();
 
-                File file = new File(context.getFilesDir(), edit_text_value.toString());
-                FileOutputStream outputStream;
 
-                try {
-                    outputStream = openFileOutput(edit_text_value.toString(), Context.MODE_PRIVATE);
-                    outputStream.write(edit_text_value.toString().getBytes());
-                    outputStream.close();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
             }
         });
     }
