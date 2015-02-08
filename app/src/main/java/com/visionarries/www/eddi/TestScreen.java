@@ -68,30 +68,30 @@ public class TestScreen extends MainActivity{
 
             }
         }
-        rightimg.setImageBitmap(operation);
+       leftimg.setImageBitmap(operation);
     }
 
     public void rightgray(View view){
-        Bitmap operation = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
+        Bitmap operation1 = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
 
         for(int i=0; i< rightbmp.getWidth(); i++){
 
             for(int j=0; j< rightbmp.getHeight(); j++){
 
-                double ij=(i-(rightbmp.getWidth()/2))^2*(j-(rightbmp.getWidth()/2))^2;
-                double k = (rightbmp.getWidth()/2)*(rightbmp.getWidth()/3);
+                double ij=(i-(rightbmp.getWidth()/2))*(i-(rightbmp.getWidth()/2))+(j-(rightbmp.getWidth()/2))*(j-(rightbmp.getWidth()/2));
+                double k = (rightbmp.getWidth()/2)*(rightbmp.getWidth()/2);
                 double dis=Math.sqrt(2*(rightbmp.getWidth()^2));
                 if (ij<=k){
                     int test = (int)((contrast*255/2*Math.cos((-i+j)*Math.PI*.45/dis)+255/2));
                     //(j-i*Math.sqrt(3)-2*Math.cos((j*Math.sqrt(3)+i)/2));
 
-                    operation.setPixel(i, j, Color.argb(255, test, test, test));}
+                    operation1.setPixel(i, j, Color.argb(255, test, test, test));}
                 else{
                     int test=128;
-                    operation.setPixel(i, j, Color.argb(255, test, test, test));}
+                    operation1.setPixel(i, j, Color.argb(255, test, test, test));}
             }
         }
-        rightimg.setImageBitmap(operation);
+        rightimg.setImageBitmap(operation1);
     }
 
 }
