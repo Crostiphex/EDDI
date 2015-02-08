@@ -12,7 +12,8 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="85dp"
-        android:layout_marginStart="85dp" />
+        android:layout_marginStart="85dp"
+        android:src="@drawable/ic_launcher" />
 
     <ImageView
         android:layout_width="wrap_content"
@@ -22,7 +23,8 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_marginRight="85dp"
-        android:layout_marginEnd="85dp" />
+        android:layout_marginEnd="85dp"
+        android:src="@drawable/ic_launcher" />
 
     <Button
         style="?android:attr/buttonStyleSmall"

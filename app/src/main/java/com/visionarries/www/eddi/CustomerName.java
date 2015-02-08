@@ -22,7 +22,7 @@ public class CustomerName extends MainActivity {
         switchact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent act2 = new Intent(view.getContext(),MainActivity.class);
+                Intent act2 = new Intent(view.getContext(),TestScreen.class);
                 startActivity(act2);
 
                 EditText edit_text = (EditText) findViewById(R.id.nameString);
