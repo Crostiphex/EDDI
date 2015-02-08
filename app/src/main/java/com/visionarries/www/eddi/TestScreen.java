@@ -1,6 +1,7 @@
 package com.visionarries.www.eddi;
 
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -8,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class TestScreen extends MainActivity{
 
@@ -21,6 +23,8 @@ public class TestScreen extends MainActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_screen);
+
+
 
         leftimg = (ImageView) findViewById(R.id.leftGrating);
         BitmapDrawable leftabmp = (BitmapDrawable) leftimg.getDrawable();
@@ -36,17 +40,29 @@ public class TestScreen extends MainActivity{
 
             @Override
             public void onClick(View view) {
+                long startTime = System.currentTimeMillis();
 
-                leftgray(view);
-           rightgray(view);
+                leftgray(view,1.0);
+                rightgray(view, .65);
+
+                long endTime = System.currentTimeMillis();
+
+                Context context = getApplicationContext();
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, "That took " + (endTime - startTime) + " milliseconds", duration);
+                toast.show();
+
+
+
             }
         });
     }
 
 
-    double  contrast = 1.0;
 
-    public void leftgray(View view){
+
+    public void leftgray(View view, double contrast){
         Bitmap operation = Bitmap.createBitmap(leftbmp.getWidth(), leftbmp.getHeight(), leftbmp.getConfig());
 
         for(int i=0; i< leftbmp.getWidth(); i++){
@@ -71,7 +87,7 @@ public class TestScreen extends MainActivity{
        leftimg.setImageBitmap(operation);
     }
 
-    public void rightgray(View view){
+    public void rightgray(View view, double contrast){
         Bitmap operation1 = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
 
         for(int i=0; i< rightbmp.getWidth(); i++){
