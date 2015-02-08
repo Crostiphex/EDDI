@@ -1,6 +1,7 @@
 package com.visionarries.www.eddi;
 
 
+
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -9,12 +10,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+
 public class TestScreen extends MainActivity{
 
-    private ImageView leftimg;
-    private Bitmap leftbmp;
-    private ImageView rightimg;
-    private Bitmap rightbmp;
+    public ImageView leftimg;
+    public Bitmap leftbmp;
+    public ImageView rightimg;
+    public Bitmap rightbmp;
 
 
     @Override
@@ -37,16 +39,17 @@ public class TestScreen extends MainActivity{
             @Override
             public void onClick(View view) {
 
-                leftgray(view);
-           rightgray(view);
+                left_gray(view,1.0);
+                right_gray(view,.75);
+
             }
         });
     }
 
 
-    double  contrast = 1.0;
 
-    public void leftgray(View view){
+
+    private void left_gray(View view, double contrast){
         Bitmap operation = Bitmap.createBitmap(leftbmp.getWidth(), leftbmp.getHeight(), leftbmp.getConfig());
 
         for(int i=0; i< leftbmp.getWidth(); i++){
@@ -71,12 +74,12 @@ public class TestScreen extends MainActivity{
        leftimg.setImageBitmap(operation);
     }
 
-    public void rightgray(View view){
+    private void right_gray(View view, double contrast){
         Bitmap operation1 = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
 
-        for(int i=0; i< rightbmp.getWidth(); i++){
+        for(int i=rightbmp.getWidth()-1; i>0;  i--){
 
-            for(int j=0; j< rightbmp.getHeight(); j++){
+            for(int j=rightbmp.getHeight()-1; j>0;  j--){
 
                 double ij=(i-(rightbmp.getWidth()/2))*(i-(rightbmp.getWidth()/2))+(j-(rightbmp.getWidth()/2))*(j-(rightbmp.getWidth()/2));
                 double k = (rightbmp.getWidth()/2)*(rightbmp.getWidth()/2);
