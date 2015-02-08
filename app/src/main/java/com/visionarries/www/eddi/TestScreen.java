@@ -1,7 +1,7 @@
 package com.visionarries.www.eddi;
 
 
-
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -9,20 +9,22 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-
+import android.widget.Toast;
 
 public class TestScreen extends MainActivity{
 
-    public ImageView leftimg;
-    public Bitmap leftbmp;
-    public ImageView rightimg;
-    public Bitmap rightbmp;
+    private ImageView leftimg;
+    private Bitmap leftbmp;
+    private ImageView rightimg;
+    private Bitmap rightbmp;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_screen);
+
+
 
         leftimg = (ImageView) findViewById(R.id.leftGrating);
         BitmapDrawable leftabmp = (BitmapDrawable) leftimg.getDrawable();
@@ -38,9 +40,20 @@ public class TestScreen extends MainActivity{
 
             @Override
             public void onClick(View view) {
+                long startTime = System.currentTimeMillis();
 
-                left_gray(view,1.0);
-                right_gray(view,.75);
+                leftgray(view,1.0);
+                rightgray(view, .65);
+
+                long endTime = System.currentTimeMillis();
+
+                Context context = getApplicationContext();
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, "That took " + (endTime - startTime) + " milliseconds", duration);
+                toast.show();
+
+
 
             }
         });
@@ -49,7 +62,7 @@ public class TestScreen extends MainActivity{
 
 
 
-    private void left_gray(View view, double contrast){
+    public void leftgray(View view, double contrast){
         Bitmap operation = Bitmap.createBitmap(leftbmp.getWidth(), leftbmp.getHeight(), leftbmp.getConfig());
 
         for(int i=0; i< leftbmp.getWidth(); i++){
@@ -74,12 +87,12 @@ public class TestScreen extends MainActivity{
        leftimg.setImageBitmap(operation);
     }
 
-    private void right_gray(View view, double contrast){
+    public void rightgray(View view, double contrast){
         Bitmap operation1 = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
 
-        for(int i=rightbmp.getWidth()-1; i>0;  i--){
+        for(int i=0; i< rightbmp.getWidth(); i++){
 
-            for(int j=rightbmp.getHeight()-1; j>0;  j--){
+            for(int j=0; j< rightbmp.getHeight(); j++){
 
                 double ij=(i-(rightbmp.getWidth()/2))*(i-(rightbmp.getWidth()/2))+(j-(rightbmp.getWidth()/2))*(j-(rightbmp.getWidth()/2));
                 double k = (rightbmp.getWidth()/2)*(rightbmp.getWidth()/2);
