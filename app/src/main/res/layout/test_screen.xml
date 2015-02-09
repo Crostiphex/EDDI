@@ -42,15 +42,13 @@
         android:layout_marginTop="42dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="#1effffff" />
+        android:background="#ff808080"
+        android:indeterminate="false" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="New Text"
         android:id="@+id/textView"
-        android:background="#1effffff"
-        android:layout_below="@+id/seekBar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp" />
+        android:layout_below="@+id/seekBar" />
 </RelativeLayout>

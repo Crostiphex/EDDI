@@ -45,8 +45,8 @@ public class TestScreen extends MainActivity{
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser)
             {
                 // TODO Auto-generated method stub
-                value.setText("Contrast value is "+progress);
-                GlobalVariable.p=progress;
+                value.setText("Contrast value is: "+progress+" %");
+
 
             }
 
@@ -67,8 +67,9 @@ public class TestScreen extends MainActivity{
                 long startTime = System.currentTimeMillis();
 
                 leftgray(view, 1.0);
-                rightgray(view,GlobalVariable.p/100);
+                double right=seekbar.getProgress()/100.0;
 
+                rightgray(view, right);
                 long endTime = System.currentTimeMillis();
 
                 Context context = getApplicationContext();
