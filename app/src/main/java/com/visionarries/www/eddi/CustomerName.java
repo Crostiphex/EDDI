@@ -8,6 +8,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+<<<<<<< HEAD
+=======
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
+>>>>>>> bbeb9ddaceb54f327fa518092a986325f5bf52c3
 
 
 public class CustomerName extends MainActivity {
@@ -35,8 +41,35 @@ public class CustomerName extends MainActivity {
                 Toast toast = Toast.makeText(context, "Customer Data saved as: " + edit_text_value, duration);
                 toast.show();
 
+<<<<<<< HEAD
+=======
+WriteBtn(view,edit_text.getText().toString());
+
+
+>>>>>>> bbeb9ddaceb54f327fa518092a986325f5bf52c3
 
             }
         });
+    }
+    // write text to file
+    public void WriteBtn (View v,String edit_text) {
+        // add-write text into file
+        try {
+            FileOutputStream file_out=openFileOutput(edit_text+".txt",MODE_PRIVATE);
+            OutputStreamWriter outputWriter=new OutputStreamWriter(file_out);
+            outputWriter.write(edit_text);
+            outputWriter.close();
+
+            Context context = getApplicationContext();
+
+File dir = getDir("name.txt",MODE_PRIVATE);
+
+           Toast.makeText(context, "Customer Data saved as: "+edit_text+". The directory is: "+dir, Toast.LENGTH_LONG).show();
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
