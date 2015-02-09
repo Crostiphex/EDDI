@@ -6,9 +6,12 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class TestScreen extends MainActivity{
@@ -18,12 +21,15 @@ public class TestScreen extends MainActivity{
     private ImageView rightimg;
     private Bitmap rightbmp;
 
-
+    SeekBar seekbar;
+    TextView value;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test_screen);
 
+        value = (TextView) findViewById(R.id.textView);
+        seekbar = (SeekBar) findViewById(R.id.seekBar);
 
 
         leftimg = (ImageView) findViewById(R.id.leftGrating);
@@ -35,15 +41,34 @@ public class TestScreen extends MainActivity{
         rightbmp = rightabmp.getBitmap();
 
         final Button makePattern =(Button)findViewById(R.id.makePattern);
+        seekbar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener()
+        {
+            public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser)
+            {
+                // TODO Auto-generated method stub
+                value.setText("Contrast value is "+progress);
+                GlobalVariable.p=progress;
+
+            }
+
+            public void onStartTrackingTouch(SeekBar seekBar)
+            {
+                // TODO Auto-generated method stub
+            }
+
+            public void onStopTrackingTouch(SeekBar seekBar)
+            {
+                // TODO Auto-generated method stub
+            }
+        });
+
         makePattern.setOnClickListener(new View.OnClickListener() {
-
-
             @Override
             public void onClick(View view) {
                 long startTime = System.currentTimeMillis();
 
-                leftgray(view,1.0);
-                rightgray(view, .65);
+                leftgray(view, 1.0);
+                rightgray(view,GlobalVariable.p/100);
 
                 long endTime = System.currentTimeMillis();
 
@@ -52,8 +77,6 @@ public class TestScreen extends MainActivity{
 
                 Toast toast = Toast.makeText(context, "That took " + (endTime - startTime) + " milliseconds", duration);
                 toast.show();
-
-
 
             }
         });
