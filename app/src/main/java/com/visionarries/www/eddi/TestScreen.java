@@ -44,21 +44,12 @@ public class TestScreen extends MainActivity{
         {
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser)
             {
-                // TODO Auto-generated method stub
-                value.setText("Contrast value is "+progress+" %");
-
-
+                                value.setText("Contrast value is "+progress+" %");
             }
 
-            public void onStartTrackingTouch(SeekBar seekBar)
-            {
-                // TODO Auto-generated method stub
-            }
+            public void onStartTrackingTouch(SeekBar seekBar){}
 
-            public void onStopTrackingTouch(SeekBar seekBar)
-            {
-                // TODO Auto-generated method stub
-            }
+            public void onStopTrackingTouch(SeekBar seekBar){}
         });
 
         makePattern.setOnClickListener(new View.OnClickListener() {
@@ -66,10 +57,10 @@ public class TestScreen extends MainActivity{
             public void onClick(View view) {
                 long startTime = System.currentTimeMillis();
 
-                leftgray(view, 1.0);
+                left_pattern(view, 1.0);
                 double right=seekbar.getProgress()/100.0;
 
-                rightgray(view, right);
+                right_pattern(view, right);
                 long endTime = System.currentTimeMillis();
 
                 Context context = getApplicationContext();
@@ -85,7 +76,7 @@ public class TestScreen extends MainActivity{
 
 
 
-    public void leftgray(View view, double contrast){
+    public void left_pattern(View view, double contrast){
         Bitmap operation = Bitmap.createBitmap(leftbmp.getWidth(), leftbmp.getHeight(), leftbmp.getConfig());
 
         for(int i=0; i< leftbmp.getWidth(); i++){
@@ -97,8 +88,8 @@ public class TestScreen extends MainActivity{
 
                 if (ij<=k){//displays pattern in a circle
 
-                    int test = (int)((contrast*(255/2)*Math.cos((i+j)*Math.PI*(.45/dis))+(255/2))); //pattern
-                    operation.setPixel(i, j, Color.argb(255, test, test, test));}
+                    int gray_level = (int)((contrast*(255/2)*Math.cos((i+j)*Math.PI*(.45/dis))+(255/2))); //pattern
+                    operation.setPixel(i, j, Color.argb(255, gray_level, gray_level, gray_level));}
 
                 else{
                     int test=128;
@@ -110,7 +101,7 @@ public class TestScreen extends MainActivity{
        leftimg.setImageBitmap(operation);
     }
 
-    public void rightgray(View view, double contrast){
+    public void right_pattern(View view, double contrast){
         Bitmap operation1 = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
 
         for(int i=0; i< rightbmp.getWidth(); i++){
@@ -121,10 +112,9 @@ public class TestScreen extends MainActivity{
                 double k = (rightbmp.getWidth()/2)*(rightbmp.getWidth()/2);
                 double dis=Math.sqrt(2*(rightbmp.getWidth()^2));
                 if (ij<=k){
-                    int test = (int)((contrast*255/2*Math.cos((-i+j)*Math.PI*.45/dis)+255/2));
-                    //(j-i*Math.sqrt(3)-2*Math.cos((j*Math.sqrt(3)+i)/2));
+                    int gray_level = (int)((contrast*255/2*Math.cos((-i+j)*Math.PI*.45/dis)+255/2));
 
-                    operation1.setPixel(i, j, Color.argb(255, test, test, test));}
+                    operation1.setPixel(i, j, Color.argb(255, gray_level, gray_level, gray_level));}
                 else{
                     int test=128;
                     operation1.setPixel(i, j, Color.argb(255, test, test, test));}
