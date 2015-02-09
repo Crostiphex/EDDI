@@ -55,10 +55,11 @@ WriteBtn(view,edit_text.getText().toString());
             outputWriter.close();
 
             Context context = getApplicationContext();
-            int duration = Toast.LENGTH_LONG;
+
 File dir = getDir("name.txt",MODE_PRIVATE);
-            Toast toast = Toast.makeText(context, "Customer Data saved as: "+edit_text+dir, duration);
-            toast.show();
+
+           Toast.makeText(context, "Customer Data saved as: "+edit_text+". The directory is: "+dir, Toast.LENGTH_LONG).show();
+
 
 
         } catch (Exception e) {
