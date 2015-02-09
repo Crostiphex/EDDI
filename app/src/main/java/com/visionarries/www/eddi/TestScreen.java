@@ -45,7 +45,7 @@ public class TestScreen extends MainActivity{
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser)
             {
                 // TODO Auto-generated method stub
-                value.setText("Contrast value is: "+progress+" %");
+                value.setText("Contrast value is "+progress+" %");
 
 
             }
