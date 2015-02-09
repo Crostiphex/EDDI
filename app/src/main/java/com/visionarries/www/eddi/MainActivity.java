@@ -10,16 +10,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Toast;
+import android.widget.ViewSwitcher;
 
 
 public class MainActivity extends ActionBarActivity {
-
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+
+
 
         final Button switchact =(Button)findViewById(R.id.startbutton);
         final CheckBox want_user = (CheckBox) findViewById(R.id.newUserCheckBox);
