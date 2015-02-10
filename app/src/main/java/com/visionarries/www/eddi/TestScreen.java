@@ -88,15 +88,15 @@ public class TestScreen extends MainActivity{
 
 
 //makes the pattern
-    public void left_pattern(View view, double contrast){
-        Bitmap operation = Bitmap.createBitmap(leftbmp.getWidth(), leftbmp.getHeight(), leftbmp.getConfig());
+    public void right_pattern(View view, double contrast){
+        Bitmap operation = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
 //the loop goes through each picture
-        for(int i=0; i< leftbmp.getWidth(); i++){
-            for(int j=0; j< leftbmp.getHeight(); j++){
+        for(int i=0; i< rightbmp.getWidth(); i++){
+            for(int j=0; j< rightbmp.getHeight(); j++){
 
-                double ij=(i-(leftbmp.getWidth()/2))*(i-(leftbmp.getWidth()/2))+(j-(leftbmp.getWidth()/2))*(j-(leftbmp.getWidth()/2));
-                double k = (leftbmp.getWidth()/2)*(leftbmp.getWidth()/2);
-                double dis=Math.sqrt(2*(leftbmp.getWidth()^2));
+                double ij=(i-(rightbmp.getWidth()/2))*(i-(rightbmp.getWidth()/2))+(j-(rightbmp.getWidth()/2))*(j-(rightbmp.getWidth()/2));
+                double k = (rightbmp.getWidth()/2)*(rightbmp.getWidth()/2);
+                double dis=Math.sqrt(2*(rightbmp.getWidth()^2));
 
                 if (ij<=k){//displays pattern in a circle
 
@@ -110,19 +110,20 @@ public class TestScreen extends MainActivity{
 
             }
         }
-       leftimg.setImageBitmap(operation);
+       rightimg.setImageBitmap(operation);
     }
 
 
-    public void right_pattern(View view, double contrast){
-        Bitmap operation1 = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
+    public void left_pattern(View view, double contrast){
+        Bitmap operation1 = Bitmap.createBitmap(leftbmp.getWidth(), leftbmp.getHeight(), leftbmp.getConfig());
 
-        for(int i=0; i< rightbmp.getWidth(); i++){
-            for(int j=0; j< rightbmp.getHeight(); j++){
+        for(int i=0; i< leftbmp.getWidth(); i++){
 
-                double ij=(i-(rightbmp.getWidth()/2))*(i-(rightbmp.getWidth()/2))+(j-(rightbmp.getWidth()/2))*(j-(rightbmp.getWidth()/2));
-                double k = (rightbmp.getWidth()/2)*(rightbmp.getWidth()/2);
-                double dis=Math.sqrt(2*(rightbmp.getWidth()^2));
+            for(int j=0; j< leftbmp.getHeight(); j++){
+
+                double ij=(i-(leftbmp.getWidth()/2))*(i-(leftbmp.getWidth()/2))+(j-(leftbmp.getWidth()/2))*(j-(leftbmp.getWidth()/2));
+                double k = (leftbmp.getWidth()/2)*(leftbmp.getWidth()/2);
+                double dis=Math.sqrt(2*(leftbmp.getWidth()^2));
                 if (ij<=k){
                     int gray_level = (int)((contrast*255/2*Math.cos((-i+j)*Math.PI*.65/dis+1.1)+255/2));
 
@@ -132,7 +133,7 @@ public class TestScreen extends MainActivity{
                     operation1.setPixel(i, j, Color.argb(255, test, test, test));}
             }
         }
-        rightimg.setImageBitmap(operation1);
+        leftimg.setImageBitmap(operation1);
     }
 
 }
