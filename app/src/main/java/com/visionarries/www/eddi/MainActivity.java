@@ -7,10 +7,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.Toast;
-import android.widget.ViewSwitcher;
+
 
 
 public class MainActivity extends ActionBarActivity {
@@ -21,8 +24,29 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final ImageView image = (ImageView)findViewById(R.id.imageView);
+        final Animation animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
+        final Animation animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fadeout);
 
+        Animation.AnimationListener animListener = new Animation.AnimationListener(){
 
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                image.setImageResource(R.drawable.eddi);
+                image.startAnimation(animationFadeIn);
+            }
+        };
+        image.startAnimation(animationFadeOut);
+        animationFadeIn.setAnimationListener(animListener);
+        animationFadeOut.setAnimationListener(animListener);
 
 
         final Button switchact =(Button)findViewById(R.id.startbutton);
@@ -76,4 +100,5 @@ if(want_user.isChecked()){
 
         return super.onOptionsItemSelected(item);
     }
+
 }
