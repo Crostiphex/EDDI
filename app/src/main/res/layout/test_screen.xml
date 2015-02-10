@@ -43,7 +43,9 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:background="#ff808080"
-        android:indeterminate="false" />
+        android:indeterminate="false"
+        android:progressTint="#ff000000"
+        android:thumbTint="#ff000000" />
 
     <TextView
         android:layout_width="wrap_content"

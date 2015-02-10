@@ -15,35 +15,43 @@ import android.widget.Toast;
 
 public class TestScreen extends MainActivity{
 
+    //defining the images
     private ImageView leftimg;
     private Bitmap leftbmp;
     private ImageView rightimg;
     private Bitmap rightbmp;
-
+//defining the seekbar and text underneath it
     SeekBar seekbar;
     TextView value;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        //this is just needed
         super.onCreate(savedInstanceState);
+        //sets the layout to the inputted ID
         setContentView(R.layout.test_screen);
 
+        //so we can call and edit the values
         value = (TextView) findViewById(R.id.textView);
         seekbar = (SeekBar) findViewById(R.id.seekBar);
 
-
+//defining the left image
         leftimg = (ImageView) findViewById(R.id.leftGrating);
         BitmapDrawable leftabmp = (BitmapDrawable) leftimg.getDrawable();
         leftbmp = leftabmp.getBitmap();
-
+//defining the right image
         rightimg = (ImageView) findViewById(R.id.rightGrating);
         BitmapDrawable rightabmp = (BitmapDrawable) rightimg.getDrawable();
         rightbmp = rightabmp.getBitmap();
-
+//this button makes the pattern
         final Button makePattern =(Button)findViewById(R.id.makePattern);
+
+        //this code is for the seekbar to function
         seekbar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener()
         {
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser)
             {
+                //when you move the seekbar is changed the text changes.
                                 value.setText("Contrast value is "+progress+" %");
             }
 
@@ -52,20 +60,24 @@ public class TestScreen extends MainActivity{
             public void onStopTrackingTouch(SeekBar seekBar){}
         });
 
+//listener for the button
+
         makePattern.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+                public void onClick(View view) {
+                //this is to keep track of how long it takes for the image functions to be executed.
                 long startTime = System.currentTimeMillis();
+//calls the function that rewrites thes the bitmap data for the left and right images
 
                 left_pattern(view, 1.0);
+                //calls the value of what the seekbar is.
                 double right=seekbar.getProgress()/100.0;
-
                 right_pattern(view, right);
                 long endTime = System.currentTimeMillis();
 
                 Context context = getApplicationContext();
                 int duration = Toast.LENGTH_SHORT;
-
+//toast to show the time it takes to run the programs
                 Toast toast = Toast.makeText(context, "That took " + (endTime - startTime) + " milliseconds", duration);
                 toast.show();
 
@@ -75,10 +87,10 @@ public class TestScreen extends MainActivity{
 
 
 
-
+//makes the pattern
     public void left_pattern(View view, double contrast){
         Bitmap operation = Bitmap.createBitmap(leftbmp.getWidth(), leftbmp.getHeight(), leftbmp.getConfig());
-
+//the loop goes through each picture
         for(int i=0; i< leftbmp.getWidth(); i++){
             for(int j=0; j< leftbmp.getHeight(); j++){
 
@@ -89,7 +101,7 @@ public class TestScreen extends MainActivity{
                 if (ij<=k){//displays pattern in a circle
 
                     int gray_level = (int)((contrast*(255/2)*Math.cos((i+j)*Math.PI*(.45/dis))+(255/2))); //pattern
-                    operation.setPixel(i, j, Color.argb(255, gray_level, gray_level, gray_level));}
+                    operation.setPixel(i, j, Color.argb(255, gray_level, gray_level, gray_level));}//actually assigns the values.
 
                 else{
                     int test=128;
@@ -100,6 +112,7 @@ public class TestScreen extends MainActivity{
         }
        leftimg.setImageBitmap(operation);
     }
+
 
     public void right_pattern(View view, double contrast){
         Bitmap operation1 = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
