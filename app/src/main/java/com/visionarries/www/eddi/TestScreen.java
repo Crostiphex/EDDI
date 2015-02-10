@@ -100,7 +100,7 @@ public class TestScreen extends MainActivity{
 
                 if (ij<=k){//displays pattern in a circle
 
-                    int gray_level = (int)((contrast*(255/2)*Math.cos((i+j)*Math.PI*(.45/dis))+(255/2))); //pattern
+                    int gray_level = (int)((contrast*(255/2)*Math.cos((i+j)*Math.PI*(.65/dis))+(255/2))); //pattern
                     operation.setPixel(i, j, Color.argb(255, gray_level, gray_level, gray_level));}//actually assigns the values.
 
                 else{
@@ -118,14 +118,13 @@ public class TestScreen extends MainActivity{
         Bitmap operation1 = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
 
         for(int i=0; i< rightbmp.getWidth(); i++){
-
             for(int j=0; j< rightbmp.getHeight(); j++){
 
                 double ij=(i-(rightbmp.getWidth()/2))*(i-(rightbmp.getWidth()/2))+(j-(rightbmp.getWidth()/2))*(j-(rightbmp.getWidth()/2));
                 double k = (rightbmp.getWidth()/2)*(rightbmp.getWidth()/2);
                 double dis=Math.sqrt(2*(rightbmp.getWidth()^2));
                 if (ij<=k){
-                    int gray_level = (int)((contrast*255/2*Math.cos((-i+j)*Math.PI*.45/dis)+255/2));
+                    int gray_level = (int)((contrast*255/2*Math.cos((-i+j)*Math.PI*.65/dis+1.1)+255/2));
 
                     operation1.setPixel(i, j, Color.argb(255, gray_level, gray_level, gray_level));}
                 else{
