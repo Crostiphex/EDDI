@@ -13,6 +13,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
 public class TestScreen extends MainActivity{
 
     //defining the images
@@ -24,6 +25,7 @@ public class TestScreen extends MainActivity{
     SeekBar seekbar;
     TextView value;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //this is just needed
@@ -34,6 +36,9 @@ public class TestScreen extends MainActivity{
         //so we can call and edit the values
         value = (TextView) findViewById(R.id.textView);
         seekbar = (SeekBar) findViewById(R.id.seekBar);
+
+
+
 
 //defining the left image
         leftimg = (ImageView) findViewById(R.id.leftGrating);
@@ -135,6 +140,7 @@ public class TestScreen extends MainActivity{
         }
         leftimg.setImageBitmap(operation1);
     }
+
 
 }
 

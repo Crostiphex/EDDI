@@ -51,20 +51,27 @@ public class MainActivity extends ActionBarActivity {
 
         final Button switchact =(Button)findViewById(R.id.startbutton);
         final CheckBox want_user = (CheckBox) findViewById(R.id.newUserCheckBox);
+        final CheckBox voicescreen = (CheckBox) findViewById(R.id.voiceControlCheckBox);
 
         switchact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
+                if(voicescreen.isChecked()){
 
-if(want_user.isChecked()){
-                Intent act2 = new Intent(view.getContext(),CustomerName.class);
-                startActivity(act2);}
-                else{
+    Intent act2 = new Intent(view.getContext(),VoiceControl.class);
+    startActivity(act2);}
+
+                else if(want_user.isChecked()){
+
+    Intent act2 = new Intent(view.getContext(),CustomerName.class);
+    startActivity(act2);}
+
+                else {
 
     Context context = getApplicationContext();
-    CharSequence text = "You didn't check the box!";
+    CharSequence text = "You didn't check anything..";
     int duration = Toast.LENGTH_SHORT;
     Toast toast = Toast.makeText(context, text, duration);
     toast.show();

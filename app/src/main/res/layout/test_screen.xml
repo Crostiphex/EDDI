@@ -76,4 +76,5 @@
         android:layout_alignTop="@+id/leftFocusRing"
         android:layout_toRightOf="@+id/makePattern"
         android:layout_toEndOf="@+id/makePattern" />
+
 </RelativeLayout>
