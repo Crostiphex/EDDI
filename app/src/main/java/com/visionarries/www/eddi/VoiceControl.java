@@ -39,11 +39,11 @@ public class VoiceControl extends MainActivity implements View.OnClickListener {
 }
     class listener implements RecognitionListener
     {
-        public void onReadyForSpeech(Bundle params){Log.d(TAG, "onReadyForSpeech");        }
-        public void onBeginningOfSpeech(){Log.d(TAG, "onBeginningOfSpeech");        }
-        public void onRmsChanged(float rmsdB){Log.d(TAG, "onRmsChanged");        }
-        public void onBufferReceived(byte[] buffer){            Log.d(TAG, "onBufferReceived");        }
-        public void onEndOfSpeech(){            Log.d(TAG, "onEndofSpeech");        }
+        public void onReadyForSpeech(Bundle params){Log.d(TAG, "onReadyForSpeech");}
+        public void onBeginningOfSpeech(){Log.d(TAG, "onBeginningOfSpeech");}
+        public void onRmsChanged(float rmsdB){Log.d(TAG, "onRmsChanged");}
+        public void onBufferReceived(byte[] buffer){Log.d(TAG, "onBufferReceived");}
+        public void onEndOfSpeech(){Log.d(TAG, "onEndofSpeech");}
         public void onError(int error)        {
             Log.d(TAG,  "error " +  error);
             mText.setText("error " + error);
@@ -89,8 +89,9 @@ public class VoiceControl extends MainActivity implements View.OnClickListener {
             long endTime = System.currentTimeMillis();
             Context context = getApplicationContext();
             int duration = Toast.LENGTH_SHORT;
+            int a = mlp.topMargin;
 //toast to show the time it takes to run the programs
-            Toast toast = Toast.makeText(context, "That took " + (endTime - startTime) + " milliseconds", duration);
+            Toast toast = Toast.makeText(context, "That took " + (endTime - startTime) + " milliseconds"+(a), duration);
             toast.show();
         }
         public void onPartialResults(Bundle partialResults)
