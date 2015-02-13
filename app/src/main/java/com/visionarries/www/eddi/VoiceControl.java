@@ -4,7 +4,9 @@ import android.content.Context;
 import android.os.Bundle;
 import android.speech.SpeechRecognizer;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.content.Intent;
 import android.speech.RecognitionListener;
@@ -18,6 +20,8 @@ public class VoiceControl extends MainActivity implements View.OnClickListener {
     private TextView mText;
     private SpeechRecognizer sr;
     private static final String TAG = "MyStt3Activity";
+    private ImageView sop;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +31,7 @@ public class VoiceControl extends MainActivity implements View.OnClickListener {
         setContentView(R.layout.voice_control);
         Button speakButton = (Button) findViewById(R.id.btn_speak);
         mText = (TextView) findViewById(R.id.textView1);
+        sop=(ImageView) findViewById(R.id.imageVoice);
         speakButton.setOnClickListener(this);
         sr = SpeechRecognizer.createSpeechRecognizer(this);
         sr.setRecognitionListener(new listener());
@@ -70,19 +75,33 @@ public class VoiceControl extends MainActivity implements View.OnClickListener {
                 str += data.get(i);
             }
             long startTime = System.currentTimeMillis();
+            ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) sop.getLayoutParams();
 
             String up="up";
             String down="down";
             String left="left";
             String right="right";
             if (str.contains(up)){
-                mText.setText("results: "+up);}
+                mText.setText("results: "+up);
+                mlp.topMargin=mlp.topMargin-30;
+                sop.setLayoutParams(mlp);
+
+            }
             if (str.contains(down)){
-                mText.setText("results: "+down);}
+                mText.setText("results: "+down);
+                mlp.topMargin=mlp.topMargin+30;
+                sop.setLayoutParams(mlp);
+            }
             if (str.contains(left)){
-                mText.setText("results: "+left);}
+                mText.setText("results: "+left);
+                mlp.leftMargin=mlp.leftMargin-30;
+                sop.setLayoutParams(mlp);
+            }
             if (str.contains(right)){
-                mText.setText("results: "+right);}
+                mText.setText("results: "+right);
+                mlp.leftMargin=mlp.leftMargin+30;
+                sop.setLayoutParams(mlp);
+            }
             long endTime = System.currentTimeMillis();
             Context context = getApplicationContext();
             int duration = Toast.LENGTH_SHORT;
@@ -98,6 +117,7 @@ public class VoiceControl extends MainActivity implements View.OnClickListener {
         {
             Log.d(TAG, "onEvent " + eventType);
         }
+
     }
     public void onClick(View v) {
         if (v.getId() == R.id.btn_speak)
