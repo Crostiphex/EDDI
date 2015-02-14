@@ -53,6 +53,8 @@ public class VoiceControl extends MainActivity implements View.OnClickListener {
             String str= null;
             Log.d(TAG, "onResults " + results);
             ArrayList data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+            DataSave p = new DataSave();
+
             for (int i = 0; i < data.size(); i++)
             {
                 Log.d(TAG, "result " + data.get(i));
@@ -89,9 +91,9 @@ public class VoiceControl extends MainActivity implements View.OnClickListener {
             long endTime = System.currentTimeMillis();
             Context context = getApplicationContext();
             int duration = Toast.LENGTH_SHORT;
-            int a = mlp.topMargin;
+            p.DataSaveTest= mlp.topMargin;
 //toast to show the time it takes to run the programs
-            Toast toast = Toast.makeText(context, "That took " + (endTime - startTime) + " milliseconds"+(a), duration);
+            Toast toast = Toast.makeText(context, "That took " + (endTime - startTime) + " milliseconds"+(p.DataSaveTest), duration);
             toast.show();
         }
         public void onPartialResults(Bundle partialResults)
