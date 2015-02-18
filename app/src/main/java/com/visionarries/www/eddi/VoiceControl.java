@@ -47,6 +47,15 @@ public class VoiceControl extends MainActivity implements View.OnClickListener {
         public void onError(int error)        {
             Log.d(TAG,  "error " +  error);
             mText.setText("error " + error);
+
+            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,"com.visionarries.www.eddi");
+
+            intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,100);
+            sr.startListening(intent);
+            Log.i("111111","11111111");
+
         }
         public void onResults(Bundle results)
         {
@@ -107,14 +116,15 @@ public class VoiceControl extends MainActivity implements View.OnClickListener {
 
     }
     public void onClick(View v) {
-        if (v.getId() == R.id.btn_speak)
-        {
+
             Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
             intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
             intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,"com.visionarries.www.eddi");
 
-            intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,5);
+            intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,50);
             sr.startListening(intent);
             Log.i("111111","11111111");
-        }
-    }}
+
+    }
+
+}
