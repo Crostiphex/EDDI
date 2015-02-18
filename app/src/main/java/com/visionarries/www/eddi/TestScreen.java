@@ -1,13 +1,13 @@
 package com.visionarries.www.eddi;
 
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -15,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class TestScreen extends VoiceControl{
+public class TestScreen extends Activity {
 
     //defining the images
     private ImageView leftimg;
@@ -25,8 +25,7 @@ public class TestScreen extends VoiceControl{
 //defining the seekbar and text underneath it
     SeekBar seekbar;
     TextView value;
-    private ImageView sop;
-    private ImageView pos;
+
 
 
 

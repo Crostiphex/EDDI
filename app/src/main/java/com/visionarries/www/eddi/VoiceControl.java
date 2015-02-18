@@ -3,9 +3,7 @@ package com.visionarries.www.eddi;
 import android.content.Context;
 import android.os.Bundle;
 import android.speech.SpeechRecognizer;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.content.Intent;
@@ -15,7 +13,7 @@ import java.util.ArrayList;
 import android.util.Log;
 import android.widget.Toast;
 
-public class VoiceControl extends MainActivity implements View.OnClickListener {
+public class VoiceControl extends MainActivity{
 
     private TextView mText;
     private SpeechRecognizer sr;
@@ -29,13 +27,17 @@ public class VoiceControl extends MainActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         //sets the layout to the inputted ID
         setContentView(R.layout.voice_control);
-        Button speakButton = (Button) findViewById(R.id.btn_speak);
         mText = (TextView) findViewById(R.id.textView1);
-        sop=(ImageView) findViewById(R.id.imageVoice);
-        speakButton.setOnClickListener(this);
         sr = SpeechRecognizer.createSpeechRecognizer(this);
         sr.setRecognitionListener(new listener());
 
+        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,"com.visionarries.www.eddi");
+
+        intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,50);
+        sr.startListening(intent);
+        Log.i("111111","11111111");
 }
     class listener implements RecognitionListener
     {
@@ -59,6 +61,13 @@ public class VoiceControl extends MainActivity implements View.OnClickListener {
         }
         public void onResults(Bundle results)
         {
+
+            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+            intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,"com.visionarries.www.eddi");
+
+            intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,50);
+
             String str= null;
             Log.d(TAG, "onResults " + results);
             ArrayList data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
@@ -81,11 +90,6 @@ public class VoiceControl extends MainActivity implements View.OnClickListener {
                 mlp.topMargin=mlp.topMargin-30;
                 sop.setLayoutParams(mlp);
 
-                Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-                intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-                intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,"com.visionarries.www.eddi");
-
-                intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,50);
                 sr.startListening(intent);
                 Log.i("111111","11111111");
 
@@ -94,16 +98,28 @@ public class VoiceControl extends MainActivity implements View.OnClickListener {
                 mText.setText("results: "+down);
                 mlp.topMargin=mlp.topMargin+30;
                 sop.setLayoutParams(mlp);
+
+                sr.startListening(intent);
+                Log.i("111111","11111111");
             }
             if (str.contains(left)){
                 mText.setText("results: "+left);
                 mlp.leftMargin=mlp.leftMargin-30;
                 sop.setLayoutParams(mlp);
+
+                sr.startListening(intent);
+                Log.i("111111","11111111");
             }
             if (str.contains(right)){
                 mText.setText("results: "+right);
                 mlp.leftMargin=mlp.leftMargin+30;
                 sop.setLayoutParams(mlp);
+
+                sr.startListening(intent);
+                Log.i("111111","11111111");
+            }
+            if(str.contains("okay")||str.contains("end")){
+
             }
             long endTime = System.currentTimeMillis();
             Context context = getApplicationContext();
@@ -123,16 +139,6 @@ public class VoiceControl extends MainActivity implements View.OnClickListener {
         }
 
     }
-    public void onClick(View v) {
 
-            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-            intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,"com.visionarries.www.eddi");
-
-            intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,50);
-            sr.startListening(intent);
-            Log.i("111111","11111111");
-
-    }
 
 }
