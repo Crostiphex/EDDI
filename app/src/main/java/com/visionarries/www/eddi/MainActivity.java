@@ -18,7 +18,6 @@ import android.widget.Toast;
 
 public class MainActivity extends ActionBarActivity {
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +26,8 @@ public class MainActivity extends ActionBarActivity {
         final ImageView image = (ImageView)findViewById(R.id.imageView);
         final Animation animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
         final Animation animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fadeout);
+
+
 
         Animation.AnimationListener animListener = new Animation.AnimationListener(){
 
@@ -107,5 +108,6 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
 
 }

@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -14,7 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
-public class TestScreen extends MainActivity{
+public class TestScreen extends VoiceControl{
 
     //defining the images
     private ImageView leftimg;
@@ -24,6 +25,10 @@ public class TestScreen extends MainActivity{
 //defining the seekbar and text underneath it
     SeekBar seekbar;
     TextView value;
+    private ImageView sop;
+    private ImageView pos;
+
+
 
 
     @Override
@@ -79,6 +84,9 @@ public class TestScreen extends MainActivity{
                 double right=seekbar.getProgress()/100.0;
                 right_pattern(view, right);
                 long endTime = System.currentTimeMillis();
+
+
+
 
                 Context context = getApplicationContext();
                 int duration = Toast.LENGTH_SHORT;

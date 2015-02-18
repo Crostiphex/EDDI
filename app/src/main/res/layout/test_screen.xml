@@ -25,7 +25,10 @@
         android:layout_toEndOf="@+id/makePattern"
         android:layout_marginLeft="85dp"
         android:layout_marginStart="85dp"
-        android:layout_alignParentStart="false" />
+        android:layout_alignParentStart="false"
+        android:layout_marginTop="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginBottom="0dp" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
