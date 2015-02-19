@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import android.util.Log;
 import android.widget.Toast;
 
+
 public class VoiceControl extends MainActivity{
 
     private TextView mText;
@@ -28,6 +29,7 @@ public class VoiceControl extends MainActivity{
         //sets the layout to the inputted ID
         setContentView(R.layout.voice_control);
         mText = (TextView) findViewById(R.id.textView1);
+        sop=(ImageView) findViewById(R.id.imageVoice);
         sr = SpeechRecognizer.createSpeechRecognizer(this);
         sr.setRecognitionListener(new listener());
 
@@ -38,6 +40,7 @@ public class VoiceControl extends MainActivity{
         intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,50);
         sr.startListening(intent);
         Log.i("111111","11111111");
+
 }
     class listener implements RecognitionListener
     {
@@ -46,6 +49,7 @@ public class VoiceControl extends MainActivity{
         public void onRmsChanged(float rmsdB){Log.d(TAG, "onRmsChanged");}
         public void onBufferReceived(byte[] buffer){Log.d(TAG, "onBufferReceived");}
         public void onEndOfSpeech(){Log.d(TAG, "onEndofSpeech");}
+
         public void onError(int error)        {
             Log.d(TAG,  "error " +  error);
             mText.setText("error " + error);
