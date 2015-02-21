@@ -37,54 +37,60 @@
         android:layout_height="wrap_content"
         android:id="@+id/leftFocusRing"
         android:src="@drawable/focalring"
-        android:layout_centerVertical="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="32dp"
-        android:layout_marginStart="32dp" />
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_marginTop="105dp"
+        android:layout_marginLeft="36dp" />
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/rightFocusRing"
         android:src="@drawable/focalring"
-        android:layout_marginLeft="40dp"
-        android:layout_marginStart="40dp"
-        android:layout_alignTop="@+id/leftFocusRing"
-        android:layout_toRightOf="@+id/makePattern"
-        android:layout_toEndOf="@+id/makePattern" />
+        android:layout_alignParentTop="false"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_marginTop="105dp"
+        android:layout_marginLeft="420dp" />
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_above="@+id/rightGrating"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignTop="@+id/leftFocusRing"
+        android:layout_alignLeft="@+id/leftFocusRing"
+        android:layout_alignStart="@+id/leftFocusRing"
+        android:layout_alignBottom="@+id/leftFocusRing"
+        android:layout_alignRight="@+id/leftFocusRing"
+        android:layout_alignEnd="@+id/leftFocusRing">
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/rightGrating"
-            android:src="@drawable/ic_launcher"
-            android:layout_alignTop="@+id/leftGrating"
-            android:layout_toRightOf="@+id/makePattern"
-            android:layout_toEndOf="@+id/makePattern"
-            android:layout_marginLeft="450dp"
-            android:layout_alignParentStart="false"
-            android:layout_marginTop="145dp"
-            android:layout_gravity="left|top" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/leftGrating"
             android:src="@drawable/ic_launcher"
-            android:layout_gravity="left|top"
-            android:layout_above="@+id/makePattern"
-            android:layout_alignRight="@+id/leftFocusRing"
-            android:layout_alignEnd="@+id/leftFocusRing"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="160dp" />
-    </FrameLayout>
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignTop="@+id/rightFocusRing"
+        android:layout_alignBottom="@+id/rightFocusRing"
+        android:layout_alignRight="@+id/rightFocusRing"
+        android:layout_alignEnd="@+id/rightFocusRing"
+        android:layout_alignLeft="@+id/rightFocusRing"
+        android:layout_alignStart="@+id/rightFocusRing"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/rightGrating"
+            android:src="@drawable/ic_launcher"
+            android:layout_centerInParent="true" />
+    </RelativeLayout>
 
 </RelativeLayout>
