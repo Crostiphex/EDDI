@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SeekBar;
@@ -22,7 +23,9 @@ public class TestScreen extends Activity {
     private Bitmap leftbmp;
     private ImageView rightimg;
     private Bitmap rightbmp;
-//defining the seekbar and text underneath it
+
+
+    //defining the seekbar and text underneath it
     SeekBar seekbar;
     TextView value;
 
@@ -55,13 +58,19 @@ public class TestScreen extends Activity {
 //this button makes the pattern
         final Button makePattern =(Button)findViewById(R.id.makePattern);
 
+        DataSave p = new DataSave();
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftimg.getLayoutParams();
+        mlp.topMargin=p.DataSaveTest;
+        leftimg.setLayoutParams(mlp);
+
         //this code is for the seekbar to function
         seekbar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener()
         {
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser)
             {
+                DataSave p = new DataSave();
                 //when you move the seekbar is changed the text changes.
-                                value.setText("Contrast value is "+progress+" %");
+                                value.setText("Contrast value is "+progress+" %"+p.DataSaveTest);
             }
 
             public void onStartTrackingTouch(SeekBar seekBar){}

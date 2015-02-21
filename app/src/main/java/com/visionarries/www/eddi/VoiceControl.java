@@ -16,6 +16,8 @@ import android.widget.Toast;
 
 public class VoiceControl extends MainActivity{
 
+
+
     private TextView mText;
     private SpeechRecognizer sr;
     private static final String TAG = "MyStt3Activity";
@@ -32,6 +34,7 @@ public class VoiceControl extends MainActivity{
         sop=(ImageView) findViewById(R.id.imageVoice);
         sr = SpeechRecognizer.createSpeechRecognizer(this);
         sr.setRecognitionListener(new listener());
+
 
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
@@ -76,6 +79,8 @@ public class VoiceControl extends MainActivity{
             Log.d(TAG, "onResults " + results);
             ArrayList data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
             DataSave p = new DataSave();
+
+
 
             for (int i = 0; i < data.size(); i++)
             {
