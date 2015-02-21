@@ -23,6 +23,7 @@ public class TestScreen extends Activity {
     private Bitmap leftbmp;
     private ImageView rightimg;
     private Bitmap rightbmp;
+    private ImageView leftring;
 
 
     //defining the seekbar and text underneath it
@@ -46,7 +47,7 @@ public class TestScreen extends Activity {
 
 
 
-
+leftring = (ImageView) findViewById(R.id.leftFocusRing);
 //defining the left image
         leftimg = (ImageView) findViewById(R.id.leftGrating);
         BitmapDrawable leftabmp = (BitmapDrawable) leftimg.getDrawable();
@@ -59,9 +60,9 @@ public class TestScreen extends Activity {
         final Button makePattern =(Button)findViewById(R.id.makePattern);
 
         DataSave p = new DataSave();
-        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftimg.getLayoutParams();
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
         mlp.topMargin=p.DataSaveTest;
-        leftimg.setLayoutParams(mlp);
+        leftring.setLayoutParams(mlp);
 
         //this code is for the seekbar to function
         seekbar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener()
