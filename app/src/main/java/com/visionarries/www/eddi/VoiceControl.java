@@ -96,7 +96,7 @@ public class VoiceControl extends MainActivity{
             String right="right";
             if (str.contains(up)){
                 mText.setText("results: "+up);
-                mlp.topMargin=mlp.topMargin-30;
+                mlp.topMargin=mlp.topMargin-100;
                 sop.setLayoutParams(mlp);
 
                 sr.startListening(intent);
@@ -105,7 +105,7 @@ public class VoiceControl extends MainActivity{
             }
             if (str.contains(down)){
                 mText.setText("results: "+down);
-                mlp.topMargin=mlp.topMargin+30;
+                mlp.topMargin=mlp.topMargin+100;
                 sop.setLayoutParams(mlp);
 
                 sr.startListening(intent);
@@ -113,7 +113,7 @@ public class VoiceControl extends MainActivity{
             }
             if (str.contains(left)){
                 mText.setText("results: "+left);
-                mlp.leftMargin=mlp.leftMargin-30;
+                mlp.leftMargin=mlp.leftMargin-100;
                 sop.setLayoutParams(mlp);
 
                 sr.startListening(intent);
@@ -121,7 +121,7 @@ public class VoiceControl extends MainActivity{
             }
             if (str.contains(right)){
                 mText.setText("results: "+right);
-                mlp.leftMargin=mlp.leftMargin+30;
+                mlp.leftMargin=mlp.leftMargin+100;
                 sop.setLayoutParams(mlp);
 
                 sr.startListening(intent);
