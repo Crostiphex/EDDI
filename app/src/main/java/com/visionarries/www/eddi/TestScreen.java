@@ -61,7 +61,8 @@ leftring = (ImageView) findViewById(R.id.leftFocusRing);
 
         DataSave p = new DataSave();
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
-        mlp.topMargin=p.DataSaveTest;
+        mlp.topMargin=p.from_top;
+        mlp.leftMargin=p.from_left;
         leftring.setLayoutParams(mlp);
 
         //this code is for the seekbar to function
@@ -71,7 +72,7 @@ leftring = (ImageView) findViewById(R.id.leftFocusRing);
             {
                 DataSave p = new DataSave();
                 //when you move the seekbar is changed the text changes.
-                                value.setText("Contrast value is "+progress+" %"+p.DataSaveTest);
+                                value.setText("Contrast value is "+progress+" %");
             }
 
             public void onStartTrackingTouch(SeekBar seekBar){}

@@ -75,7 +75,7 @@
 
     <RelativeLayout
         android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
+        android:layout_height="wrap_content"
         android:layout_alignTop="@+id/rightFocusRing"
         android:layout_alignBottom="@+id/rightFocusRing"
         android:layout_alignRight="@+id/rightFocusRing"
