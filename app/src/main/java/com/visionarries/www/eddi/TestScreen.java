@@ -59,18 +59,15 @@ leftring = (ImageView) findViewById(R.id.leftFocusRing);
 //this button makes the pattern
         final Button makePattern =(Button)findViewById(R.id.makePattern);
 
-        DataSave p = new DataSave();
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
-        mlp.topMargin=p.from_top;
-        mlp.leftMargin=p.from_left;
-        leftring.setLayoutParams(mlp);
+           leftring.setLayoutParams(mlp);
 
         //this code is for the seekbar to function
         seekbar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener()
         {
             public void onProgressChanged(SeekBar seekBar, int progress,boolean fromUser)
             {
-                DataSave p = new DataSave();
+
                 //when you move the seekbar is changed the text changes.
                                 value.setText("Contrast value is "+progress+" %");
             }
@@ -124,7 +121,6 @@ public boolean onTouchEvent(MotionEvent event) {
     Context context = getApplicationContext();
     int duration = Toast.LENGTH_SHORT;
     Toast toast_finger_down = Toast.makeText(context, "You touched me.", duration);
-    Toast toast_finger_move = Toast.makeText(context, "You moved me.", duration);
     Toast toast_finger_up = Toast.makeText(context, "You released me.", duration);
 
     switch (eventaction) {
@@ -156,8 +152,8 @@ public boolean onTouchEvent(MotionEvent event) {
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
         Toast toast_finger_down = Toast.makeText(context, "You touched me.", duration);
-        Toast toast_finger_move = Toast.makeText(context, "You moved me.", duration);
-        Toast toast_finger_up = Toast.makeText(context, "You released me.", duration);
+//        Toast toast_finger_move = Toast.makeText(context, "You moved me.", duration);
+//        Toast toast_finger_up = Toast.makeText(context, "You released me.", duration);
 
         switch (eventaction) {
             case MotionEvent.BUTTON_PRIMARY:
