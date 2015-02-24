@@ -136,8 +136,8 @@ public class VoiceControl extends MainActivity{
             p.from_top = mlp.topMargin;
             p.from_left=mlp.leftMargin;
 //toast to show the time it takes to run the programs
-//            Toast toast = Toast.makeText(context, "That took " + (endTime - startTime) + " milliseconds"+(p.from_top), duration);
-//            toast.show();
+           Toast toast = Toast.makeText(context, "That took " + (endTime - startTime) + " milliseconds"+(p.from_top), duration);
+            toast.show();
         }
         public void onPartialResults(Bundle partialResults)
         {

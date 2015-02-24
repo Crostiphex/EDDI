@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -29,7 +30,6 @@ public class TestScreen extends Activity {
     //defining the seekbar and text underneath it
     SeekBar seekbar;
     TextView value;
-
 
 
 
@@ -108,7 +108,94 @@ leftring = (ImageView) findViewById(R.id.leftFocusRing);
         });
     }
 
+//    public boolean onTouch(View v, MotionEvent event) {
+//        if (event.getButtonState() == MotionEvent.BUTTON_PRIMARY) { // API 14 required
+//            ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
+//            mlp.topMargin = mlp.topMargin + 30;
+//            leftring.setLayoutParams(mlp);
+//
+//
+//        }
+//        return true;
+//    }
+public boolean onTouchEvent(MotionEvent event) {
+    int eventaction = event.getButtonState();
 
+    Context context = getApplicationContext();
+    int duration = Toast.LENGTH_SHORT;
+    Toast toast_finger_down = Toast.makeText(context, "You touched me.", duration);
+    Toast toast_finger_move = Toast.makeText(context, "You moved me.", duration);
+    Toast toast_finger_up = Toast.makeText(context, "You released me.", duration);
+
+    switch (eventaction) {
+        case MotionEvent.BUTTON_PRIMARY:
+
+            toast_finger_down.show();
+            break;
+
+//        case MotionEvent.ACTION_MOVE:
+//            // finger moves on the screen
+//          //  toast_finger_move.show();
+//            break;
+
+        case MotionEvent.BUTTON_TERTIARY:
+            // finger leaves the screen
+            toast_finger_up.show();
+            break;
+    }
+
+    // tell the system that we handled the event and no further processing is required
+    return true;
+}
+
+    public boolean onGenericMotionEvent(MotionEvent event) {
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
+
+        int eventaction = event.getAction();
+
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast_finger_down = Toast.makeText(context, "You touched me.", duration);
+        Toast toast_finger_move = Toast.makeText(context, "You moved me.", duration);
+        Toast toast_finger_up = Toast.makeText(context, "You released me.", duration);
+
+        switch (eventaction) {
+            case MotionEvent.BUTTON_PRIMARY:
+
+                toast_finger_down.show();
+                break;
+
+//        case MotionEvent.ACTION_MOVE:
+//            // finger moves on the screen
+//          //  toast_finger_move.show();
+//            break;
+
+            case MotionEvent.ACTION_SCROLL:
+                // finger leaves the screen
+                if (event.getAxisValue(MotionEvent.AXIS_HSCROLL) < 0.0f){
+                    mlp.leftMargin=mlp.leftMargin-5;
+                    leftring.setLayoutParams(mlp);
+                }
+                if (event.getAxisValue(MotionEvent.AXIS_HSCROLL) > 0.0f){
+                    mlp.leftMargin=mlp.leftMargin+5;
+                    leftring.setLayoutParams(mlp);
+                }
+                if (event.getAxisValue(MotionEvent.AXIS_VSCROLL) < 0.0f){
+                    mlp.topMargin=mlp.topMargin+5;
+                    leftring.setLayoutParams(mlp);
+                }
+                if (event.getAxisValue(MotionEvent.AXIS_VSCROLL) > 0.0f){
+                    mlp.topMargin=mlp.topMargin-5;
+                    leftring.setLayoutParams(mlp);
+                }
+
+
+                break;
+        }
+
+        // tell the system that we handled the event and no further processing is required
+        return true;
+    }
 
 //makes the pattern
     public void right_pattern(View view, double contrast){
