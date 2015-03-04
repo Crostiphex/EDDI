@@ -91,15 +91,15 @@ leftring = (ImageView) findViewById(R.id.leftFocusRing);
                 double right=seekbar.getProgress()/100.0;
                 right_pattern(view, right);
                 long endTime = System.currentTimeMillis();
-
-
-
-
                 Context context = getApplicationContext();
                 int duration = Toast.LENGTH_SHORT;
 //toast to show the time it takes to run the programs
                 Toast toast = Toast.makeText(context, "That took " + (endTime - startTime) + " milliseconds", duration);
                 toast.show();
+
+
+
+
 
             }
         });
