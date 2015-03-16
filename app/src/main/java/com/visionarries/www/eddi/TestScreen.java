@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+
 public class TestScreen extends Activity {
 
     //defining the images
@@ -81,15 +82,19 @@ leftring = (ImageView) findViewById(R.id.leftFocusRing);
 
         makePattern.setOnClickListener(new View.OnClickListener() {
             @Override
-                public void onClick(View view) {
+                public void onClick(final View view) {
                 //this is to keep track of how long it takes for the image functions to be executed.
                 long startTime = System.currentTimeMillis();
 //calls the function that rewrites thes the bitmap data for the left and right images
 
                 left_pattern(view, 1.0);
                 //calls the value of what the seekbar is.
-                double right=seekbar.getProgress()/100.0;
+
+// invoke intent
+                double right = seekbar.getProgress() / 100.0;
                 right_pattern(view, right);
+
+
                 long endTime = System.currentTimeMillis();
                 Context context = getApplicationContext();
                 int duration = Toast.LENGTH_SHORT;
