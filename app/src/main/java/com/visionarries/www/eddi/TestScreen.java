@@ -120,29 +120,27 @@ leftring = (ImageView) findViewById(R.id.leftFocusRing);
 //        }
 //        return true;
 //    }
+long lastDown;
+    long lastDuration;
+    long sumDuration;
 public boolean onTouchEvent(MotionEvent event) {
     int eventaction = event.getButtonState();
 
     Context context = getApplicationContext();
     int duration = Toast.LENGTH_SHORT;
-    Toast toast_finger_down = Toast.makeText(context, "You touched me.", duration);
-    Toast toast_finger_up = Toast.makeText(context, "You released me.", duration);
+//    Toast toast_finger_down = Toast.makeText(context, "You touched me.", duration);
 
-    switch (eventaction) {
-        case MotionEvent.BUTTON_PRIMARY:
 
-            toast_finger_down.show();
-            break;
+    if(event.getAction() == android.view.MotionEvent.ACTION_DOWN ) {
+        lastDown = System.currentTimeMillis();
+    }
 
-//        case MotionEvent.ACTION_MOVE:
-//            // finger moves on the screen
-//          //  toast_finger_move.show();
-//            break;
+    else if (event.getAction() == MotionEvent.ACTION_UP) {
+        lastDuration = System.currentTimeMillis() - lastDown;
 
-        case MotionEvent.BUTTON_TERTIARY:
-            // finger leaves the screen
-            toast_finger_up.show();
-            break;
+        sumDuration=sumDuration+lastDuration;
+        Toast toast_finger_up = Toast.makeText(context, "You released me." + sumDuration/1000.0, duration);
+        toast_finger_up.show();
     }
 
     // tell the system that we handled the event and no further processing is required

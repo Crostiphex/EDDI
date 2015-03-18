@@ -1,154 +1,138 @@
 package com.visionarries.www.eddi;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.speech.SpeechRecognizer;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.content.Intent;
-import android.speech.RecognitionListener;
-import android.speech.RecognizerIntent;
-import java.util.ArrayList;
-import android.util.Log;
 import android.widget.Toast;
 
-
-public class VoiceControl extends MainActivity{
-
-
-
-    private TextView mText;
-    private SpeechRecognizer sr;
-    private static final String TAG = "MyStt3Activity";
-    private ImageView sop;
+import java.util.Timer;
+import java.util.TimerTask;
 
 
+
+
+public class VoiceControl extends MainActivity {
+
+
+    private ImageView rightimg;
+    private Bitmap rightbmp;
+    int photoAry[] = { R.drawable.androidlogo300, R.drawable.focalring, R.drawable.frogger,
+            R.drawable.ic_launcher};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         //this is just needed
         super.onCreate(savedInstanceState);
         //sets the layout to the inputted ID
         setContentView(R.layout.voice_control);
-        mText = (TextView) findViewById(R.id.textView1);
-        sop=(ImageView) findViewById(R.id.imageVoice);
-        sr = SpeechRecognizer.createSpeechRecognizer(this);
-        sr.setRecognitionListener(new listener());
 
+        Timer timer;
 
-        Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-        intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,"com.visionarries.www.eddi");
+        timer = new Timer("TweetCollectorTimer");
+        timer.schedule(updateTask, 3000L, 3000L);//here 6000L is starting //delay and 3000L is periodic delay after starting delay
 
-        intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,50);
-        sr.startListening(intent);
-        Log.i("111111","11111111");
-
-}
-    class listener implements RecognitionListener
-    {
-        public void onReadyForSpeech(Bundle params){Log.d(TAG, "onReadyForSpeech");}
-        public void onBeginningOfSpeech(){Log.d(TAG, "onBeginningOfSpeech");}
-        public void onRmsChanged(float rmsdB){Log.d(TAG, "onRmsChanged");}
-        public void onBufferReceived(byte[] buffer){Log.d(TAG, "onBufferReceived");}
-        public void onEndOfSpeech(){Log.d(TAG, "onEndofSpeech");}
-
-        public void onError(int error)        {
-            Log.d(TAG,  "error " +  error);
-            mText.setText("error " + error);
-
-            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-            intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,"com.visionarries.www.eddi");
-
-            intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,100);
-            sr.startListening(intent);
-            Log.i("111111","11111111");
-
-        }
-        public void onResults(Bundle results)
-        {
-
-            Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
-            intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
-            intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE,"com.visionarries.www.eddi");
-
-            intent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS,50);
-
-            String str= null;
-            Log.d(TAG, "onResults " + results);
-            ArrayList data = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
-            DataSave p = new DataSave();
-
-
-
-            for (int i = 0; i < data.size(); i++)
-            {
-                Log.d(TAG, "result " + data.get(i));
-                str += data.get(i);
-            }
-            long startTime = System.currentTimeMillis();
-            ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) sop.getLayoutParams();
-
-            String up="up";
-            String down="down";
-            String left="left";
-            String right="right";
-            if (str.contains(up)){
-                mText.setText("results: "+up);
-                mlp.topMargin=mlp.topMargin-100;
-                sop.setLayoutParams(mlp);
-
-                sr.startListening(intent);
-                Log.i("111111","11111111");
-
-            }
-            if (str.contains(down)){
-                mText.setText("results: "+down);
-                mlp.topMargin=mlp.topMargin+100;
-                sop.setLayoutParams(mlp);
-
-                sr.startListening(intent);
-                Log.i("111111","11111111");
-            }
-            if (str.contains(left)){
-                mText.setText("results: "+left);
-                mlp.leftMargin=mlp.leftMargin-100;
-                sop.setLayoutParams(mlp);
-
-                sr.startListening(intent);
-                Log.i("111111","11111111");
-            }
-            if (str.contains(right)){
-                mText.setText("results: "+right);
-                mlp.leftMargin=mlp.leftMargin+100;
-                sop.setLayoutParams(mlp);
-
-                sr.startListening(intent);
-                Log.i("111111","11111111");
-            }
-            if(str.contains("okay")||str.contains("end")){
-
-            }
-            long endTime = System.currentTimeMillis();
-            Context context = getApplicationContext();
-            int duration = Toast.LENGTH_SHORT;
-            p.from_top = mlp.topMargin;
-            p.from_left=mlp.leftMargin;
-//toast to show the time it takes to run the programs
-           Toast toast = Toast.makeText(context, "That took " + (endTime - startTime) + " milliseconds"+(p.from_top), duration);
-            toast.show();
-        }
-        public void onPartialResults(Bundle partialResults)
-        {
-            Log.d(TAG, "onPartialResults");
-        }
-        public void onEvent(int eventType, Bundle params)
-        {
-            Log.d(TAG, "onEvent " + eventType);
-        }
 
     }
 
+    private TimerTask updateTask = new TimerTask() {
+int i =0;
 
+
+        BitmapDrawable rightabmp = (BitmapDrawable) rightimg.getDrawable();
+        @Override
+
+        public void run() {
+
+            VoiceControl.this.runOnUiThread(new Runnable() {
+
+                @Override
+                public void run() { // TODO Auto-generated method stub
+
+//                    right_pattern(null, i/10);
+
+
+                    new View.OnClickListener() {
+                        @Override
+                        public void onClick(final View view) {
+
+                            right_pattern(view, i/10);
+
+                        }
+                    };
+                    i++;
+                    if (i > 3)
+                    {
+                        i = 0;
+
+
+                    }
+                }
+
+            });
+        }
+    };
+
+
+    long lastDown;
+    long lastDuration;
+    long sumDuration;
+    public boolean onTouchEvent(MotionEvent event) {
+//        int eventaction = event.getButtonState();
+
+        Context context = getApplicationContext();
+        int duration = Toast.LENGTH_SHORT;
+//    Toast toast_finger_down = Toast.makeText(context, "You touched me.", duration);
+
+
+        if(event.getAction() == android.view.MotionEvent.ACTION_DOWN ) {
+            lastDown = System.currentTimeMillis();
+        }
+
+        else if (event.getAction() == MotionEvent.ACTION_UP) {
+            lastDuration = System.currentTimeMillis() - lastDown;
+
+            sumDuration=sumDuration+lastDuration;
+            Toast toast_finger_up = Toast.makeText(context, "You released me." + sumDuration/1000.0, duration);
+            toast_finger_up.show();
+        }
+
+        // tell the system that we handled the event and no further processing is required
+        return true;
+    }
+    //makes the pattern
+
+    public void right_pattern(View view, double contrast){
+        rightimg = (ImageView) findViewById(R.id.rightGrating);
+        BitmapDrawable rightabmp = (BitmapDrawable) rightimg.getDrawable();
+        rightbmp = rightabmp.getBitmap();
+
+        Bitmap operation = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
+//the loop goes through each picture
+        for(int i=0; i< rightbmp.getWidth(); i++){
+            for(int j=0; j< rightbmp.getHeight(); j++){
+
+                double ij=(i-(rightbmp.getWidth()/2))*(i-(rightbmp.getWidth()/2))+(j-(rightbmp.getWidth()/2))*(j-(rightbmp.getWidth()/2));
+                double k = (rightbmp.getWidth()/2)*(rightbmp.getWidth()/2);
+                double dis=Math.sqrt(2*(rightbmp.getWidth()^2));
+
+                if (ij<=k){//displays pattern in a circle
+
+                    int gray_level = (int)((contrast*(255/2)*Math.cos((i+j)*Math.PI*(.65/dis))+(255/2))); //pattern
+                    operation.setPixel(i, j, Color.argb(255, gray_level, gray_level, gray_level));}//actually assigns the values.
+
+                else{
+                    int test=128;
+                    operation.setPixel(i, j, Color.argb(255, test, test, test));}
+
+
+            }
+        }
+        rightimg.setImageBitmap(operation);
+    }
 }
+
