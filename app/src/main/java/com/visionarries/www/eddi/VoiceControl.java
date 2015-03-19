@@ -7,7 +7,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
+
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -20,7 +20,7 @@ import java.util.TimerTask;
 public class VoiceControl extends MainActivity {
 
 
-    private ImageView rightimg;
+    ImageView rightimg;
     private Bitmap rightbmp;
     int photoAry[] = { R.drawable.androidlogo300, R.drawable.focalring, R.drawable.frogger,
             R.drawable.ic_launcher};
@@ -30,52 +30,36 @@ public class VoiceControl extends MainActivity {
         super.onCreate(savedInstanceState);
         //sets the layout to the inputted ID
         setContentView(R.layout.voice_control);
-
+        rightimg= (ImageView) findViewById(R.id.imageVoice);
         Timer timer;
-
         timer = new Timer("TweetCollectorTimer");
         timer.schedule(updateTask, 3000L, 3000L);//here 6000L is starting //delay and 3000L is periodic delay after starting delay
 
 
     }
 
+
     private TimerTask updateTask = new TimerTask() {
 int i =0;
-
-
-        BitmapDrawable rightabmp = (BitmapDrawable) rightimg.getDrawable();
         @Override
-
         public void run() {
-
             VoiceControl.this.runOnUiThread(new Runnable() {
-
                 @Override
                 public void run() { // TODO Auto-generated method stub
-
 //                    right_pattern(null, i/10);
-
-
-                    new View.OnClickListener() {
-                        @Override
-                        public void onClick(final View view) {
-
-                            right_pattern(view, i/10);
-
-                        }
-                    };
+                            rightimg.setImageResource(photoAry[i]);
                     i++;
                     if (i > 3)
                     {
                         i = 0;
-
-
                     }
                 }
 
             });
         }
     };
+
+
 
 
     long lastDown;
@@ -107,11 +91,7 @@ int i =0;
     //makes the pattern
 
     public void right_pattern(View view, double contrast){
-        rightimg = (ImageView) findViewById(R.id.rightGrating);
-        BitmapDrawable rightabmp = (BitmapDrawable) rightimg.getDrawable();
-        rightbmp = rightabmp.getBitmap();
-
-        Bitmap operation = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
+               Bitmap operation = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
 //the loop goes through each picture
         for(int i=0; i< rightbmp.getWidth(); i++){
             for(int j=0; j< rightbmp.getHeight(); j++){
