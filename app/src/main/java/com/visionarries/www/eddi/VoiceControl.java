@@ -14,11 +14,10 @@ import android.widget.Toast;
 
 public class VoiceControl extends MainActivity {
     int i = 0;
-
     ImageView rightimg;
     Bitmap rightbmp;
     CountDownTimer waitTimer;
-  TextView text;
+    TextView text;
 
    double contrastR[] = {.05,.10,.20,.40,.45,.50,.55,.60,.80,.90,.95};
     @Override
@@ -27,8 +26,8 @@ public class VoiceControl extends MainActivity {
         super.onCreate(savedInstanceState);
         //sets the layout to the inputted ID
         setContentView(R.layout.voice_control);
-
-        waitTimer = new CountDownTimer(1000*contrastR.length, 5000) {
+//Timer
+        waitTimer = new CountDownTimer(60000*contrastR.length^2, 60000*contrastR.length) {
 
 
             public void onTick(long millisUntilFinished) {
@@ -61,7 +60,8 @@ public class VoiceControl extends MainActivity {
 
     }
 
-  long lastDown;
+//Button Recognizer
+    long lastDown;
     long lastDuration;
     public boolean onTouchEvent(MotionEvent event) {
 //        int eventaction = event.getButtonState();
@@ -88,8 +88,8 @@ public class VoiceControl extends MainActivity {
         // tell the system that we handled the event and no further processing is required
         return true;
     }
-    //makes the pattern
 
+//makes the pattern
     public void right_pattern(Double contrast){
                Bitmap operation = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
 //the loop goes through each picture
@@ -116,25 +116,6 @@ public class VoiceControl extends MainActivity {
     }
 
 
-//    public class PieChart extends View {
-//        public PieChart(Context context) {
-//            super(context);
-//            //--- Additional custom code --
-//            rightimg = (ImageView) findViewById(R.id.rightGrating);
-//            BitmapDrawable rightabmp = (BitmapDrawable) rightimg.getDrawable();
-//            rightbmp = rightabmp.getBitmap();
-//
-//        }
-//
-//        public PieChart(Context context, AttributeSet attrs) {
-//            super(context, attrs);
-//            //--- Additional custom code --
-//        }
-//
-//        public PieChart(Context context, AttributeSet attrs, int defStyle) {
-//            super(context, attrs, defStyle);
-//            //--- Additional custom code --
-//        }
-//    }
+
 }
 
