@@ -92,7 +92,7 @@ leftring = (ImageView) findViewById(R.id.leftFocusRing);
 
 // invoke intent
                 double right = seekbar.getProgress() / 100.0;
-                right_pattern(view, right);
+                right_pattern(right);
 
 
                 long endTime = System.currentTimeMillis();
@@ -101,6 +101,7 @@ leftring = (ImageView) findViewById(R.id.leftFocusRing);
 //toast to show the time it takes to run the programs
                 Toast toast = Toast.makeText(context, "That took " + (endTime - startTime) + " milliseconds", duration);
                 toast.show();
+
 
 
 
@@ -197,7 +198,7 @@ public boolean onTouchEvent(MotionEvent event) {
     }
 
 //makes the pattern
-    public void right_pattern(View view, double contrast){
+    public void right_pattern(double contrast){
         Bitmap operation = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
 //the loop goes through each picture
         for(int i=0; i< rightbmp.getWidth(); i++){

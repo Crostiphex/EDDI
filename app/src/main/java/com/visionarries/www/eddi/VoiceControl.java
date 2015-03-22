@@ -1,70 +1,68 @@
 package com.visionarries.www.eddi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.MotionEvent;
-import android.view.View;
-
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
-
-
-
 public class VoiceControl extends MainActivity {
-
+    int i = 0;
 
     ImageView rightimg;
-    private Bitmap rightbmp;
-    int photoAry[] = { R.drawable.androidlogo300, R.drawable.focalring, R.drawable.frogger,
-            R.drawable.ic_launcher};
+    Bitmap rightbmp;
+    CountDownTimer waitTimer;
+  TextView text;
+
+   double contrastR[] = {.05,.10,.20,.40,.45,.50,.55,.60,.80,.90,.95};
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         //this is just needed
         super.onCreate(savedInstanceState);
         //sets the layout to the inputted ID
         setContentView(R.layout.voice_control);
-        rightimg= (ImageView) findViewById(R.id.imageVoice);
-        Timer timer;
-        timer = new Timer("TweetCollectorTimer");
-        timer.schedule(updateTask, 3000L, 3000L);//here 6000L is starting //delay and 3000L is periodic delay after starting delay
 
+        waitTimer = new CountDownTimer(1000*contrastR.length, 5000) {
+
+
+            public void onTick(long millisUntilFinished) {
+                rightimg = (ImageView) findViewById(R.id.imageVoice);
+                text = (TextView) findViewById(R.id.textView1);
+
+//defining the right image
+                BitmapDrawable rightabmp = (BitmapDrawable) rightimg.getDrawable();
+                rightbmp = rightabmp.getBitmap();
+
+                right_pattern(contrastR[i]);
+
+
+                i=i+1;
+//
+                text.setText("seconds remaining: " + millisUntilFinished / 1000);
+
+            }
+
+            public void onFinish() {
+
+                Intent intent = new Intent(VoiceControl.this, CustomerName.class);
+                startActivity(intent);
+
+            }
+
+
+
+        }.start();
 
     }
 
-
-    private TimerTask updateTask = new TimerTask() {
-int i =0;
-        @Override
-        public void run() {
-            VoiceControl.this.runOnUiThread(new Runnable() {
-                @Override
-                public void run() { // TODO Auto-generated method stub
-//                    right_pattern(null, i/10);
-                            rightimg.setImageResource(photoAry[i]);
-                    i++;
-                    if (i > 3)
-                    {
-                        i = 0;
-                    }
-                }
-
-            });
-        }
-    };
-
-
-
-
-    long lastDown;
+  long lastDown;
     long lastDuration;
-    long sumDuration;
     public boolean onTouchEvent(MotionEvent event) {
 //        int eventaction = event.getButtonState();
 
@@ -75,14 +73,16 @@ int i =0;
 
         if(event.getAction() == android.view.MotionEvent.ACTION_DOWN ) {
             lastDown = System.currentTimeMillis();
-        }
+                    }
 
         else if (event.getAction() == MotionEvent.ACTION_UP) {
             lastDuration = System.currentTimeMillis() - lastDown;
 
-            sumDuration=sumDuration+lastDuration;
-            Toast toast_finger_up = Toast.makeText(context, "You released me." + sumDuration/1000.0, duration);
+
+            DataSave.time_pressed[i]=DataSave.time_pressed[i]+lastDuration/1000.;
+            Toast toast_finger_up = Toast.makeText(context, "You released me." + DataSave.time_pressed[i], duration);
             toast_finger_up.show();
+
         }
 
         // tell the system that we handled the event and no further processing is required
@@ -90,7 +90,7 @@ int i =0;
     }
     //makes the pattern
 
-    public void right_pattern(View view, double contrast){
+    public void right_pattern(Double contrast){
                Bitmap operation = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
 //the loop goes through each picture
         for(int i=0; i< rightbmp.getWidth(); i++){
@@ -114,5 +114,27 @@ int i =0;
         }
         rightimg.setImageBitmap(operation);
     }
+
+
+//    public class PieChart extends View {
+//        public PieChart(Context context) {
+//            super(context);
+//            //--- Additional custom code --
+//            rightimg = (ImageView) findViewById(R.id.rightGrating);
+//            BitmapDrawable rightabmp = (BitmapDrawable) rightimg.getDrawable();
+//            rightbmp = rightabmp.getBitmap();
+//
+//        }
+//
+//        public PieChart(Context context, AttributeSet attrs) {
+//            super(context, attrs);
+//            //--- Additional custom code --
+//        }
+//
+//        public PieChart(Context context, AttributeSet attrs, int defStyle) {
+//            super(context, attrs, defStyle);
+//            //--- Additional custom code --
+//        }
+//    }
 }
 
