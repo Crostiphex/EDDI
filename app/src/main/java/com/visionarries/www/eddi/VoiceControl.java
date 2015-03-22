@@ -28,7 +28,7 @@ public class VoiceControl extends MainActivity {
         //sets the layout to the inputted ID
         setContentView(R.layout.voice_control);
 //Timer
-        waitTimer = new CountDownTimer(60000*contrastR.length^2, 60000*contrastR.length) {
+        waitTimer = new CountDownTimer(11000, 1000) {
             public void onTick(long millisUntilFinished) {
                 rightimg = (ImageView) findViewById(R.id.imageVoice);
                 text = (TextView) findViewById(R.id.textView1);
@@ -36,14 +36,9 @@ public class VoiceControl extends MainActivity {
 //defining the right image
                 BitmapDrawable rightabmp = (BitmapDrawable) rightimg.getDrawable();
                 rightbmp = rightabmp.getBitmap();
-
                 right_pattern(contrastR[i]);
-
-
                 i=i+1;
-//
                 text.setText("seconds remaining: " + millisUntilFinished / 1000);
-
             }
 
             public void onFinish() {
