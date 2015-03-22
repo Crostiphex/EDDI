@@ -20,6 +20,7 @@ public class VoiceControl extends MainActivity {
     TextView text;
 
    double contrastR[] = {.05,.10,.20,.40,.45,.50,.55,.60,.80,.90,.95};
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         //this is just needed
@@ -28,8 +29,6 @@ public class VoiceControl extends MainActivity {
         setContentView(R.layout.voice_control);
 //Timer
         waitTimer = new CountDownTimer(60000*contrastR.length^2, 60000*contrastR.length) {
-
-
             public void onTick(long millisUntilFinished) {
                 rightimg = (ImageView) findViewById(R.id.imageVoice);
                 text = (TextView) findViewById(R.id.textView1);
@@ -114,8 +113,5 @@ public class VoiceControl extends MainActivity {
         }
         rightimg.setImageBitmap(operation);
     }
-
-
-
 }
 
