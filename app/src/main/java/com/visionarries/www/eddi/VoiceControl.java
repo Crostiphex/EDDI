@@ -43,7 +43,7 @@ public class VoiceControl extends MainActivity {
 
             public void onFinish() {
 
-                Intent intent = new Intent(VoiceControl.this, CustomerName.class);
+                Intent intent = new Intent(VoiceControl.this, Calculations.class);
                 startActivity(intent);
 
             }
