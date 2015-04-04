@@ -68,8 +68,7 @@ public class Calculations extends MainActivity{
             sxx=sxx+xx[i];
             sx=sx+x[i];
             sxy=sxy+xy[i];
-            sy=sy+y[i];
-        }
+            sy=sy+y[i];}
 
         d=sx*sx-m*sxx;
         a=(1/d)*(sx*sy-m*sxy);
@@ -80,19 +79,6 @@ public class Calculations extends MainActivity{
         value.setText("x0 is "+x0);
         int duration = Toast.LENGTH_LONG;
         Context context = getApplicationContext();
-        Toast toast_finger_up = Toast.makeText(context, "The Dominance Index is: " + x0, duration);
-        toast_finger_up.show();
-
-
-
-
-
-
-    }
-
-
-
-
-
-}
+        Toast toast = Toast.makeText(context, "The Dominance Index is: " + x0, duration);
+        toast.show();}}
 

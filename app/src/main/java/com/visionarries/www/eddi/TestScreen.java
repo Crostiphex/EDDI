@@ -3,6 +3,7 @@ package com.visionarries.www.eddi;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
@@ -19,13 +20,14 @@ import android.widget.Toast;
 
 
 public class TestScreen extends Activity {
-
+int a= 0;
     //defining the images
     private ImageView leftimg;
     private Bitmap leftbmp;
     private ImageView rightimg;
     private Bitmap rightbmp;
     private ImageView leftring;
+    private ImageView rightring;
 
 
     //defining the seekbar and text underneath it
@@ -49,6 +51,7 @@ public class TestScreen extends Activity {
 
 
 leftring = (ImageView) findViewById(R.id.leftFocusRing);
+        rightring = (ImageView) findViewById(R.id.rightFocusRing);
 //defining the left image
         leftimg = (ImageView) findViewById(R.id.leftGrating);
         BitmapDrawable leftabmp = (BitmapDrawable) leftimg.getDrawable();
@@ -62,6 +65,8 @@ leftring = (ImageView) findViewById(R.id.leftFocusRing);
 
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
            leftring.setLayoutParams(mlp);
+        ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) rightring.getLayoutParams();
+        rightring.setLayoutParams(plm);
 
         //this code is for the seekbar to function
         seekbar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener()
@@ -87,7 +92,7 @@ leftring = (ImageView) findViewById(R.id.leftFocusRing);
                 long startTime = System.currentTimeMillis();
 //calls the function that rewrites thes the bitmap data for the left and right images
 
-                left_pattern(view, 1.0);
+                left_pattern(1.0);
                 //calls the value of what the seekbar is.
 
 // invoke intent
@@ -121,57 +126,31 @@ leftring = (ImageView) findViewById(R.id.leftFocusRing);
 //        }
 //        return true;
 //    }
-long lastDown;
-    long lastDuration;
-    long sumDuration;
-public boolean onTouchEvent(MotionEvent event) {
-    int eventaction = event.getButtonState();
 
-    Context context = getApplicationContext();
-    int duration = Toast.LENGTH_SHORT;
-//    Toast toast_finger_down = Toast.makeText(context, "You touched me.", duration);
-
-
-    if(event.getAction() == android.view.MotionEvent.ACTION_DOWN ) {
-        lastDown = System.currentTimeMillis();
-    }
-
-    else if (event.getAction() == MotionEvent.ACTION_UP) {
-        lastDuration = System.currentTimeMillis() - lastDown;
-
-        sumDuration=sumDuration+lastDuration;
-        Toast toast_finger_up = Toast.makeText(context, "You released me." + sumDuration/1000.0, duration);
-        toast_finger_up.show();
-    }
-
-    // tell the system that we handled the event and no further processing is required
-    return true;
-}
 
     public boolean onGenericMotionEvent(MotionEvent event) {
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
-
+ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) rightring.getLayoutParams();
         int eventaction = event.getAction();
 
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
-        Toast toast_finger_down = Toast.makeText(context, "You touched me.", duration);
+        Toast toast_finger_down = Toast.makeText(context, "a = " + a, duration);
 //        Toast toast_finger_move = Toast.makeText(context, "You moved me.", duration);
 //        Toast toast_finger_up = Toast.makeText(context, "You released me.", duration);
 
         switch (eventaction) {
             case MotionEvent.BUTTON_PRIMARY:
-
+                Intent intent = new Intent(TestScreen.this, VoiceControl.class);
+                startActivity(intent);
+            case MotionEvent.BUTTON_TERTIARY:
+                a++;
                 toast_finger_down.show();
                 break;
 
-//        case MotionEvent.ACTION_MOVE:
-//            // finger moves on the screen
-//          //  toast_finger_move.show();
-//            break;
-
             case MotionEvent.ACTION_SCROLL:
                 // finger leaves the screen
+                if(a/2==0){
                 if (event.getAxisValue(MotionEvent.AXIS_HSCROLL) < 0.0f){
                     mlp.leftMargin=mlp.leftMargin-5;
                     leftring.setLayoutParams(mlp);
@@ -187,7 +166,24 @@ public boolean onTouchEvent(MotionEvent event) {
                 if (event.getAxisValue(MotionEvent.AXIS_VSCROLL) > 0.0f){
                     mlp.topMargin=mlp.topMargin-5;
                     leftring.setLayoutParams(mlp);
-                }
+                }}
+                if(a/2==1){
+                    if (event.getAxisValue(MotionEvent.AXIS_HSCROLL) < 0.0f){
+                        plm.rightMargin=plm.rightMargin-5;
+                        rightring.setLayoutParams(plm);
+                    }
+                    if (event.getAxisValue(MotionEvent.AXIS_HSCROLL) > 0.0f){
+                        plm.leftMargin=plm.leftMargin+5;
+                        rightring.setLayoutParams(plm);
+                    }
+                    if (event.getAxisValue(MotionEvent.AXIS_VSCROLL) < 0.0f){
+                        plm.topMargin=plm.topMargin+5;
+                        rightring.setLayoutParams(plm);
+                    }
+                    if (event.getAxisValue(MotionEvent.AXIS_VSCROLL) > 0.0f){
+                        plm.topMargin=plm.topMargin-5;
+                        rightring.setLayoutParams(plm);
+                    }}
 
 
                 break;
@@ -224,7 +220,7 @@ public boolean onTouchEvent(MotionEvent event) {
     }
 
 
-    public void left_pattern(View view, double contrast){
+    public void left_pattern(double contrast){
         Bitmap operation1 = Bitmap.createBitmap(leftbmp.getWidth(), leftbmp.getHeight(), leftbmp.getConfig());
 
         for(int i=0; i< leftbmp.getWidth(); i++){
