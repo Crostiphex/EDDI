@@ -1,6 +1,7 @@
 package com.visionarries.www.eddi;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,13 +53,14 @@ public class Calculations extends MainActivity{
     double k=0;
     double x0=0;
     TextView value;
-
+    DBAdapter myDb;
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         //this is just needed
         super.onCreate(savedInstanceState);
         //sets the layout to the inputted ID
         setContentView(R.layout.calc_page);
+        openDB();
         for(int i=0; i<m; i++){
             //y[i]=DataSave.time_pressed[i]/60; //to get the data to be a percentage of a minute
            // x[i]=Math.log10(x[i]); //This is you want the x to be on base 10
@@ -80,5 +82,27 @@ public class Calculations extends MainActivity{
         int duration = Toast.LENGTH_LONG;
         Context context = getApplicationContext();
         Toast toast = Toast.makeText(context, "The Dominance Index is: " + x0, duration);
-        toast.show();}}
+        toast.show();
+
+        long newId = myDb.insertRow(DataSave.name, x0);
+
+        Intent intent = new Intent(Calculations.this, Database_main.class);
+        startActivity(intent);
+
+    }
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        closeDB();
+    }
+
+
+    private void openDB() {
+        myDb = new DBAdapter(this);
+        myDb.open();
+    }
+    private void closeDB() {
+        myDb.close();
+    }
+}
 

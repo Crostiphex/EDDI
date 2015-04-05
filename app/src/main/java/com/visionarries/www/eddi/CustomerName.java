@@ -31,32 +31,12 @@ public class CustomerName extends MainActivity {
 
                 EditText edit_text = (EditText) findViewById(R.id.nameString);
 
-                WriteBtn(view,edit_text.getText().toString());
+                DataSave.name=edit_text.getText().toString();
 
 
 
             }
         });
     }
-    // write text to file
-    public void WriteBtn (View v,String edit_text) {
-        // add-write text into file
-        try {
-            FileOutputStream file_out=openFileOutput(edit_text+".txt",MODE_PRIVATE);
-            OutputStreamWriter outputWriter=new OutputStreamWriter(file_out);
-            outputWriter.write(edit_text);
-            outputWriter.close();
 
-            Context context = getApplicationContext();
-
-            File dir = getDir("name.txt",MODE_PRIVATE);
-
-           Toast.makeText(context, "Customer Data saved as: "+edit_text+". The directory is: "+dir, Toast.LENGTH_LONG).show();
-
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
