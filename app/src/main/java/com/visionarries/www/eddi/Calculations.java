@@ -84,7 +84,7 @@ public class Calculations extends MainActivity{
         Toast toast = Toast.makeText(context, "The Dominance Index is: " + x0, duration);
         toast.show();
 
-        long newId = myDb.insertRow(DataSave.name, x0);
+        long newId = myDb.insertRow(DataSave.name, String.valueOf(x0));
 
         Intent intent = new Intent(Calculations.this, Database_main.class);
         startActivity(intent);

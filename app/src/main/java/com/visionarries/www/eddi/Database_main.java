@@ -58,7 +58,7 @@ public class Database_main extends MainActivity {
 	public void onClick_AddRecord(View v) {
 		displayText("Clicked add record!");
 		
-		long newId = myDb.insertRow("Jenny", 5559);
+		long newId = myDb.insertRow("Jenny", String.valueOf(5559.2));
 		
 		// Query for the record we just added.
 		// Use the ID:

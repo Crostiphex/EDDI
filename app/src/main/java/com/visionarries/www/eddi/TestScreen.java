@@ -131,26 +131,26 @@ leftring = (ImageView) findViewById(R.id.leftFocusRing);
     public boolean onGenericMotionEvent(MotionEvent event) {
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
 ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) rightring.getLayoutParams();
-        int eventaction = event.getAction();
-
+        int scroll_action = event.getAction();
+int button_click = event.getButtonState();
         Context context = getApplicationContext();
         int duration = Toast.LENGTH_SHORT;
         Toast toast_finger_down = Toast.makeText(context, "a = " + a, duration);
 //        Toast toast_finger_move = Toast.makeText(context, "You moved me.", duration);
 //        Toast toast_finger_up = Toast.makeText(context, "You released me.", duration);
-
-        switch (eventaction) {
+        switch (button_click) {
             case MotionEvent.BUTTON_PRIMARY:
                 Intent intent = new Intent(TestScreen.this, VoiceControl.class);
                 startActivity(intent);
-            case MotionEvent.BUTTON_TERTIARY:
-                a++;
-                toast_finger_down.show();
                 break;
+            case MotionEvent.BUTTON_TERTIARY:
+                a=a+1;
+                break;}
 
+        switch (scroll_action) {
             case MotionEvent.ACTION_SCROLL:
                 // finger leaves the screen
-                if(a/2==0){
+                if(a%2==0){
                 if (event.getAxisValue(MotionEvent.AXIS_HSCROLL) < 0.0f){
                     mlp.leftMargin=mlp.leftMargin-5;
                     leftring.setLayoutParams(mlp);
@@ -167,9 +167,9 @@ ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) rightring.getL
                     mlp.topMargin=mlp.topMargin-5;
                     leftring.setLayoutParams(mlp);
                 }}
-                if(a/2==1){
+                if(a%2==1){
                     if (event.getAxisValue(MotionEvent.AXIS_HSCROLL) < 0.0f){
-                        plm.rightMargin=plm.rightMargin-5;
+                        plm.leftMargin=plm.leftMargin-5;
                         rightring.setLayoutParams(plm);
                     }
                     if (event.getAxisValue(MotionEvent.AXIS_HSCROLL) > 0.0f){
