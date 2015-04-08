@@ -32,17 +32,15 @@
         android:text="Add User Profile"
         android:id="@+id/newUserCheckBox"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/voiceControlCheckBox"
-        android:layout_alignStart="@+id/voiceControlCheckBox" />
+        android:layout_toEndOf="@+id/startbutton" />
 
-    <CheckBox
+    <Button
+        style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Voice Control"
-        android:id="@+id/voiceControlCheckBox"
+        android:text="Database"
+        android:id="@+id/database_button"
         android:layout_alignBottom="@+id/startbutton"
-        android:layout_toRightOf="@+id/imageView"
-        android:layout_toEndOf="@+id/imageView"
-        android:checked="false" />
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

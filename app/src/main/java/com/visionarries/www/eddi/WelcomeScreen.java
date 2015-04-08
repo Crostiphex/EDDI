@@ -16,12 +16,12 @@ import android.widget.Toast;
 
 
 
-public class MainActivity extends ActionBarActivity {
+public class WelcomeScreen extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.welcome_screen);
 
         final ImageView image = (ImageView)findViewById(R.id.imageView);
         final Animation animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
@@ -51,39 +51,48 @@ public class MainActivity extends ActionBarActivity {
 
 
         final Button switchact =(Button)findViewById(R.id.startbutton);
+        final Button database =(Button)findViewById(R.id.database_button);
         final CheckBox want_user = (CheckBox) findViewById(R.id.newUserCheckBox);
-        final CheckBox voicescreen = (CheckBox) findViewById(R.id.voiceControlCheckBox);
 
         switchact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
 
-                if(voicescreen.isChecked()){
-
-    Intent act2 = new Intent(view.getContext(),VoiceControl.class);
-    startActivity(act2);}
-
-                else if(want_user.isChecked()){
+                if(want_user.isChecked()){
 
     Intent act2 = new Intent(view.getContext(),CustomerName.class);
     startActivity(act2);}
 
                 else {
-
     Context context = getApplicationContext();
-    CharSequence text = "You didn't check anything..";
+    CharSequence text = "There was a problem please restart..";
     int duration = Toast.LENGTH_SHORT;
     Toast toast = Toast.makeText(context, text, duration);
     toast.show();
-}
+}}});
+        database.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+
+                if(want_user.isChecked()){
+
+    Intent act2 = new Intent(view.getContext(),Database_main.class);
+    startActivity(act2);}
+
+                else {
+    Context context = getApplicationContext();
+    CharSequence text = "There was a problem please restart..";
+    int duration = Toast.LENGTH_SHORT;
+    Toast toast = Toast.makeText(context, text, duration);
+    toast.show();
+}}});
 
 
 
 
 
-            }
-        });
     }
 
 

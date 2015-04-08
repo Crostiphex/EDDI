@@ -18,7 +18,7 @@ import android.widget.TextView;
  * Demo application to show how to use the 
  * built-in SQL lite database.
  */
-public class Database_main extends MainActivity {
+public class Database_main extends WelcomeScreen {
 	
 	DBAdapter myDb;
 
@@ -58,7 +58,7 @@ public class Database_main extends MainActivity {
 	public void onClick_AddRecord(View v) {
 		displayText("Clicked add record!");
 		
-		long newId = myDb.insertRow("Jenny", String.valueOf(5559.2));
+		long newId = myDb.insertRow("Jenny", 5559.2);
 		
 		// Query for the record we just added.
 		// Use the ID:
@@ -89,7 +89,7 @@ public class Database_main extends MainActivity {
 				// Process the data:
 				int id = cursor.getInt(DBAdapter.COL_ROWID);
 				String name = cursor.getString(DBAdapter.COL_NAME);
-				double domindex = cursor.getInt(DBAdapter.COL_DOMINANCE_INDEX);
+				double domindex = cursor.getDouble(DBAdapter.COL_DOMINANCE_INDEX);
 
 				
 				// Append data to the message:

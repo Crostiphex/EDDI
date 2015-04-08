@@ -60,7 +60,7 @@ public class DBAdapter {
 			//  - "not null" means it is a required field (must be given a value).
 			// NOTE: All must be comma separated (end of line!) Last one must have NO comma!!
 			+ KEY_NAME + " text not null, "
-			+ KEY_DOMINANCE_INDEX + " text not null "
+			+ KEY_DOMINANCE_INDEX + " real not null "
 
 			// Rest  of creation:
 			+ ");";
@@ -92,7 +92,7 @@ public class DBAdapter {
 	}
 	
 	// Add a new set of values to the database.
-	public long insertRow(String name, String dom_index) {
+	public long insertRow(String name, double dom_index) {
 		/*
 		 * CHANGE 3:
 		 */		
@@ -147,7 +147,7 @@ public class DBAdapter {
 	}
 	
 	// Change an existing row to be equal to new data.
-	public boolean updateRow(long rowId, String name, String dom_index) {
+	public boolean updateRow(long rowId, String name, double dom_index) {
 		String where = KEY_ROWID + "=" + rowId;
 
 		/*

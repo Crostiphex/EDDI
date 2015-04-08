@@ -16,7 +16,7 @@
         android:theme="@style/AppTheme" >
 
         <activity
-            android:name=".MainActivity"
+            android:name=".WelcomeScreen"
             android:screenOrientation="landscape"
             android:label="@string/app_name" >
             <intent-filter>
@@ -38,7 +38,7 @@
         </activity>
 
         <activity
-            android:name=".TestScreen"
+            android:name=".Calibration"
             android:screenOrientation="landscape"
             android:label="@string/app_name" >
             <intent-filter>

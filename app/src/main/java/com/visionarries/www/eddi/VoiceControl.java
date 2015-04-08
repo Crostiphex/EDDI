@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class VoiceControl extends MainActivity {
+public class VoiceControl extends WelcomeScreen {
     int i = 0;
     ImageView rightimg;
     Bitmap rightbmp;
