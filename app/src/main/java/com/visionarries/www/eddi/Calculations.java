@@ -123,7 +123,7 @@ x_ave=x_ave/m; y_ave=y_ave/m;
         tts_object.speak("Hello, the test is completed.", TextToSpeech.QUEUE_FLUSH, null,null);
 //ttsobject.speak("Hello, the test is completed.",TextToSpeech.QUEUE_FLUSH,null,"");
 
-        if (DataSave.name != ""){
+        if (!DataSave.name.equals("")){
         myDb.insertRow(DataSave.name, x0);
 
         Intent intent = new Intent(Calculations.this, Database_main.class);
