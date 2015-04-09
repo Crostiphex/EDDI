@@ -65,11 +65,8 @@ public class WelcomeScreen extends ActionBarActivity {
     startActivity(act2);}
 
                 else {
-    Context context = getApplicationContext();
-    CharSequence text = "There was a problem please restart..";
-    int duration = Toast.LENGTH_SHORT;
-    Toast toast = Toast.makeText(context, text, duration);
-    toast.show();
+                    Intent act2 = new Intent(view.getContext(),Calibration.class);
+                    startActivity(act2);
 }}});
         database.setOnClickListener(new View.OnClickListener() {
             @Override

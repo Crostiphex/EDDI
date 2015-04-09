@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ff808080">
+    android:orientation="vertical"
+    android:background="#ffc1c1c1">
+
+
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/leftFocusRing"
+        android:id="@+id/leftFocusRing_test"
         android:src="@drawable/focalring"
         android:layout_alignParentTop="false"
         android:layout_alignParentLeft="false"
@@ -18,7 +21,7 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rightFocusRing"
+        android:id="@+id/rightFocusRing_test"
         android:src="@drawable/focalring"
         android:layout_alignParentTop="false"
         android:layout_alignParentLeft="false"
@@ -29,18 +32,18 @@
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_alignTop="@+id/leftFocusRing"
-        android:layout_alignLeft="@+id/leftFocusRing"
-        android:layout_alignStart="@+id/leftFocusRing"
-        android:layout_alignBottom="@+id/leftFocusRing"
-        android:layout_alignRight="@+id/leftFocusRing"
-        android:layout_alignEnd="@+id/leftFocusRing">
+        android:layout_alignTop="@+id/leftFocusRing_test"
+        android:layout_alignLeft="@+id/leftFocusRing_test"
+        android:layout_alignStart="@+id/leftFocusRing_test"
+        android:layout_alignBottom="@+id/leftFocusRing_test"
+        android:layout_alignRight="@+id/leftFocusRing_test"
+        android:layout_alignEnd="@+id/leftFocusRing_test">
 
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/leftGrating"
+            android:id="@+id/leftGrating_test"
             android:src="@drawable/ic_launcher"
             android:layout_centerInParent="true" />
     </RelativeLayout>
@@ -48,19 +51,19 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/rightFocusRing"
-        android:layout_alignBottom="@+id/rightFocusRing"
-        android:layout_alignRight="@+id/rightFocusRing"
-        android:layout_alignEnd="@+id/rightFocusRing"
-        android:layout_alignLeft="@+id/rightFocusRing"
-        android:layout_alignStart="@+id/rightFocusRing"
+        android:layout_alignTop="@+id/rightFocusRing_test"
+        android:layout_alignBottom="@+id/rightFocusRing_test"
+        android:layout_alignRight="@+id/rightFocusRing_test"
+        android:layout_alignEnd="@+id/rightFocusRing_test"
+        android:layout_alignLeft="@+id/rightFocusRing_test"
+        android:layout_alignStart="@+id/rightFocusRing_test"
         android:layout_alignParentEnd="false"
         android:layout_alignParentStart="false">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rightGrating"
+            android:id="@+id/rightGrating_test"
             android:src="@drawable/ic_launcher"
             android:layout_centerInParent="true" />
     </RelativeLayout>

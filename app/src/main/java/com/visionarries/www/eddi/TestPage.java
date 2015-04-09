@@ -8,30 +8,43 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MotionEvent;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class VoiceControl extends WelcomeScreen {
+public class TestPage extends WelcomeScreen {
     int i = 0;
     ImageView rightimg;
     Bitmap rightbmp;
     CountDownTimer waitTimer;
     TextView text;
+    private ImageView leftring;
+    private ImageView rightring;
+    ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
+    ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) rightring.getLayoutParams();
 
-   double contrastR[] = {.05,.10,.20,.40,.45,.50,.55,.60,.80,.90,.95};
+
+    double contrastR[] = {.05,.10,.20,.40,.45,.50,.55,.60,.80,.90,.95};
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         //this is just needed
         super.onCreate(savedInstanceState);
         //sets the layout to the inputted ID
-        setContentView(R.layout.voice_control);
+        setContentView(R.layout.test_page);
+        leftring = (ImageView) findViewById(R.id.leftFocusRing_test);
+        rightring = (ImageView) findViewById(R.id.rightFocusRing_test);
+        mlp.leftMargin=DataSave.from_left_left;
+        mlp.topMargin=DataSave.from_top_left;
+        leftring.setLayoutParams(mlp);
+        plm.leftMargin=DataSave.from_left_right;
+        plm.topMargin=DataSave.from_top_right;
+        rightring.setLayoutParams(plm);
+
 //Timer
-        waitTimer = new CountDownTimer(11000, 1000) {
+        waitTimer = new CountDownTimer(contrastR.length*60000,60000) {
             public void onTick(long millisUntilFinished) {
-                rightimg = (ImageView) findViewById(R.id.imageVoice);
-                text = (TextView) findViewById(R.id.textView1);
 
 //defining the right image
                 BitmapDrawable rightabmp = (BitmapDrawable) rightimg.getDrawable();
@@ -43,7 +56,7 @@ public class VoiceControl extends WelcomeScreen {
 
             public void onFinish() {
 
-                Intent intent = new Intent(VoiceControl.this, Calculations.class);
+                Intent intent = new Intent(TestPage.this, Calculations.class);
                 startActivity(intent);
 
             }

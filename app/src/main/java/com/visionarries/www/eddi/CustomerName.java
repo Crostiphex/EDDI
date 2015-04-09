@@ -20,13 +20,13 @@ public class CustomerName extends WelcomeScreen {
         switch_act.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent act2 = new Intent(view.getContext(), Calibration.class);
-                startActivity(act2);
+                Intent act2 = new Intent(CustomerName.this, Calibration.class);
+                
 
                 EditText edit_text = (EditText) findViewById(R.id.nameString);
 
                 DataSave.name=edit_text.getText().toString();
-
+                startActivity(act2);
 
 
             }

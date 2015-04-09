@@ -12,7 +12,7 @@ public class Calculations extends WelcomeScreen {
 TextToSpeech tts_object;
 
     //    double x[] =  {.05,.10,.20,.40,.45,.50,.55,.60,.80,.90,.95};
-//    double y[]=new double[x.length];
+ // double y[]=DataSave.time_pressed;
     double x[]={0.1,
             0.35,
             0.5,

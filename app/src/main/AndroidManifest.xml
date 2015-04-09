@@ -48,7 +48,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".VoiceControl"
+            android:name=".TestPage"
             android:screenOrientation="landscape"
             android:label="@string/app_name" >
             <intent-filter>
