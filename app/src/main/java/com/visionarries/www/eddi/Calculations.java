@@ -1,18 +1,18 @@
 package com.visionarries.www.eddi;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.widget.TextView;
-import android.widget.Toast;
 import java.util.Locale;
 
-public class Calculations extends WelcomeScreen {
-TextToSpeech tts_object;
+public class Calculations extends WelcomeScreen implements TextToSpeech.OnInitListener {
 
     //    double x[] =  {.05,.10,.20,.40,.45,.50,.55,.60,.80,.90,.95};
  // double y[]=DataSave.time_pressed;
+
+    //<editor-fold desc="Initialization">
     double x[]={0.1,
             0.35,
             0.5,
@@ -66,21 +66,21 @@ TextToSpeech tts_object;
     double SSxy = 0;
     double syy = 0;
     double error_x0 = 0;
-
     TextView value;
     DBAdapter myDb;
+    public String text;
+    private TextToSpeech tts;
+    //</editor-fold>
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         //this is just needed
         super.onCreate(savedInstanceState);
         //sets the layout to the inputted ID
         setContentView(R.layout.calc_page);
-        tts_object = new TextToSpeech(Calculations.this, new TextToSpeech.OnInitListener(){
-            @Override
-        public void onInit(int status){
-                tts_object.setLanguage(Locale.ENGLISH);
-            }
-        });
+        tts = new TextToSpeech(this, this);
+
+
         openDB();
         for(int i=0; i<m; i++){
             //y[i]=DataSave.time_pressed[i]/60; //to get the data to be a percentage of a minute
@@ -115,35 +115,57 @@ x_ave=x_ave/m; y_ave=y_ave/m;
 
 
         value = (TextView) findViewById(R.id.DomIndex);
-        value.setText("x0 is "+x0);
-        int duration = Toast.LENGTH_LONG;
-        Context context = getApplicationContext();
-        Toast toast = Toast.makeText(context, "The Dominance Index is: " + x0 + ". The error is: " + error_x0, duration);
-        toast.show();
-        tts_object.speak("Hello, the test is completed.", TextToSpeech.QUEUE_FLUSH, null,null);
-//ttsobject.speak("Hello, the test is completed.",TextToSpeech.QUEUE_FLUSH,null,"");
-
+        text = "Calculation complete. The ocular dominance value is "+String.valueOf( Math.round(x0/.5*100)/100D)+". The error is "+String.valueOf( Math.round(error_x0/.5*100)/100D);
+        value.setText(text);
         if (!DataSave.name.equals("")){
         myDb.insertRow(DataSave.name, x0);
-
         Intent intent = new Intent(Calculations.this, Database_main.class);
         startActivity(intent);}
-
+        speakOut(text);
     }
-
-        @Override
+    @Override
     protected void onDestroy() {
-        super.onDestroy();
-        closeDB();
+            // Don't forget to shutdown!
+            if (tts != null) {
+                tts.stop();
+                tts.shutdown();
+            }
+            closeDB();
+            super.onDestroy();
+
+
     }
+    private void speakOut(String text) {
 
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null,null);
+    }
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
 
+            int result = tts.setLanguage(Locale.US);
+
+             //tts.setPitch(-10); // set pitch level
+
+            // tts.setSpeechRate(2); // set speech speed rate
+
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "Language is not supported");
+            } else {
+                speakOut(text);
+            }
+
+        } else {
+            Log.e("TTS", "Initilization Failed");
+        }
+
+    }
     private void openDB() {
         myDb = new DBAdapter(this);
         myDb.open();
     }
     private void closeDB() {
         myDb.close();
-    }
-}
+    }}
 
