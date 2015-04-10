@@ -1,6 +1,5 @@
 package com.visionarries.www.eddi;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -12,8 +11,6 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.Toast;
-
 
 
 public class WelcomeScreen extends ActionBarActivity {
@@ -71,20 +68,10 @@ public class WelcomeScreen extends ActionBarActivity {
         database.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent act2 = new Intent(view.getContext(),Database_main.class);
+                startActivity(act2);
 
-
-                if(want_user.isChecked()){
-
-    Intent act2 = new Intent(view.getContext(),Database_main.class);
-    startActivity(act2);}
-
-                else {
-    Context context = getApplicationContext();
-    CharSequence text = "There was a problem please restart..";
-    int duration = Toast.LENGTH_SHORT;
-    Toast toast = Toast.makeText(context, text, duration);
-    toast.show();
-}}});
+                }});
 
 
 

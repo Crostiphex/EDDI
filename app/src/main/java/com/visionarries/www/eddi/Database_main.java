@@ -1,6 +1,7 @@
 package com.visionarries.www.eddi;
 
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +30,8 @@ public class Database_main extends WelcomeScreen {
 		setContentView(R.layout.data_base);
 		
 		openDB();
+        Cursor cursor = myDb.getAllRows();
+        displayRecordSet(cursor);
 	}
 	@Override
 	protected void onDestroy() {
@@ -55,27 +58,16 @@ public class Database_main extends WelcomeScreen {
 
 	
 
-	public void onClick_AddRecord(View v) {
-		displayText("Clicked add record!");
-		
-		long newId = myDb.insertRow("Jenny", 5559.2);
-		
-		// Query for the record we just added.
-		// Use the ID:
-		Cursor cursor = myDb.getRow(newId);
-		displayRecordSet(cursor);
-	}
+
 
 	public void onClick_ClearAll(View v) {
 		displayText("Clicked clear all!");
 		myDb.deleteAll();
 	}
 
-	public void onClick_DisplayRecords(View v) {
-		displayText("Clicked display record!");
-		
-		Cursor cursor = myDb.getAllRows();
-		displayRecordSet(cursor);
+	public void onClick_GoHome(View v) {
+        Intent act2 = new Intent(v.getContext(),WelcomeScreen.class);
+        startActivity(act2);
 	}
 	
 	// Display an entire recordset to the screen.

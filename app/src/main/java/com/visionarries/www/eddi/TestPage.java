@@ -17,10 +17,6 @@ public class TestPage extends WelcomeScreen {
     ImageView rightimg;
     Bitmap rightbmp;
     CountDownTimer waitTimer;
-    //TextView text;
-    private ImageView leftring;
-    private ImageView rightring;
-
 
 
     double contrastR[] = {.05,.10,.20,.40,.45,.50,.55,.60,.80,.90,.95};
@@ -32,8 +28,8 @@ public class TestPage extends WelcomeScreen {
         //sets the layout to the inputted ID
         setContentView(R.layout.test_page);
         rightimg = (ImageView) findViewById(R.id.rightGrating_test);
-        leftring = (ImageView) findViewById(R.id.leftFocusRing_test);
-        rightring = (ImageView) findViewById(R.id.rightFocusRing_test);
+        ImageView leftring = (ImageView) findViewById(R.id.leftFocusRing_test);
+        ImageView rightring = (ImageView) findViewById(R.id.rightFocusRing_test);
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
         ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) rightring.getLayoutParams();
 
