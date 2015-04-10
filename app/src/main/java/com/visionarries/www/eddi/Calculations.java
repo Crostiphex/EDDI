@@ -8,7 +8,6 @@ import android.widget.TextView;
 import java.util.Locale;
 
 public class Calculations extends WelcomeScreen implements TextToSpeech.OnInitListener {
-
     //    double x[] =  {.05,.10,.20,.40,.45,.50,.55,.60,.80,.90,.95};
  // double y[]=DataSave.time_pressed;
 
@@ -71,7 +70,6 @@ public class Calculations extends WelcomeScreen implements TextToSpeech.OnInitLi
     public String text;
     private TextToSpeech tts;
     //</editor-fold>
-
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         //this is just needed
@@ -116,6 +114,7 @@ x_ave=x_ave/m; y_ave=y_ave/m;
 
         value = (TextView) findViewById(R.id.DomIndex);
         text = "Calculation complete. The ocular dominance value is "+String.valueOf( Math.round(x0/.5*100)/100D)+". The error is "+String.valueOf( Math.round(error_x0/.5*100)/100D);
+       // text="A customer is requesting assistance, A customer is requesting assistance, A customer is requesting assistance, A customer is requesting assistance, A customer is requesting assistance";
         value.setText(text);
         if (!DataSave.name.equals("")){
         myDb.insertRow(DataSave.name, x0);
@@ -143,7 +142,7 @@ x_ave=x_ave/m; y_ave=y_ave/m;
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
 
-            int result = tts.setLanguage(Locale.US);
+            int result = tts.setLanguage(Locale.ENGLISH);
 
              //tts.setPitch(-10); // set pitch level
 
@@ -168,4 +167,3 @@ x_ave=x_ave/m; y_ave=y_ave/m;
     private void closeDB() {
         myDb.close();
     }}
-

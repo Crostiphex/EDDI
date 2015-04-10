@@ -4,15 +4,19 @@ package com.visionarries.www.eddi;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import java.util.Locale;
 
 
-
-public class Calibration extends Activity {
+public class Calibration extends Activity implements TextToSpeech.OnInitListener {
 int a= 0;
+    public String text;
+    private TextToSpeech tts;
     //defining the images
 
     private ImageView leftring;
@@ -32,8 +36,11 @@ int a= 0;
 
 
 
+        tts = new TextToSpeech(this, this);
+text= "Calibration page initiated. Slide finger on middle button to move pattern, click the middle button to move other pattern. When finished, left click to progress to the test.";
+        speakOut(text);
 
-leftring = (ImageView) findViewById(R.id.leftFocusRing);
+        leftring = (ImageView) findViewById(R.id.leftFocusRing);
         rightring = (ImageView) findViewById(R.id.rightFocusRing);
 
 //this button makes the pattern
@@ -42,7 +49,6 @@ leftring = (ImageView) findViewById(R.id.leftFocusRing);
            leftring.setLayoutParams(mlp);
        final ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) rightring.getLayoutParams();
         rightring.setLayoutParams(plm);
-
 
     }
 
@@ -112,5 +118,44 @@ int button_click = event.getButtonState();
 
         // tell the system that we handled the event and no further processing is required
         return true;
-    }}
+    }
+    @Override
+    protected void onDestroy() {
+        // Don't forget to shutdown!
+        if (tts != null) {
+            tts.stop();
+            tts.shutdown();
+        }
+
+        super.onDestroy();
+
+
+    }
+    private void speakOut(String text) {
+
+        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null,null);
+    }
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+
+            int result = tts.setLanguage(Locale.ENGLISH);
+
+            //tts.setPitch(-10); // set pitch level
+
+            // tts.setSpeechRate(2); // set speech speed rate
+
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("TTS", "Language is not supported");
+            } else {
+                speakOut(text);
+            }
+
+        } else {
+            Log.e("TTS", "Initilization Failed");
+        }
+
+    }
+}
 

@@ -10,7 +10,6 @@ import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class TestPage extends WelcomeScreen {
@@ -18,11 +17,10 @@ public class TestPage extends WelcomeScreen {
     ImageView rightimg;
     Bitmap rightbmp;
     CountDownTimer waitTimer;
-    TextView text;
+    //TextView text;
     private ImageView leftring;
     private ImageView rightring;
-    ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
-    ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) rightring.getLayoutParams();
+
 
 
     double contrastR[] = {.05,.10,.20,.40,.45,.50,.55,.60,.80,.90,.95};
@@ -33,8 +31,12 @@ public class TestPage extends WelcomeScreen {
         super.onCreate(savedInstanceState);
         //sets the layout to the inputted ID
         setContentView(R.layout.test_page);
+        rightimg = (ImageView) findViewById(R.id.rightGrating_test);
         leftring = (ImageView) findViewById(R.id.leftFocusRing_test);
         rightring = (ImageView) findViewById(R.id.rightFocusRing_test);
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
+        ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) rightring.getLayoutParams();
+
         mlp.leftMargin=DataSave.from_left_left;
         mlp.topMargin=DataSave.from_top_left;
         leftring.setLayoutParams(mlp);
@@ -51,7 +53,7 @@ public class TestPage extends WelcomeScreen {
                 rightbmp = rightabmp.getBitmap();
                 right_pattern(contrastR[i]);
                 i=i+1;
-                text.setText("seconds remaining: " + millisUntilFinished / 1000);
+               // text.setText("seconds remaining: " + millisUntilFinished / 1000);
             }
 
             public void onFinish() {

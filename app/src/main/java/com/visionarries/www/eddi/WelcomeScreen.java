@@ -65,7 +65,7 @@ public class WelcomeScreen extends ActionBarActivity {
     startActivity(act2);}
 
                 else {
-                    Intent act2 = new Intent(view.getContext(),Calculations.class);
+                    Intent act2 = new Intent(view.getContext(),Calibration.class);
                     startActivity(act2);
 }}});
         database.setOnClickListener(new View.OnClickListener() {
