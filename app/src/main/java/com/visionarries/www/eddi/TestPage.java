@@ -19,6 +19,8 @@ public class TestPage extends WelcomeScreen {
     ImageView leftimg;
     Bitmap leftbmp;
     CountDownTimer waitTimer;
+    int a=0;
+    int b=0;
 
 
     double contrastR[] = {.05,.10,.20,.40,.45,.50,.55,.60,.80,.90,.95};
@@ -85,15 +87,18 @@ public class TestPage extends WelcomeScreen {
 
         if(event.getAction() == android.view.MotionEvent.ACTION_DOWN ) {
             lastDown = System.currentTimeMillis();
+            a=i;
                     }
 
         else if (event.getAction() == MotionEvent.ACTION_UP) {
             lastDuration = System.currentTimeMillis() - lastDown;
-
+            b=i;
+if(a!=b){DataSave.time_pressed[i-1]=DataSave.time_pressed[i-1]+lastDuration/1000.;}
+            else{
 
             DataSave.time_pressed[i]=DataSave.time_pressed[i]+lastDuration/1000.;
             Toast toast_finger_up = Toast.makeText(context, "You released me." + DataSave.time_pressed[i], duration);
-            toast_finger_up.show();
+            toast_finger_up.show();}
 
         }
 
@@ -105,8 +110,8 @@ public class TestPage extends WelcomeScreen {
     public void right_pattern(Double contrast){
                Bitmap operation = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
 //the loop goes through each picture
-        for(int i=0; i< rightbmp.getWidth(); i++){
-            for(int j=0; j< rightbmp.getHeight(); j++){
+        for(int i=0; i< rightbmp.getWidth()-1; i++){
+            for(int j=0; j< rightbmp.getHeight()-1; j++){
 
                 double ij=(i-(rightbmp.getWidth()/2))*(i-(rightbmp.getWidth()/2))+(j-(rightbmp.getWidth()/2))*(j-(rightbmp.getWidth()/2));
                 double k = (rightbmp.getWidth()/2)*(rightbmp.getWidth()/2);
@@ -114,7 +119,7 @@ public class TestPage extends WelcomeScreen {
 
                 if (ij<=k){//displays pattern in a circle
 
-                    int gray_level = gamma_correction((int)((contrast*(255/2)*Math.cos((i+j+2)*Math.PI*(1.2/dis))+(255/2)))); //pattern
+                    int gray_level = gamma_correction((int)((contrast*(255/2)*Math.cos((i+j+2)*Math.PI*(1.26/dis))+(255/2)))); //pattern
                     operation.setPixel(i, j, Color.argb(255, gray_level, gray_level, gray_level));}//actually assigns the values.
 
                 else{
@@ -131,8 +136,8 @@ public class TestPage extends WelcomeScreen {
     public void left_pattern(Double contrast){
         Bitmap operation = Bitmap.createBitmap(leftbmp.getWidth(), leftbmp.getHeight(), leftbmp.getConfig());
 //the loop goes through each picture
-        for(int i=0; i< leftbmp.getWidth(); i++){
-            for(int j=0; j< leftbmp.getHeight(); j++){
+        for(int i=0; i< leftbmp.getWidth()-1; i++){
+            for(int j=leftbmp.getHeight()-1; j>0; j--){
 
                 double ij=(i-(leftbmp.getWidth()/2))*(i-(leftbmp.getWidth()/2))+(j-(leftbmp.getWidth()/2))*(j-(leftbmp.getWidth()/2));
                 double k = (leftbmp.getWidth()/2)*(leftbmp.getWidth()/2);
@@ -140,7 +145,7 @@ public class TestPage extends WelcomeScreen {
 
                 if (ij<=k){//displays pattern in a circle
 
-                    int gray_level = gamma_correction((int)((contrast*(255/2)*Math.cos((i-j+2)*Math.PI*(1.2/dis))+(255/2)))); //pattern
+                    int gray_level = gamma_correction((int)((contrast*(255/2)*Math.cos((+i-j+2)*Math.PI*(1.26/dis))+(255/2)))); //pattern
                     operation.setPixel(i, j, Color.argb(255, gray_level, gray_level, gray_level));}//actually assigns the values.
 
                 else{
