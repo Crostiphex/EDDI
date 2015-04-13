@@ -41,7 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/leftGrating"
-            android:src="@drawable/stimulus"
+            android:src="@drawable/stimuli2"
             android:layout_centerInParent="true" />
     </RelativeLayout>
 
@@ -61,7 +61,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/rightGrating"
-            android:src="@drawable/stimulus"
+            android:src="@drawable/stimuli2"
             android:layout_centerInParent="true" />
     </RelativeLayout>
 

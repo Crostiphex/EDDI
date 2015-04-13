@@ -16,6 +16,8 @@ public class TestPage extends WelcomeScreen {
     int i = 0;
     ImageView rightimg;
     Bitmap rightbmp;
+    ImageView leftimg;
+    Bitmap leftbmp;
     CountDownTimer waitTimer;
 
 
@@ -28,6 +30,7 @@ public class TestPage extends WelcomeScreen {
         //sets the layout to the inputted ID
         setContentView(R.layout.test_page);
         rightimg = (ImageView) findViewById(R.id.rightGrating_test);
+        leftimg = (ImageView) findViewById(R.id.leftGrating_test);
         ImageView leftring = (ImageView) findViewById(R.id.leftFocusRing_test);
         ImageView rightring = (ImageView) findViewById(R.id.rightFocusRing_test);
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
@@ -48,6 +51,10 @@ public class TestPage extends WelcomeScreen {
                 BitmapDrawable rightabmp = (BitmapDrawable) rightimg.getDrawable();
                 rightbmp = rightabmp.getBitmap();
                 right_pattern(contrastR[i]);
+
+                BitmapDrawable leftabmp = (BitmapDrawable) leftimg.getDrawable();
+                leftbmp = leftabmp.getBitmap();
+                left_pattern(1.);
                 i=i+1;
                // text.setText("seconds remaining: " + millisUntilFinished / 1000);
             }
@@ -94,7 +101,7 @@ public class TestPage extends WelcomeScreen {
         return true;
     }
 
-//makes the pattern
+//makes the right pattern
     public void right_pattern(Double contrast){
                Bitmap operation = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
 //the loop goes through each picture
@@ -107,7 +114,33 @@ public class TestPage extends WelcomeScreen {
 
                 if (ij<=k){//displays pattern in a circle
 
-                    int gray_level = gamma_correction((int)((contrast*(255/2)*Math.cos((i+j)*Math.PI*(.65/dis))+(255/2)))); //pattern
+                    int gray_level = gamma_correction((int)((contrast*(255/2)*Math.cos((i+j+2)*Math.PI*(1.2/dis))+(255/2)))); //pattern
+                    operation.setPixel(i, j, Color.argb(255, gray_level, gray_level, gray_level));}//actually assigns the values.
+
+                else{
+                   int test=gamma_correction(128);
+                    operation.setPixel(i, j, Color.argb(255, test, test, test));}
+
+
+            }
+        }
+        rightimg.setImageBitmap(operation);
+    }
+
+    //makes the left pattern
+    public void left_pattern(Double contrast){
+        Bitmap operation = Bitmap.createBitmap(leftbmp.getWidth(), leftbmp.getHeight(), leftbmp.getConfig());
+//the loop goes through each picture
+        for(int i=0; i< leftbmp.getWidth(); i++){
+            for(int j=0; j< leftbmp.getHeight(); j++){
+
+                double ij=(i-(leftbmp.getWidth()/2))*(i-(leftbmp.getWidth()/2))+(j-(leftbmp.getWidth()/2))*(j-(leftbmp.getWidth()/2));
+                double k = (leftbmp.getWidth()/2)*(leftbmp.getWidth()/2);
+                double dis=Math.sqrt(2*(leftbmp.getWidth()^2));
+
+                if (ij<=k){//displays pattern in a circle
+
+                    int gray_level = gamma_correction((int)((contrast*(255/2)*Math.cos((i-j+2)*Math.PI*(1.2/dis))+(255/2)))); //pattern
                     operation.setPixel(i, j, Color.argb(255, gray_level, gray_level, gray_level));}//actually assigns the values.
 
                 else{
@@ -117,10 +150,10 @@ public class TestPage extends WelcomeScreen {
 
             }
         }
-        rightimg.setImageBitmap(operation);
+        leftimg.setImageBitmap(operation);
     }
-    public int gamma_correction (int initial_value){
 
+    public int gamma_correction (int initial_value){
         int[ ] correction ={0, 9, 20, 28, 34, 39, 44, 48, 51, 55, 58, 61, 64, 67, 69, 72, 74, 76,
                 79, 81, 83, 85, 87, 89, 91, 92, 94, 96, 98, 99, 101, 102, 104, 105,
                 107, 108, 110, 111, 113, 114, 115, 117, 118, 119, 121, 122, 123, 124,
@@ -139,8 +172,6 @@ public class TestPage extends WelcomeScreen {
                 240, 240, 241, 241, 242, 242, 242, 243, 243, 244, 244, 245, 245, 246,
                 246, 246, 247, 247, 248, 248, 249, 249, 249, 250, 250, 251, 251, 252,
                 252, 252, 253, 253, 254, 254, 255, 255, 255, 255, 255, 255,255};
-
-
         return correction[initial_value];
 
     }
