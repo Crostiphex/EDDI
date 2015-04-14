@@ -43,8 +43,6 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:maxHeight="55px"
-            android:maxWidth="55px"
             android:id="@+id/leftGrating_test"
             android:src="@drawable/stimuli2"
             android:layout_centerInParent="true" />

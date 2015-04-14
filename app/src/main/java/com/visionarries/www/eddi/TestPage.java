@@ -1,6 +1,5 @@
 package com.visionarries.www.eddi;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -10,7 +9,6 @@ import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class TestPage extends WelcomeScreen {
     int i = 0;
@@ -56,7 +54,7 @@ public class TestPage extends WelcomeScreen {
 
                 BitmapDrawable leftabmp = (BitmapDrawable) leftimg.getDrawable();
                 leftbmp = leftabmp.getBitmap();
-                left_pattern(1.);
+                left_pattern(.5);
                 i=i+1;
                // text.setText("seconds remaining: " + millisUntilFinished / 1000);
             }
@@ -78,13 +76,6 @@ public class TestPage extends WelcomeScreen {
     long lastDown;
     long lastDuration;
     public boolean onTouchEvent(MotionEvent event) {
-//        int eventaction = event.getButtonState();
-
-        Context context = getApplicationContext();
-        int duration = Toast.LENGTH_SHORT;
-//    Toast toast_finger_down = Toast.makeText(context, "You touched me.", duration);
-
-
         if(event.getAction() == android.view.MotionEvent.ACTION_DOWN ) {
             lastDown = System.currentTimeMillis();
             a=i;
@@ -97,8 +88,7 @@ if(a!=b){DataSave.time_pressed[i-1]=DataSave.time_pressed[i-1]+lastDuration/1000
             else{
 
             DataSave.time_pressed[i]=DataSave.time_pressed[i]+lastDuration/1000.;
-            Toast toast_finger_up = Toast.makeText(context, "You released me." + DataSave.time_pressed[i], duration);
-            toast_finger_up.show();}
+          }
 
         }
 
