@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-/*
+/**
  * Steps to using the DB:
  * 1. [DONE] Instantiate the DB Adapter
  * 2. [DONE] Open the DB
