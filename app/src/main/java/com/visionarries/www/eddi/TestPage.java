@@ -44,7 +44,7 @@ public class TestPage extends WelcomeScreen {
         rightring.setLayoutParams(plm);
 
 //Timer
-        waitTimer = new CountDownTimer(contrastR.length*60000,60000) {
+        waitTimer = new CountDownTimer(contrastR.length*3000,3000) {
             public void onTick(long millisUntilFinished) {
 
 //defining the right image
@@ -58,19 +58,15 @@ public class TestPage extends WelcomeScreen {
                 i=i+1;
                // text.setText("seconds remaining: " + millisUntilFinished / 1000);
             }
-
+            @Override
             public void onFinish() {
-
                 Intent intent = new Intent(TestPage.this, Calculations.class);
                 startActivity(intent);
-
             }
-
-
-
         }.start();
-
     }
+
+
 
 //Button Recognizer
     long lastDown;
@@ -96,7 +92,7 @@ if(a!=b){DataSave.time_pressed[i-1]=DataSave.time_pressed[i-1]+lastDuration/1000
         return true;
     }
 
-//makes the right pattern
+    //makes the right pattern
     public void right_pattern(Double contrast){
                Bitmap operation = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
 //the loop goes through each picture
@@ -121,7 +117,6 @@ if(a!=b){DataSave.time_pressed[i-1]=DataSave.time_pressed[i-1]+lastDuration/1000
         }
         rightimg.setImageBitmap(operation);
     }
-
     //makes the left pattern
     public void left_pattern(Double contrast){
         Bitmap operation = Bitmap.createBitmap(leftbmp.getWidth(), leftbmp.getHeight(), leftbmp.getConfig());
@@ -147,7 +142,6 @@ if(a!=b){DataSave.time_pressed[i-1]=DataSave.time_pressed[i-1]+lastDuration/1000
         }
         leftimg.setImageBitmap(operation);
     }
-
     public int gamma_correction (int initial_value){
         int[ ] correction ={0, 9, 20, 28, 34, 39, 44, 48, 51, 55, 58, 61, 64, 67, 69, 72, 74, 76,
                 79, 81, 83, 85, 87, 89, 91, 92, 94, 96, 98, 99, 101, 102, 104, 105,

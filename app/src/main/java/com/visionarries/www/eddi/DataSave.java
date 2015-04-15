@@ -6,6 +6,6 @@ public class DataSave extends WelcomeScreen {
     public static int from_top_right;
     public static int from_left_right;
 
-   public static double[] time_pressed = new double[10];
+   public static double[] time_pressed = new double[11];
     public static String  name = "";
 }
