@@ -21,7 +21,21 @@ public class TestPage extends WelcomeScreen {
     int b=0;
 
 
-    double contrastR[] = {.05,.10,.20,.40,.45,.50,.55,.60,.80,.90,.95};
+    public static double contrastR[]={0.1,
+            0.35,
+            0.5,
+            0.7,
+            0.85,
+            0.2,
+            0.3,
+            0.45,
+            0.75,
+            0.9,
+            0.15,
+            0.25,
+            0.55,
+            0.65,
+            0.6};
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -44,7 +58,7 @@ public class TestPage extends WelcomeScreen {
         rightring.setLayoutParams(plm);
 
 //Timer
-        waitTimer = new CountDownTimer(contrastR.length*30000,30000) {
+        waitTimer = new CountDownTimer(contrastR.length*1000,1000) {
             public void onTick(long millisUntilFinished) {
 
 //defining the right image
@@ -60,7 +74,7 @@ public class TestPage extends WelcomeScreen {
             }
             @Override
             public void onFinish() {
-                Intent intent = new Intent(TestPage.this, Calculations.class);
+                Intent intent = new Intent(TestPage.this, Calculation.class);
                 startActivity(intent);
             }
         }.start();

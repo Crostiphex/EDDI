@@ -79,13 +79,12 @@ public class Database_main extends WelcomeScreen {
 		if (cursor.moveToFirst()) {
 			do {
 				// Process the data:
-				int id = cursor.getInt(DBAdapter.COL_ROWID);
 				String name = cursor.getString(DBAdapter.COL_NAME);
-				double domindex = cursor.getDouble(DBAdapter.COL_DOMINANCE_INDEX);
+				double dom_index = cursor.getDouble(DBAdapter.COL_DOMINANCE_INDEX);
 
 				
 				// Append data to the message:
-                message += String.format("%-40s %s", name , +domindex+"\n");
+                message += String.format("%-40s %s", name , +dom_index+"\n");
 
 			} while(cursor.moveToNext());
 		}

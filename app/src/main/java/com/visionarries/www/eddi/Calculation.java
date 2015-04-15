@@ -4,44 +4,32 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
+import android.view.View;
 import android.widget.TextView;
+
 import java.util.Locale;
 
-public class Calculations extends WelcomeScreen implements TextToSpeech.OnInitListener {
-        double x[] =  {.05,.10,.20,.40,.45,.50,.55,.60,.80,.90,.95};
-  double y[]=DataSave.time_pressed;
+public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitListener {
+        //double x[] =  {.05,.10,.20,.40,.45,.50,.55,.60,.80,.90,.95};
+ // double y[]=DataSave.time_pressed;
 
     //<editor-fold desc="Initialization">
-//    double x[]={0.1,
-//            0.35,
-//            0.5,
-//            0.7,
-//            0.85,
-//            0.2,
-//            0.3,
-//            0.45,
-//            0.75,
-//            0.9,
-//            0.15,
-//            0.25,
-//            0.55,
-//            0.65,
-//            0.6};
-//    double y[]={0.1055,
-//            0.4836,
-//            0.7712,
-//            0.7554,
-//            0.8531,
-//            0.1671,
-//            0.4146,
-//            0.6077,
-//            0.9079,
-//            0.8648,
-//            0.1874,
-//            0.3254,
-//            0.6852,
-//            0.8494,
-//            0.878};
+    double x[]=TestPage.contrastR;
+    double y[]={0.1055,
+            0.4836,
+            0.7712,
+            0.7554,
+            0.8531,
+            0.1671,
+            0.4146,
+            0.6077,
+            0.9079,
+            0.8648,
+            0.1874,
+            0.3254,
+            0.6852,
+            0.8494,
+            0.878};
     double xx[]=new double[x.length];
     double yy[]=new double[x.length];
     double xy[]=new double[x.length];
@@ -81,8 +69,8 @@ public class Calculations extends WelcomeScreen implements TextToSpeech.OnInitLi
 
         openDB();
         for(int i=0; i<m; i++){
-            y[i]=DataSave.time_pressed[i]/30; //to get the data to be a percentage of a minute
-           x[i]=Math.log10(x[i]); //This is you want the x to be on base 10
+          //  y[i]=DataSave.time_pressed[i]/30; //to get the data to be a percentage of a minute
+            x[i]=Math.log10(x[i]); //This is you want the x to be on base 10
             x_ave=x_ave+x[i];
             y[i] = Math.log((1/y[i])-1);
             y_ave=y_ave+y[i];
@@ -118,9 +106,13 @@ x_ave=x_ave/m; y_ave=y_ave/m;
         value.setText(text);
         if (!DataSave.name.equals("")){
         myDb.insertRow(DataSave.name, x0);
-        Intent intent = new Intent(Calculations.this, Database_main.class);
+        Intent intent = new Intent(Calculation.this, Database_main.class);
         startActivity(intent);}
         speakOut(text);
+    }
+    public void onClick_GoHome(View v) {
+        Intent act2 = new Intent(v.getContext(),WelcomeScreen.class);
+        startActivity(act2);
     }
     @Override
     protected void onDestroy() {

@@ -50,13 +50,7 @@ text= "Calibration page initiated. Slide finger on middle button to move pattern
        final ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) rightring.getLayoutParams();
         rightring.setLayoutParams(plm);
 
-        DataSave.from_left_left=mlp.leftMargin;
-        DataSave.from_top_left=mlp.topMargin;
-        DataSave.from_left_right=plm.leftMargin;
-        DataSave.from_top_right=plm.topMargin;
 
-        Intent intent = new Intent(Calibration.this, TestPage.class);
-        startActivity(intent);
     }
 
 
