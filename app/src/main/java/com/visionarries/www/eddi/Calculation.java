@@ -11,25 +11,25 @@ import java.util.Locale;
 
 public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitListener {
         //double x[] =  {.05,.10,.20,.40,.45,.50,.55,.60,.80,.90,.95};
- // double y[]=DataSave.time_pressed;
+ double y[]=DataSave.time_pressed;
 
     //<editor-fold desc="Initialization">
     double x[]=TestPage.contrastR;
-    double y[]={0.1055,
-            0.4836,
-            0.7712,
-            0.7554,
-            0.8531,
-            0.1671,
-            0.4146,
-            0.6077,
-            0.9079,
-            0.8648,
-            0.1874,
-            0.3254,
-            0.6852,
-            0.8494,
-            0.878};
+//    double y[]={0.1055,
+//            0.4836,
+//            0.7712,
+//            0.7554,
+//            0.8531,
+//            0.1671,
+//            0.4146,
+//            0.6077,
+//            0.9079,
+//            0.8648,
+//            0.1874,
+//            0.3254,
+//            0.6852,
+//            0.8494,
+//            0.878};
     double xx[]=new double[x.length];
     double yy[]=new double[x.length];
     double xy[]=new double[x.length];

@@ -58,7 +58,7 @@ public class TestPage extends WelcomeScreen {
         rightring.setLayoutParams(plm);
 
 //Timer
-        waitTimer = new CountDownTimer(contrastR.length*1000,1000) {
+        waitTimer = new CountDownTimer(contrastR.length*30000,30000) {
             public void onTick(long millisUntilFinished) {
 
 //defining the right image
@@ -74,6 +74,9 @@ public class TestPage extends WelcomeScreen {
             }
             @Override
             public void onFinish() {
+                if (b!=i){
+                    DataSave.time_pressed[i]=DataSave.time_pressed[i]+lastDuration/1000.;}
+
                 Intent intent = new Intent(TestPage.this, Calculation.class);
                 startActivity(intent);
             }
