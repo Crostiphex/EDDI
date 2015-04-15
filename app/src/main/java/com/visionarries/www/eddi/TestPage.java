@@ -44,7 +44,7 @@ public class TestPage extends WelcomeScreen {
         rightring.setLayoutParams(plm);
 
 //Timer
-        waitTimer = new CountDownTimer(contrastR.length*3000,3000) {
+        waitTimer = new CountDownTimer(contrastR.length*30000,30000) {
             public void onTick(long millisUntilFinished) {
 
 //defining the right image
@@ -142,7 +142,7 @@ if(a!=b){DataSave.time_pressed[i-1]=DataSave.time_pressed[i-1]+lastDuration/1000
         }
         leftimg.setImageBitmap(operation);
     }
-    public int gamma_correction (int initial_value){
+        public int gamma_correction (int initial_value){
         int[ ] correction ={0, 9, 20, 28, 34, 39, 44, 48, 51, 55, 58, 61, 64, 67, 69, 72, 74, 76,
                 79, 81, 83, 85, 87, 89, 91, 92, 94, 96, 98, 99, 101, 102, 104, 105,
                 107, 108, 110, 111, 113, 114, 115, 117, 118, 119, 121, 122, 123, 124,
