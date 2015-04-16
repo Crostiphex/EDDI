@@ -11,17 +11,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 public class TestPage extends WelcomeScreen {
-    int i = 0;
-    ImageView rightimg;
-    Bitmap rightbmp;
-    ImageView leftimg;
-    Bitmap leftbmp;
-    CountDownTimer waitTimer;
-    int a=0;
-    int b=0;
-
-
-    public static double contrastR[]={0.1,
+    public static double contrastR[] = {0.1,
             0.35,
             0.5,
             0.7,
@@ -36,6 +26,19 @@ public class TestPage extends WelcomeScreen {
             0.55,
             0.65,
             0.6};
+    int i = 0;
+    ImageView rightimg;
+    Bitmap rightbmp;
+    ImageView leftimg;
+    Bitmap leftbmp;
+    CountDownTimer waitTimer;
+    int a=0;
+    int b=0;
+    int c = 0;
+    int d = 0;
+    //Button Recognizer
+    long lastDown;
+    long lastDuration;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -50,15 +53,15 @@ public class TestPage extends WelcomeScreen {
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
         ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) rightring.getLayoutParams();
 
-        mlp.leftMargin=DataSave.from_left_left;
-        mlp.topMargin=DataSave.from_top_left;
+        mlp.leftMargin = DataSave.from_left_left;
+        mlp.topMargin = DataSave.from_top_left;
         leftring.setLayoutParams(mlp);
-        plm.leftMargin=DataSave.from_left_right;
-        plm.topMargin=DataSave.from_top_right;
+        plm.leftMargin = DataSave.from_left_right;
+        plm.topMargin = DataSave.from_top_right;
         rightring.setLayoutParams(plm);
 
 //Timer
-        waitTimer = new CountDownTimer(contrastR.length*30000,30000) {
+        waitTimer = new CountDownTimer(contrastR.length * 30000, 30000) {
             public void onTick(long millisUntilFinished) {
 
 //defining the right image
@@ -69,13 +72,15 @@ public class TestPage extends WelcomeScreen {
                 BitmapDrawable leftabmp = (BitmapDrawable) leftimg.getDrawable();
                 leftbmp = leftabmp.getBitmap();
                 left_pattern(.5);
-                i=i+1;
-               // text.setText("seconds remaining: " + millisUntilFinished / 1000);
+                i = i + 1;
+                // text.setText("seconds remaining: " + millisUntilFinished / 1000);
             }
+
             @Override
             public void onFinish() {
-                if (b!=i){
-                    DataSave.time_pressed[i]=DataSave.time_pressed[i]+lastDuration/1000.;}
+                if (d != c) {
+                    DataSave.time_pressed[i] = DataSave.time_pressed[i] + lastDuration / 1000.;
+                }
 
                 Intent intent = new Intent(TestPage.this, Calculation.class);
                 startActivity(intent);
@@ -83,21 +88,18 @@ public class TestPage extends WelcomeScreen {
         }.start();
     }
 
-
-
-//Button Recognizer
-    long lastDown;
-    long lastDuration;
     public boolean onTouchEvent(MotionEvent event) {
         if(event.getAction() == android.view.MotionEvent.ACTION_DOWN ) {
             lastDown = System.currentTimeMillis();
             a=i;
+            c++;
                     }
 
         else if (event.getAction() == MotionEvent.ACTION_UP) {
             lastDuration = System.currentTimeMillis() - lastDown;
             b=i;
-if(a!=b){DataSave.time_pressed[i-1]=DataSave.time_pressed[i-1]+lastDuration/1000.;}
+            d++;
+            if(a!=b){DataSave.time_pressed[i-1]=DataSave.time_pressed[i-1]+lastDuration/1000.;}
             else{
 
             DataSave.time_pressed[i]=DataSave.time_pressed[i]+lastDuration/1000.;
@@ -122,7 +124,7 @@ if(a!=b){DataSave.time_pressed[i-1]=DataSave.time_pressed[i-1]+lastDuration/1000
 
                 if (ij<=k){//displays pattern in a circle
 
-                    int gray_level = gamma_correction((int)((contrast*(255/2)*Math.cos((i+j+2)*Math.PI*(1.26/dis))+(255/2)))); //pattern
+                    int gray_level = gamma_correction((int) ((contrast * (255 / 2) * Math.cos((i + j) * Math.PI * (1.09 / dis)) + (255 / 2)))); //pattern
                     operation.setPixel(i, j, Color.argb(255, gray_level, gray_level, gray_level));}//actually assigns the values.
 
                 else{
@@ -147,7 +149,7 @@ if(a!=b){DataSave.time_pressed[i-1]=DataSave.time_pressed[i-1]+lastDuration/1000
 
                 if (ij<=k){//displays pattern in a circle
 
-                    int gray_level = gamma_correction((int)((contrast*(255/2)*Math.cos((+i-j+2)*Math.PI*(1.26/dis))+(255/2)))); //pattern
+                    int gray_level = gamma_correction((int) ((contrast * (255 / 2) * Math.cos((+i - j) * Math.PI * (1.09 / dis)) + (255 / 2)))); //pattern
                     operation.setPixel(i, j, Color.argb(255, gray_level, gray_level, gray_level));}//actually assigns the values.
 
                 else{

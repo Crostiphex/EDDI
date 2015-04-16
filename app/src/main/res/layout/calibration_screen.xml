@@ -1,68 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ff808080">
+    android:background="#ff808080"
+    android:orientation="vertical">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/leftFocusRing"
-        android:src="@drawable/focalring"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentStart="false"
-        android:layout_marginTop="150dp"
-        android:layout_marginLeft="120dp" />
-
-    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rightFocusRing"
-        android:src="@drawable/focalring"
-        android:layout_alignParentTop="false"
         android:layout_alignParentLeft="false"
         android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_marginLeft="120dp"
         android:layout_marginTop="150dp"
-        android:layout_marginLeft="450dp" />
+        android:src="@drawable/focus_pattern" />
+
+    <ImageView
+        android:id="@+id/rightFocusRing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_marginLeft="450dp"
+        android:layout_marginTop="150dp"
+        android:src="@drawable/focus_pattern" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_alignTop="@+id/leftFocusRing"
-        android:layout_alignLeft="@+id/leftFocusRing"
-        android:layout_alignStart="@+id/leftFocusRing"
         android:layout_alignBottom="@+id/leftFocusRing"
+        android:layout_alignEnd="@+id/leftFocusRing"
+        android:layout_alignLeft="@+id/leftFocusRing"
         android:layout_alignRight="@+id/leftFocusRing"
-        android:layout_alignEnd="@+id/leftFocusRing">
+        android:layout_alignStart="@+id/leftFocusRing"
+        android:layout_alignTop="@+id/leftFocusRing">
 
 
         <ImageView
+            android:id="@+id/leftGrating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/leftGrating"
-            android:src="@drawable/stimuli2"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:src="@drawable/stimulus" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/rightFocusRing"
         android:layout_alignBottom="@+id/rightFocusRing"
-        android:layout_alignRight="@+id/rightFocusRing"
         android:layout_alignEnd="@+id/rightFocusRing"
         android:layout_alignLeft="@+id/rightFocusRing"
-        android:layout_alignStart="@+id/rightFocusRing"
         android:layout_alignParentEnd="false"
-        android:layout_alignParentStart="false">
+        android:layout_alignParentStart="false"
+        android:layout_alignRight="@+id/rightFocusRing"
+        android:layout_alignStart="@+id/rightFocusRing"
+        android:layout_alignTop="@+id/rightFocusRing">
 
         <ImageView
+            android:id="@+id/rightGrating"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rightGrating"
-            android:src="@drawable/stimuli2"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:src="@drawable/stimulus" />
     </RelativeLayout>
 
 </RelativeLayout>

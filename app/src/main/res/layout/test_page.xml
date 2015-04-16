@@ -2,70 +2,69 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="#ffc1c1c1">
-
+    android:background="#ffc1c1c1"
+    android:orientation="vertical">
 
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/leftFocusRing_test"
-        android:src="@drawable/focalring"
-        android:layout_alignParentTop="false"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentStart="false"
-        android:layout_marginTop="105dp"
-        android:layout_marginLeft="36dp" />
-
-    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/rightFocusRing_test"
-        android:src="@drawable/focalring"
-        android:layout_alignParentTop="false"
         android:layout_alignParentLeft="false"
         android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_marginLeft="36dp"
         android:layout_marginTop="105dp"
-        android:layout_marginLeft="420dp" />
+        android:src="@drawable/focus_pattern" />
+
+    <ImageView
+        android:id="@+id/rightFocusRing_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_marginLeft="420dp"
+        android:layout_marginTop="105dp"
+        android:src="@drawable/focus_pattern" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_alignTop="@+id/leftFocusRing_test"
-        android:layout_alignLeft="@+id/leftFocusRing_test"
-        android:layout_alignStart="@+id/leftFocusRing_test"
         android:layout_alignBottom="@+id/leftFocusRing_test"
+        android:layout_alignEnd="@+id/leftFocusRing_test"
+        android:layout_alignLeft="@+id/leftFocusRing_test"
         android:layout_alignRight="@+id/leftFocusRing_test"
-        android:layout_alignEnd="@+id/leftFocusRing_test">
+        android:layout_alignStart="@+id/leftFocusRing_test"
+        android:layout_alignTop="@+id/leftFocusRing_test">
 
 
         <ImageView
+            android:id="@+id/leftGrating_test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/leftGrating_test"
-            android:src="@drawable/stimuli2"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:src="@drawable/stimulus" />
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/rightFocusRing_test"
         android:layout_alignBottom="@+id/rightFocusRing_test"
-        android:layout_alignRight="@+id/rightFocusRing_test"
         android:layout_alignEnd="@+id/rightFocusRing_test"
         android:layout_alignLeft="@+id/rightFocusRing_test"
-        android:layout_alignStart="@+id/rightFocusRing_test"
         android:layout_alignParentEnd="false"
-        android:layout_alignParentStart="false">
+        android:layout_alignParentStart="false"
+        android:layout_alignRight="@+id/rightFocusRing_test"
+        android:layout_alignStart="@+id/rightFocusRing_test"
+        android:layout_alignTop="@+id/rightFocusRing_test">
 
         <ImageView
+            android:id="@+id/rightGrating_test"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/rightGrating_test"
-            android:src="@drawable/stimuli2"
-            android:layout_centerInParent="true" />
+            android:layout_centerInParent="true"
+            android:src="@drawable/stimulus" />
     </RelativeLayout>
 
 </RelativeLayout>
