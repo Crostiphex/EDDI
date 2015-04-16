@@ -26,12 +26,13 @@ public class TestPage extends WelcomeScreen {
             0.55,
             0.65,
             0.6};
-    int i = 0;
+    public static int seconds = 30;
     ImageView rightimg;
     Bitmap rightbmp;
     ImageView leftimg;
     Bitmap leftbmp;
     CountDownTimer waitTimer;
+    int i = 0;
     int a=0;
     int b=0;
     int c = 0;
@@ -61,7 +62,7 @@ public class TestPage extends WelcomeScreen {
         rightring.setLayoutParams(plm);
 
 //Timer
-        waitTimer = new CountDownTimer(contrastR.length * 30000, 30000) {
+        waitTimer = new CountDownTimer(contrastR.length*seconds*1000,seconds*1000) {
             public void onTick(long millisUntilFinished) {
 
 //defining the right image

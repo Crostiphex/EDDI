@@ -71,7 +71,7 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
 
         openDB();
         for (int i = 0; i < m; i++) {
-            //  y[i]=DataSave.time_pressed[i]/30; //to get the data to be a percentage of a minute
+            y[i]=DataSave.time_pressed[i]/TestPage.seconds; //to get the data to be a percentage of a minute
             x[i] = Math.log10(x[i]); //This is you want the x to be on base 10
             x_ave = x_ave + x[i];
             y[i] = Math.log((1 / y[i]) - 1);
