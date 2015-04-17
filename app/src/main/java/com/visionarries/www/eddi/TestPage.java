@@ -1,5 +1,6 @@
 package com.visionarries.www.eddi;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -9,6 +10,7 @@ import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class TestPage extends WelcomeScreen {
     public static double contrastR[] = {0.1,
@@ -26,7 +28,7 @@ public class TestPage extends WelcomeScreen {
             0.55,
             0.65,
             0.6};
-    public static int seconds = 30;
+    public static int seconds = 3;
     ImageView rightimg;
     Bitmap rightbmp;
     ImageView leftimg;
@@ -94,16 +96,24 @@ public class TestPage extends WelcomeScreen {
             lastDown = System.currentTimeMillis();
             a=i;
             c++;
+
                     }
 
         else if (event.getAction() == MotionEvent.ACTION_UP) {
-            lastDuration = System.currentTimeMillis() - lastDown;
+            lastDuration = Math.abs(System.currentTimeMillis() - lastDown);
             b=i;
             d++;
             if(a!=b){DataSave.time_pressed[i-1]=DataSave.time_pressed[i-1]+lastDuration/1000.;}
             else{
 
             DataSave.time_pressed[i]=DataSave.time_pressed[i]+lastDuration/1000.;
+
+                Context context = getApplicationContext();
+                CharSequence text = "Hello toast!"+String.valueOf(DataSave.time_pressed[i]);
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();
           }
 
         }
