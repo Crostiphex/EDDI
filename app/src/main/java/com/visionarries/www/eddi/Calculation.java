@@ -15,7 +15,7 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
 
     //<editor-fold desc="Initialization">
     double x[] = TestPage.contrastR;
-    double y[] = DataSave.time_pressed;
+    double y[] = TestPage.answer;
 
    double xx[] = new double[x.length];
     double yy[] = new double[x.length];
@@ -59,6 +59,7 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
         openDB();
         for (int i = 0; i < m; i++) {
                         x[i] = Math.log10(x[i]); //This is you want the x to be on base 10
+            y[i]=y[i]/TestPage.seconds;
             x_ave = x_ave + x[i];
             //if(y[i]==0){y[i]=.001;}
             y[i] = Math.log((1 / y[i]) - 1);
@@ -94,7 +95,7 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
 
 
         value = (TextView) findViewById(R.id.DomIndex);
-        text = "Calculation complete. The ocular dominance value is " + String.valueOf(x0/.5)  + String.valueOf(DataSave.time_pressed[13])  + String.valueOf(DataSave.time_pressed[1])  + String.valueOf(DataSave.time_pressed[2])  + String.valueOf(DataSave.time_pressed[3])  + String.valueOf(DataSave.time_pressed[4])+". The error is " + String.valueOf(r_error_x0);
+        text = "Calculation complete. The ocular dominance value is " + String.valueOf(x0/.5)  + String.valueOf(x[0])  + String.valueOf(x[0])  + String.valueOf(x[0])+". The error is " + String.valueOf(r_error_x0);
         // text="A customer is requesting assistance, A customer is requesting assistance, A customer is requesting assistance, A customer is requesting assistance, A customer is requesting assistance";
         value.setText(text);
         if (!DataSave.name.equals("")) {
