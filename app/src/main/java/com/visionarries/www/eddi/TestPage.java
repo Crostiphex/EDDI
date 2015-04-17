@@ -75,15 +75,15 @@ public class TestPage extends WelcomeScreen {
                 BitmapDrawable leftabmp = (BitmapDrawable) leftimg.getDrawable();
                 leftbmp = leftabmp.getBitmap();
                 left_pattern(.5);
-                i = i + 1;
+                i++;
                 // text.setText("seconds remaining: " + millisUntilFinished / 1000);
             }
 
             @Override
             public void onFinish() {
-                if (d != c) {
-                    DataSave.time_pressed[i] = DataSave.time_pressed[i] + lastDuration / 1000.;
-                }
+//                if (d != c) {
+//                    DataSave.time_pressed[i] = DataSave.time_pressed[i] + lastDuration / (seconds*1000.);
+//                }
 
                 Intent intent = new Intent(TestPage.this, Calculation.class);
                 startActivity(intent);
@@ -103,18 +103,25 @@ public class TestPage extends WelcomeScreen {
             lastDuration = Math.abs(System.currentTimeMillis() - lastDown);
             b=i;
             d++;
-            if(a!=b){DataSave.time_pressed[i-1]=DataSave.time_pressed[i-1]+lastDuration/1000.;}
-            else{
-
-            DataSave.time_pressed[i]=DataSave.time_pressed[i]+lastDuration/1000.;
-
-                Context context = getApplicationContext();
-                CharSequence text = "Hello toast!"+String.valueOf(DataSave.time_pressed[i]);
+            DataSave.time_pressed[i]=DataSave.time_pressed[i]+lastDuration/(seconds*1000.);
+            Context context = getApplicationContext();
+                CharSequence text = "Hello toast!"+String.valueOf(DataSave.time_pressed[i]/(seconds*1000.));
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
-          }
+//            if(a!=b){DataSave.time_pressed[i-1]=DataSave.time_pressed[i-1]+lastDuration/(seconds*1000.);}
+//            else{
+//
+//            DataSave.time_pressed[i]=DataSave.time_pressed[i]+lastDuration/(seconds*1000.);
+//
+//                Context context = getApplicationContext();
+//                CharSequence text = "Hello toast!"+String.valueOf(DataSave.time_pressed[i]/(seconds*1000.));
+//                int duration = Toast.LENGTH_SHORT;
+//
+//                Toast toast = Toast.makeText(context, text, duration);
+//                toast.show();
+//          }
 
         }
 

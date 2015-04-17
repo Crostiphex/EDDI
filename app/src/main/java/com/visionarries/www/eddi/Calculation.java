@@ -15,26 +15,12 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
 
     //<editor-fold desc="Initialization">
     double x[] = TestPage.contrastR;
-    double y[] = new double[TestPage.contrastR.length];
-//        double y[]={0.1055,
-//            0.4836,
-//            0.7712,
-//            0.7554,
-//            0.8531,
-//            0.1671,
-//            0.4146,
-//            0.6077,
-//            0.9079,
-//            0.8648,
-//            0.1874,
-//            0.3254,
-//            0.6852,
-//            0.8494,
-//            0.878};
+    double y[] = DataSave.time_pressed;
+
    double xx[] = new double[x.length];
     double yy[] = new double[x.length];
     double xy[] = new double[x.length];
-    double sxx = 0.;
+    double sxx;
     double sx = 0.;
     double sxy = 0.;
     double sy = 0.;
@@ -72,9 +58,9 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
 
         openDB();
         for (int i = 0; i < m; i++) {
-            y[i]=DataSave.time_pressed[i]/TestPage.seconds; //to get the data to be a percentage of a minute
-            x[i] = Math.log10(x[i]); //This is you want the x to be on base 10
+                        x[i] = Math.log10(x[i]); //This is you want the x to be on base 10
             x_ave = x_ave + x[i];
+            //if(y[i]==0){y[i]=.001;}
             y[i] = Math.log((1 / y[i]) - 1);
             y_ave = y_ave + y[i];
             xx[i] = x[i] * x[i];
@@ -108,7 +94,7 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
 
 
         value = (TextView) findViewById(R.id.DomIndex);
-        text = "Calculation complete. The ocular dominance value is " + String.valueOf(x0)  + String.valueOf(DataSave.time_pressed[0]/TestPage.seconds)  + String.valueOf(DataSave.time_pressed[1]/TestPage.seconds)  + String.valueOf(DataSave.time_pressed[2]/TestPage.seconds)  + String.valueOf(DataSave.time_pressed[3]/TestPage.seconds)  + String.valueOf(DataSave.time_pressed[4]/TestPage.seconds)+". The error is " + String.valueOf(r_error_x0);
+        text = "Calculation complete. The ocular dominance value is " + String.valueOf(x0/.5)  + String.valueOf(DataSave.time_pressed[13])  + String.valueOf(DataSave.time_pressed[1])  + String.valueOf(DataSave.time_pressed[2])  + String.valueOf(DataSave.time_pressed[3])  + String.valueOf(DataSave.time_pressed[4])+". The error is " + String.valueOf(r_error_x0);
         // text="A customer is requesting assistance, A customer is requesting assistance, A customer is requesting assistance, A customer is requesting assistance, A customer is requesting assistance";
         value.setText(text);
         if (!DataSave.name.equals("")) {
