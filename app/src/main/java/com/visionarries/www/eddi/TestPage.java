@@ -14,29 +14,29 @@ import android.widget.Toast;
 
 public class TestPage extends WelcomeScreen {
     public static double contrastR[] = {
-//            0.1,
-//            0.35,
-//            0.5,
-//            0.7,
-//            0.85,
-//            0.2,
-//            0.3,
-//            0.45,
-//            0.75,
-//            0.9,
-//            0.15,
-//            0.25,
-//            0.55,
-//            0.65,
+            0.1,
+            0.35,
+            0.5,
+            0.7,
+            0.85,
+            0.2,
+            0.3,
+            0.45,
+            0.75,
+            0.9,
+            0.15,
+            0.25,
+            0.55,
+            0.65,
             0.6};
     public static double answer[]=new double[contrastR.length];
-    public static int seconds = 10;
+    public static int seconds = 30;
     ImageView rightimg;
     Bitmap rightbmp;
     ImageView leftimg;
     Bitmap leftbmp;
     CountDownTimer waitTimer;
-    int i = 0;
+    int i = -1;
     int a=0;
     int b=0;
     int c = 0;
@@ -66,9 +66,9 @@ public class TestPage extends WelcomeScreen {
         rightring.setLayoutParams(plm);
 
 //Timer
-        waitTimer = new CountDownTimer(contrastR.length*seconds*1000,seconds*1000) {
+        waitTimer = new CountDownTimer((contrastR.length+1)*seconds*1000,seconds*1000) {
             public void onTick(long millisUntilFinished) {
-
+                i++;
 //defining the right image
                 BitmapDrawable rightabmp = (BitmapDrawable) rightimg.getDrawable();
                 rightbmp = rightabmp.getBitmap();
@@ -77,15 +77,15 @@ public class TestPage extends WelcomeScreen {
                 BitmapDrawable leftabmp = (BitmapDrawable) leftimg.getDrawable();
                 leftbmp = leftabmp.getBitmap();
                 left_pattern(.5);
-                i++;
+
                 // text.setText("seconds remaining: " + millisUntilFinished / 1000);
             }
 
             @Override
             public void onFinish() {
-//                if (d != c) {
-//                    DataSave.time_pressed[i] = DataSave.time_pressed[i] + lastDuration / (seconds*1000.);
-//                }
+                if (d != c) {
+                    answer[i]=answer[i]+lastDuration/1000.;
+                }
 
                 Intent intent = new Intent(TestPage.this, Calculation.class);
                 startActivity(intent);
@@ -107,23 +107,17 @@ public class TestPage extends WelcomeScreen {
             d++;
             answer[i]=answer[i]+lastDuration/1000.;
             Context context = getApplicationContext();
-                CharSequence text = "Hello toast!"+String.valueOf(answer[i]);
+                CharSequence text = "Hello toast!"+String.valueOf(answer[i]/seconds);
                 int duration = Toast.LENGTH_SHORT;
 
                 Toast toast = Toast.makeText(context, text, duration);
                 toast.show();
-//            if(a!=b){DataSave.time_pressed[i-1]=DataSave.time_pressed[i-1]+lastDuration/(seconds*1000.);}
-//            else{
-//
-//            DataSave.time_pressed[i]=DataSave.time_pressed[i]+lastDuration/(seconds*1000.);
-//
-//                Context context = getApplicationContext();
-//                CharSequence text = "Hello toast!"+String.valueOf(DataSave.time_pressed[i]/(seconds*1000.));
-//                int duration = Toast.LENGTH_SHORT;
-//
-//                Toast toast = Toast.makeText(context, text, duration);
-//                toast.show();
-//          }
+            if(a!=b){answer[i-1]=answer[i-1]+lastDuration/1000.;}
+            else{
+
+            DataSave.time_pressed[i]=DataSave.time_pressed[i]+lastDuration/(seconds*1000.);
+
+          }
 
         }
 
