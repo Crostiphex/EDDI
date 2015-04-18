@@ -1,6 +1,5 @@
 package com.visionarries.www.eddi;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -10,7 +9,6 @@ import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class TestPage extends WelcomeScreen {
     public static double contrastR[] = {
@@ -84,6 +82,7 @@ public class TestPage extends WelcomeScreen {
             @Override
             public void onFinish() {
                 if (d != c) {
+                    lastDuration = Math.abs(System.currentTimeMillis() - lastDown);
                     answer[i]=answer[i]+lastDuration/1000.;
                 }
 
@@ -105,19 +104,10 @@ public class TestPage extends WelcomeScreen {
             lastDuration = Math.abs(System.currentTimeMillis() - lastDown);
             b=i;
             d++;
-            answer[i]=answer[i]+lastDuration/1000.;
-            Context context = getApplicationContext();
-                CharSequence text = "Hello toast!"+String.valueOf(answer[i]/seconds);
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();
             if(a!=b){answer[i-1]=answer[i-1]+lastDuration/1000.;}
             else{
-
-            DataSave.time_pressed[i]=DataSave.time_pressed[i]+lastDuration/(seconds*1000.);
-
-          }
+            answer[i]=answer[i]+lastDuration/(1000.);
+            }
 
         }
 

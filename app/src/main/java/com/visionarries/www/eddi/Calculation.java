@@ -15,8 +15,8 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
 
     //<editor-fold desc="Initialization">
     double x[] = TestPage.contrastR;
-
-   double xx[] = new double[x.length];
+    double y[] = TestPage.answer;
+    double xx[] = new double[x.length];
     double yy[] = new double[x.length];
     double xy[] = new double[x.length];
     double sxx;
@@ -46,6 +46,7 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
     private TextToSpeech tts;
 
     //</editor-fold>
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         //this is just needed
@@ -54,10 +55,10 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
         setContentView(R.layout.calc_page);
         tts = new TextToSpeech(this, this);
 
-        double y[] = TestPage.answer;
+
         openDB();
         for (int i = 0; i < m; i++) {
-                        x[i] = Math.log10(x[i]); //This is you want the x to be on base 10
+            x[i] = Math.log10(x[i]); //This is you want the x to be on base 10
             y[i]=y[i]/TestPage.seconds;
             x_ave = x_ave + x[i];
             y[i] = Math.log((1 / y[i]) - 1);
@@ -94,7 +95,6 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
 
         value = (TextView) findViewById(R.id.DomIndex);
         text = "Calculation complete. The ocular dominance value is " + String.valueOf(r_x0)+". The error is " + String.valueOf(r_error_x0);
-        // text="A customer is requesting assistance, A customer is requesting assistance, A customer is requesting assistance, A customer is requesting assistance, A customer is requesting assistance";
         value.setText(text);
         if (!DataSave.name.equals("")) {
             myDb.insertRow(DataSave.name, r_x0);
