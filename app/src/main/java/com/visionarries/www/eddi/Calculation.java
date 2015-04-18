@@ -10,7 +10,7 @@ import android.widget.TextView;
 import java.util.Locale;
 
 public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitListener {
-    public String text;
+
     //double x[] =  {.05,.10,.20,.40,.45,.50,.55,.60,.80,.90,.95};
 
     //<editor-fold desc="Initialization">
@@ -44,7 +44,7 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
     TextView value;
     DBAdapter myDb;
     private TextToSpeech tts;
-
+    public String text;
     //</editor-fold>
 
     @Override
