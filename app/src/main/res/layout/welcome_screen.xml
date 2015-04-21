@@ -43,4 +43,24 @@
         android:layout_alignBottom="@+id/startbutton"
         android:layout_alignParentStart="true" />
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:ems="10"
+        android:id="@+id/editText"
+        android:layout_alignEnd="@+id/newUserCheckBox"
+        android:layout_alignTop="@+id/startbutton"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_above="@+id/newUserCheckBox" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Seconds"
+        android:id="@+id/textView"
+        android:layout_above="@+id/editText"
+        android:layout_alignStart="@+id/editText" />
+
 </RelativeLayout>

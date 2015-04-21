@@ -28,6 +28,7 @@ public class TestPage extends WelcomeScreen {
             0.65,
             0.6};
     public static double answer[]=new double[contrastR.length];
+
     public static int seconds = 30;
     ImageView rightimg;
     Bitmap rightbmp;
@@ -62,7 +63,9 @@ public class TestPage extends WelcomeScreen {
         plm.leftMargin = DataSave.from_left_right;
         plm.topMargin = DataSave.from_top_right;
         rightring.setLayoutParams(plm);
-
+        if(WelcomeScreen.sec!=0){
+            seconds = sec;
+        }
 //Timer
         waitTimer = new CountDownTimer((contrastR.length+1)*seconds*1000,seconds*1000) {
             public void onTick(long millisUntilFinished) {

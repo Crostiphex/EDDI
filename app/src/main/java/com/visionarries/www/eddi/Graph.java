@@ -39,23 +39,7 @@ public class Graph extends WelcomeScreen
         double[] sorted_contrastR = new double[contrastR.length];
         System.arraycopy(contrastR, 0, sorted_contrastR, 0, contrastR.length);
         double[] sorted_time= new double[contrastR.length];
-        double [] unsorted_time= {0.1055,
-                0.4836,
-                0.7712,
-                0.7554,
-                0.8531,
-                0.1671,
-                0.4146,
-                0.6077,
-                0.9079,
-                0.8648,
-                0.1874,
-                0.3254,
-                0.6852,
-                0.8494,
-                0.878
-
-        };
+        double [] unsorted_time= TestPage.answer;
         double [] array_1 = new double[contrastR.length*2];
         double [] array_2 = new double[contrastR.length*2];
         Arrays.sort(sorted_contrastR);
