@@ -1,5 +1,6 @@
 package com.visionarries.www.eddi;
 
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -9,6 +10,7 @@ import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class TestPage extends WelcomeScreen {
     public static double contrastR[] = {
@@ -40,6 +42,8 @@ public class TestPage extends WelcomeScreen {
     int b=0;
     int c = 0;
     int d = 0;
+    int x=0;
+    int y=0;
     //Button Recognizer
     long lastDown;
     long lastDuration;
@@ -96,20 +100,56 @@ public class TestPage extends WelcomeScreen {
     }
 
     public boolean onTouchEvent(MotionEvent event) {
-        if(event.getAction() == android.view.MotionEvent.ACTION_DOWN ) {
+        if(event.getAction() == MotionEvent.ACTION_DOWN && event.isButtonPressed(MotionEvent.BUTTON_PRIMARY )) {
             lastDown = System.currentTimeMillis();
             a=i;
             c++;
+            Context context = getApplicationContext();
+            CharSequence text = "Left Down";
+            int duration = Toast.LENGTH_SHORT;
 
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            x=1;
                     }
+        if(event.getAction() == MotionEvent.ACTION_DOWN && event.isButtonPressed(MotionEvent.BUTTON_TERTIARY )) {
+            lastDown = System.currentTimeMillis();
+            a=i;
+            c++;
+            Context context = getApplicationContext();
+            CharSequence text = "Right Down";
+            int duration = Toast.LENGTH_SHORT;
 
-        else if (event.getAction() == MotionEvent.ACTION_UP) {
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+            y=1;
+        }
+
+
+          if (event.getAction() == MotionEvent.ACTION_UP) {
             lastDuration = Math.abs(System.currentTimeMillis() - lastDown);
             b=i;
             d++;
-            if(a!=b){answer[i-1]=answer[i-1]+lastDuration/1000.;}
+            if(a!=b){answer[i-1]=answer[i-1]+lastDuration/1000.;
+
+            }
             else{
+                if (x==1){
             answer[i]=answer[i]+lastDuration/(1000.);
+                Context context = getApplicationContext();
+                CharSequence text = "Left Up";
+                int duration = Toast.LENGTH_SHORT;
+
+                Toast toast = Toast.makeText(context, text, duration);
+                toast.show();x=0;}
+                else if(y==1){answer[i]=answer[i]+lastDuration/(1000.);
+                    Context context = getApplicationContext();
+                    CharSequence text = "Right Up";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();y=0;}
+
             }
 
         }
