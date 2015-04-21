@@ -30,7 +30,8 @@ public class TestPage extends WelcomeScreen {
             0.65,
             0.6};
     public static double answer[]=new double[contrastR.length];
-
+    double left[]=new double[contrastR.length];
+    double right[]=new double[contrastR.length];
     public static int seconds = 30;
     ImageView rightimg;
     Bitmap rightbmp;
