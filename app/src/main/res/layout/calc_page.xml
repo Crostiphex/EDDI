@@ -27,5 +27,14 @@
         android:onClick="onClick_GoHome"
         android:text="Back to Home"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_toStartOf="@+id/DomIndex" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="onClick_Graph"
+        android:text="Graph"
+        android:layout_alignParentBottom="true"
+        android:layout_toEndOf="@+id/DomIndex" />
 </RelativeLayout>

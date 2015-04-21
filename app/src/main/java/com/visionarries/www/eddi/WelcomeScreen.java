@@ -1,8 +1,8 @@
 package com.visionarries.www.eddi;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -68,7 +68,7 @@ public class WelcomeScreen extends ActionBarActivity {
         database.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent act2 = new Intent(view.getContext(),Database_main.class);
+                Intent act2 = new Intent(view.getContext(),Calculation.class);
                 startActivity(act2);
 
                 }});

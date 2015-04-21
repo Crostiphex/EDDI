@@ -9,4 +9,5 @@ public class DataSave extends WelcomeScreen {
 
    public static double[] time_pressed = new double[TestPage.contrastR.length];
     public static String  name = "";
+    public static double[] leggo={5,4,3,1,2};
 }

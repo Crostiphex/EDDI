@@ -25,4 +25,5 @@ dependencies {
     compile files('lib/commons-math3-3.4.1.jar')
     //  compile files('lib/android-support-v4.jar')
     compile files('lib/androidplot-core-0.6.1.jar')
+    compile "com.androidplot:androidplot-core:0.6.1"
 }
