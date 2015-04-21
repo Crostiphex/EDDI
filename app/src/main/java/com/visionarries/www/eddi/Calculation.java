@@ -145,7 +145,7 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
         startActivity(act2);
     }
     public void onClick_Graph(View v) {
-        Intent act2 = new Intent(v.getContext(), SimpleXYPlotActivity.class);
+        Intent act2 = new Intent(v.getContext(), Graph.class);
         startActivity(act2);
     }
 

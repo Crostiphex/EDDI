@@ -27,7 +27,7 @@
         android:onClick="onClick_GoHome"
         android:text="Back to Home"
         android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/DomIndex" />
+        android:layout_toStartOf="@+id/textView2" />
 
     <Button
         android:id="@+id/button2"
@@ -36,5 +36,5 @@
         android:onClick="onClick_Graph"
         android:text="Graph"
         android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/DomIndex" />
+        android:layout_toEndOf="@+id/textView2" />
 </RelativeLayout>

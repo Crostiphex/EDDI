@@ -17,7 +17,7 @@ import java.util.Arrays;
 /**
  * A straightforward example of using AndroidPlot to plot some data.
  */
-public class SimpleXYPlotActivity extends WelcomeScreen
+public class Graph extends WelcomeScreen
 {
 
     @Override
@@ -35,27 +35,9 @@ public class SimpleXYPlotActivity extends WelcomeScreen
         // initialize our XYPlot reference:
         XYPlot plot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
 
-        double[] contrastR = { 0.1,
-        0.35,
-        0.5,
-        0.7,
-        0.85,
-        0.2,
-        0.3,
-        0.45,
-        0.75,
-        0.9,
-        0.15,
-        0.25,
-        0.55,
-        0.65,
-        0.6
-
-        };
+        double[] contrastR = TestPage.contrastR;
         double[] sorted_contrastR = new double[contrastR.length];
-        for ( int i = 0 ; i < contrastR.length ; i++ ) {
-            sorted_contrastR[i]=contrastR[i];
-        }
+        System.arraycopy(contrastR, 0, sorted_contrastR, 0, contrastR.length);
         double[] sorted_time= new double[contrastR.length];
         double [] unsorted_time= {0.1055,
                 0.4836,
@@ -94,14 +76,15 @@ public class SimpleXYPlotActivity extends WelcomeScreen
 
         }
 
-        Number[] n=new Number[array_1.length*2];
-        Number[] m=new Number[array_1.length*2];
+        Number[] series1Numbers=new Number[array_1.length*2];
+        Number[] series2Numbers=new Number[array_1.length*2];
         for ( int i = 0 ; i < array_1.length ; i++ ) {
-            n[i]=array_1[i];m[i]=array_2[i];
+            series1Numbers[i]=Math.round(array_1[i] * 100) / 100D;
+            series2Numbers[i]=Math.round(array_2[i] * 100) / 100D;
         }
 
         // Create a couple arrays of y-values to plot:
-        Number[] series1Numbers =n;Number[] series2Numbers =m;
+
 
         // Turn the above arrays into XYSeries':
         XYSeries series1 = new SimpleXYSeries(
