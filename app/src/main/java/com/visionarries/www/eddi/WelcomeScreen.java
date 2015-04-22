@@ -10,18 +10,15 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageView;
 
 
 public class WelcomeScreen extends ActionBarActivity {
-public static int sec=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.welcome_screen);
-        final EditText edit_text = (EditText) findViewById(R.id.editText);
         final ImageView image = (ImageView)findViewById(R.id.imageView);
         final Animation animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
         final Animation animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fadeout);
@@ -61,19 +58,17 @@ public static int sec=0;
 
 
                 if(want_user.isChecked()){
-                    sec=Integer.parseInt(edit_text.getText().toString());
     Intent act2 = new Intent(view.getContext(),CustomerName.class);
     startActivity(act2);}
 
                 else {
-                    sec=Integer.parseInt(edit_text.getText().toString());
                     Intent act2 = new Intent(view.getContext(),Calibration.class);
                     startActivity(act2);
 }}});
         database.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent act2 = new Intent(view.getContext(),Database_main.class);
+                Intent act2 = new Intent(view.getContext(),Calculation.class);
                 startActivity(act2);
 
                 }});

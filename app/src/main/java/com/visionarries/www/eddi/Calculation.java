@@ -11,7 +11,6 @@ import java.util.Locale;
 
 public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitListener {
 
-    //double x[] =  {.05,.10,.20,.40,.45,.50,.55,.60,.80,.90,.95};
 
     //<editor-fold desc="Initialization">
     double x[] = TestPage.contrastR;
@@ -95,7 +94,6 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
         openDB();
         for (int i = 0; i < m; i++) {
             x[i] = Math.log10(x[i]); //This is you want the x to be on base 10
-            //y[i]=y[i]/TestPage.seconds;
             x_ave = x_ave + x[i];
             y[i] = Math.log((1 / y[i]) - 1);
             y_ave = y_ave + y[i];

@@ -7,12 +7,14 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 public class TestPage extends WelcomeScreen {
+
     public static double contrastR[] = {
             0.1,
             0.35,
@@ -32,7 +34,7 @@ public class TestPage extends WelcomeScreen {
     public static double answer[]=new double[contrastR.length];
     double left[]=new double[contrastR.length];
     double right[]=new double[contrastR.length];
-    public static int seconds = 30;
+    public static int seconds = 60;
     ImageView rightimg;
     Bitmap rightbmp;
     ImageView leftimg;
@@ -68,9 +70,8 @@ public class TestPage extends WelcomeScreen {
         plm.leftMargin = DataSave.from_left_right;
         plm.topMargin = DataSave.from_top_right;
         rightring.setLayoutParams(plm);
-        if(WelcomeScreen.sec!=0){
-            seconds = sec;
-        }
+
+
 //Timer
         waitTimer = new CountDownTimer((contrastR.length+1)*seconds*1000,seconds*1000) {
             public void onTick(long millisUntilFinished) {
@@ -91,7 +92,12 @@ public class TestPage extends WelcomeScreen {
             public void onFinish() {
                 if (d != c) {
                     lastDuration = Math.abs(System.currentTimeMillis() - lastDown);
-                    answer[i]=answer[i]+lastDuration/1000.;
+                    if (x==1){left[i]=left[i]+lastDuration;x=0;}
+                    else if(y==1){right[i]=right[i]+lastDuration;y=0;}
+                }
+
+                for (int i=0; i<contrastR.length; i++){
+                    answer[i]=right[i]/(right[i]+left[i]);
                 }
 
                 Intent intent = new Intent(TestPage.this, Calculation.class);
@@ -101,56 +107,33 @@ public class TestPage extends WelcomeScreen {
     }
 
     public boolean onTouchEvent(MotionEvent event) {
+
         if(event.getAction() == MotionEvent.ACTION_DOWN && event.isButtonPressed(MotionEvent.BUTTON_PRIMARY )) {
             lastDown = System.currentTimeMillis();
             a=i;
             c++;
-            Context context = getApplicationContext();
-            CharSequence text = "Left Down";
-            int duration = Toast.LENGTH_SHORT;
+            x=1;}
 
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            x=1;
-                    }
         if(event.getAction() == MotionEvent.ACTION_DOWN && event.isButtonPressed(MotionEvent.BUTTON_TERTIARY )) {
             lastDown = System.currentTimeMillis();
             a=i;
             c++;
-            Context context = getApplicationContext();
-            CharSequence text = "Right Down";
-            int duration = Toast.LENGTH_SHORT;
-
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-            y=1;
-        }
+            y=1;}
 
 
           if (event.getAction() == MotionEvent.ACTION_UP) {
+
             lastDuration = Math.abs(System.currentTimeMillis() - lastDown);
             b=i;
             d++;
-            if(a!=b){answer[i-1]=answer[i-1]+lastDuration/1000.;
+            if(a!=b){
 
+                if (x==1){left[i-1]=left[i-1]+lastDuration;x=0;}
+                else if(y==1){right[i-1]=right[i-1]+lastDuration;y=0;}
             }
             else{
-                if (x==1){
-            answer[i]=answer[i]+lastDuration/(1000.);
-                Context context = getApplicationContext();
-                CharSequence text = "Left Up";
-                int duration = Toast.LENGTH_SHORT;
-
-                Toast toast = Toast.makeText(context, text, duration);
-                toast.show();x=0;}
-                else if(y==1){answer[i]=answer[i]+lastDuration/(1000.);
-                    Context context = getApplicationContext();
-                    CharSequence text = "Right Up";
-                    int duration = Toast.LENGTH_SHORT;
-
-                    Toast toast = Toast.makeText(context, text, duration);
-                    toast.show();y=0;}
-
+                if (x==1){left[i]=left[i]+lastDuration;x=0;}
+                else if(y==1){right[i]=right[i]+lastDuration;y=0;}
             }
 
         }
