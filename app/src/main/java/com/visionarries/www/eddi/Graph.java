@@ -35,11 +35,11 @@ public class Graph extends WelcomeScreen
         // initialize our XYPlot reference:
         XYPlot plot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
 
-        double[] contrastR = TestPage.contrastR;
+        double[] contrastR = Calculation.joy;
         double[] sorted_contrastR = new double[contrastR.length];
         System.arraycopy(contrastR, 0, sorted_contrastR, 0, contrastR.length);
         double[] sorted_time= new double[contrastR.length];
-        double [] unsorted_time= TestPage.answer;
+        double [] unsorted_time= Calculation.happy;
         double [] array_1 = new double[contrastR.length*2];
         double [] array_2 = new double[contrastR.length*2];
         Arrays.sort(sorted_contrastR);

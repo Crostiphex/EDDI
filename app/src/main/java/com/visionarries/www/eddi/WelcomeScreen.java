@@ -68,7 +68,7 @@ public class WelcomeScreen extends ActionBarActivity {
         database.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent act2 = new Intent(view.getContext(),Calculation.class);
+                Intent act2 = new Intent(view.getContext(),Database_main.class);
                 startActivity(act2);
 
                 }});
