@@ -18,7 +18,6 @@ public class Calibration extends Activity implements TextToSpeech.OnInitListener
     int a = 0;
     private TextToSpeech tts;
     //defining the images
-
     private ImageView leftring;
     private ImageView rightring;
 
@@ -28,6 +27,7 @@ public class Calibration extends Activity implements TextToSpeech.OnInitListener
         super.onCreate(savedInstanceState);
         //sets the layout to the inputted ID
         setContentView(R.layout.calibration_screen);
+
 
 
         tts = new TextToSpeech(this, this);

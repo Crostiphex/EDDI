@@ -15,8 +15,47 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
     //<editor-fold desc="Initialization">
     double x[] = TestPage.contrastR;
     double y[] = TestPage.answer;
+<<<<<<< HEAD
     public static double joy[] =  new double[15];
     public static double happy[] =  new double[15];
+=======
+//    double x[] =  { 0.1,
+//            0.35,
+//            0.5,
+//            0.7,
+//            0.85,
+//            0.2,
+//            0.3,
+//            0.45,
+//            0.75,
+//            0.9,
+//            0.15,
+//            0.25,
+//            0.55,
+//            0.65,
+//            0.6
+//
+//    };
+//    double y[] =
+//            {0.1055,
+//             0.4836,
+//             0.7712,
+//             0.7554,
+//             0.8531,
+//                    0.1671,
+//                    0.4146,
+//                    0.6077,
+//                    0.9079,
+//                    0.8648,
+//                    0.1874,
+//                    0.3254,
+//                    0.6852,
+//                    0.8494,
+//                    0.878
+//
+//            };
+
+>>>>>>> origin/master
     double xx[] = new double[x.length];
     double yy[] = new double[x.length];
     double xy[] = new double[x.length];
@@ -46,6 +85,9 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
     DBAdapter myDb;
     private TextToSpeech tts;
     public String text;
+    public static double[] joy = new double[15];
+    public static double[] yoj = new double[15];
+
     //</editor-fold>
 
     @Override
@@ -55,9 +97,14 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
         //sets the layout to the inputted ID
         setContentView(R.layout.calc_page);
         tts = new TextToSpeech(this, this);
+<<<<<<< HEAD
         System.arraycopy(TestPage.contrastR, 0, joy, 0, joy.length);
         System.arraycopy(y, 0, happy, 0, joy.length);
 
+=======
+        System.arraycopy(TestPage.contrastR, 0, joy, 0, 15);
+        System.arraycopy(TestPage.answer, 0, yoj, 0, 15);
+>>>>>>> origin/master
 
         openDB();
         for (int i = 0; i < m; i++) {

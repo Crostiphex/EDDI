@@ -1,36 +1,34 @@
 package com.visionarries.www.eddi;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 public class TestPage extends WelcomeScreen {
 
     public static double contrastR[] = {
             0.1,
-            0.35,
-            0.5,
-            0.7,
-            0.85,
-            0.2,
-            0.3,
+//            0.35,
+//            0.5,
+//            0.7,
+//            0.85,
+//            0.2,
+//            0.3,
             0.45,
-            0.75,
+//            0.75,
             0.9,
-            0.15,
-            0.25,
-            0.55,
-            0.65,
-            0.6};
+//            0.15,
+//            0.25,
+//            0.55,
+//            0.65,
+//            0.6
+    };
     public static double answer[]=new double[contrastR.length];
     double left[]=new double[contrastR.length];
     double right[]=new double[contrastR.length];
