@@ -15,10 +15,9 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
     //<editor-fold desc="Initialization">
     double x[] = TestPage.contrastR;
     double y[] = TestPage.answer;
-<<<<<<< HEAD
+
     public static double joy[] =  new double[15];
     public static double happy[] =  new double[15];
-=======
 //    double x[] =  { 0.1,
 //            0.35,
 //            0.5,
@@ -55,7 +54,6 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
 //
 //            };
 
->>>>>>> origin/master
     double xx[] = new double[x.length];
     double yy[] = new double[x.length];
     double xy[] = new double[x.length];
@@ -85,8 +83,6 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
     DBAdapter myDb;
     private TextToSpeech tts;
     public String text;
-    public static double[] joy = new double[15];
-    public static double[] yoj = new double[15];
 
     //</editor-fold>
 
@@ -97,14 +93,11 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
         //sets the layout to the inputted ID
         setContentView(R.layout.calc_page);
         tts = new TextToSpeech(this, this);
-<<<<<<< HEAD
+
         System.arraycopy(TestPage.contrastR, 0, joy, 0, joy.length);
         System.arraycopy(y, 0, happy, 0, joy.length);
 
-=======
-        System.arraycopy(TestPage.contrastR, 0, joy, 0, 15);
-        System.arraycopy(TestPage.answer, 0, yoj, 0, 15);
->>>>>>> origin/master
+
 
         openDB();
         for (int i = 0; i < m; i++) {
@@ -159,7 +152,6 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
     }
     public void onClick_Graph(View v) {
         Intent act2 = new Intent(v.getContext(), Graph.class);
-        act2.putExtra("myarray", joy);
         startActivity(act2);
     }
 
