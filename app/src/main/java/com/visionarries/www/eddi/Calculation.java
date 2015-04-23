@@ -34,10 +34,10 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
 //    };
 //    double y[] =
 //            {0.1055,
-//                    0.4836,
-//                    0.7712,
-//                    0.7554,
-//                    0.8531,
+//             0.4836,
+//             0.7712,
+//             0.7554,
+//             0.8531,
 //                    0.1671,
 //                    0.4146,
 //                    0.6077,
@@ -80,6 +80,9 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
     DBAdapter myDb;
     private TextToSpeech tts;
     public String text;
+    public static double[] joy = new double[15];
+    public static double[] yoj = new double[15];
+
     //</editor-fold>
 
     @Override
@@ -89,7 +92,8 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
         //sets the layout to the inputted ID
         setContentView(R.layout.calc_page);
         tts = new TextToSpeech(this, this);
-
+        System.arraycopy(TestPage.contrastR, 0, joy, 0, 15);
+        System.arraycopy(TestPage.answer, 0, yoj, 0, 15);
 
         openDB();
         for (int i = 0; i < m; i++) {
