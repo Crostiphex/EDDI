@@ -16,8 +16,8 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
     double x[] = TestPage.contrastR;
     double y[] = TestPage.answer;
 
-    public static double joy[] =  new double[15];
-    public static double happy[] =  new double[15];
+    public static double joy[] =  new double[TestPage.contrastR.length];
+    public static double happy[] =  new double[TestPage.contrastR.length];
 //    double x[] =  { 0.1,
 //            0.35,
 //            0.5,
