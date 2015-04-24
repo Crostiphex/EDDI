@@ -119,20 +119,19 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
         a = (1 / d) * (sx * sy - m * sxy);
         b = (1 / d) * (sx * sxy - sxx * sy);
         k = -a;
-        x0 = Math.pow(10, -b / a);
+        x0 =2* Math.pow(10, -b / a);
         //error http://mathworld.wolfram.com/LeastSquaresFitting.html
         x_ave = x_ave / m;
         y_ave = y_ave / m;
         SSxx = sxx - m * x_ave * x_ave;
         SSyy = syy - m * y_ave * y_ave;
         SSxy = sxy - m * x_ave * y_ave;
-        s = Math.pow((SSyy - Math.pow(SSxy, 2) / SSxx) / (m - 2), 1 / 2);
-        error_a = s * Math.pow((1 / m) + (Math.pow(x_ave, 2) / SSxx), (1 / 2));
+        s = Math.pow((SSyy - (Math.pow(SSxy, 2) / SSxx)) / (m - 2), 1 / 2);
+        error_a = s * Math.pow((1 / m) + ((Math.pow(x_ave, 2) / SSxx)), (1 / 2));
         error_b = s / Math.pow(SSxx, 1 / 2);
-        error_x0 = (b / a) * Math.pow(Math.pow(error_a / a, 2) + Math.pow(error_b / b, 2), 1 / 2);
-        error_x0 = error_x0 * x0;
+        error_x0 = x0*Math.pow(Math.pow(error_a / a, 2) + Math.pow(error_b / b, 2), 1 / 2);
         r_x0 = Math.round(x0 / .5 * 100) / 100D;
-        r_error_x0 = Math.round(error_x0 / .5 * 100) / 100D;
+        r_error_x0 = Math.round(error_x0 / 100) / 100D;
 
 
         value = (TextView) findViewById(R.id.DomIndex);
