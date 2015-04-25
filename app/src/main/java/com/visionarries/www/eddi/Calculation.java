@@ -130,8 +130,8 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
         error_a = s * Math.pow((1 / m) + ((Math.pow(x_ave, 2) / SSxx)), (1 / 2));
         error_b = s / Math.pow(SSxx, 1 / 2);
         error_x0 = x0*Math.pow(Math.pow(error_a / a, 2) + Math.pow(error_b / b, 2), 1 / 2);
-        r_x0 = Math.round(x0 / .5 * 100) / 100D;
-        r_error_x0 = Math.round(error_x0 / 100) / 100D;
+        r_x0 = Math.round(x0*100) / 100D;
+        r_error_x0 = Math.round(error_x0*100) / 100D;
 
 
         value = (TextView) findViewById(R.id.DomIndex);
