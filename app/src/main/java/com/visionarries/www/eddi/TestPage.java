@@ -9,6 +9,7 @@ import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class TestPage extends WelcomeScreen {
 
@@ -32,7 +33,7 @@ public class TestPage extends WelcomeScreen {
     public static double answer[]=new double[contrastR.length];
     double left[]=new double[contrastR.length];
     double right[]=new double[contrastR.length];
-    public static int seconds = 60;
+    public static int seconds = 1;
     ImageView rightimg;
     Bitmap rightbmp;
     ImageView leftimg;
@@ -61,7 +62,7 @@ public class TestPage extends WelcomeScreen {
         ImageView rightring = (ImageView) findViewById(R.id.rightFocusRing_test);
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
         ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) rightring.getLayoutParams();
-
+        final TextView text  = (TextView) findViewById(R.id.textView);
         mlp.leftMargin = DataSave.from_left_left;
         mlp.topMargin = DataSave.from_top_left;
         leftring.setLayoutParams(mlp);
@@ -71,19 +72,24 @@ public class TestPage extends WelcomeScreen {
 
 
 //Timer
-        waitTimer = new CountDownTimer((contrastR.length+1)*seconds*1000,seconds*1000) {
+        waitTimer = new CountDownTimer((contrastR.length)*seconds*1000,(seconds)*1000) {
             public void onTick(long millisUntilFinished) {
                 i++;
 //defining the right image
-                BitmapDrawable rightabmp = (BitmapDrawable) rightimg.getDrawable();
-                rightbmp = rightabmp.getBitmap();
-                right_pattern(contrastR[i]);
-
                 BitmapDrawable leftabmp = (BitmapDrawable) leftimg.getDrawable();
                 leftbmp = leftabmp.getBitmap();
                 left_pattern(.5);
 
-                // text.setText("seconds remaining: " + millisUntilFinished / 1000);
+                BitmapDrawable rightabmp = (BitmapDrawable) rightimg.getDrawable();
+                rightbmp = rightabmp.getBitmap();
+                right_pattern(contrastR[i]);
+
+if(millisUntilFinished==(seconds)*1000){right_pattern(contrastR[0]);}
+                if (Math.round((float)millisUntilFinished / 1000.0f) == (seconds)){
+                    i++;
+                    left_pattern(.5);
+                    right_pattern(contrastR[i]);}
+                    text.setText("seconds remaining: " + Math.round((float)millisUntilFinished / 1000.0f));
             }
 
             @Override
