@@ -8,32 +8,38 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 public class TestPage extends WelcomeScreen {
 
-    public static double contrastR[] = {
+    public static double contrastR_true[] = {
             0.1,
-//            0.35,
-//            0.5,
-//            0.7,
-//            0.85,
-//            0.2,
-//            0.3,
+            0.35,
+            0.5,
+            0.7,
+            0.85,
+            0.2,
+            0.3,
             0.45,
-//            0.75,
+            0.75,
             0.9,
-//            0.15,
-//            0.25,
-//            0.55,
-//            0.65,
-//            0.6
+            0.15,
+            0.25,
+            0.55,
+            0.65,
+            0.6
     };
-    public static double answer[]=new double[contrastR.length];
-    double left[]=new double[contrastR.length];
-    double right[]=new double[contrastR.length];
-    public static int seconds = 1;
+    public static double contrastR_false[] = {
+            0.1,
+            0.45,
+            0.9};
+    public static double contrastR[];
+    public static double answer[];
+    double left[];
+    double right[];
+    public static int seconds = 60;
     ImageView rightimg;
     Bitmap rightbmp;
     ImageView leftimg;
@@ -56,6 +62,15 @@ public class TestPage extends WelcomeScreen {
         super.onCreate(savedInstanceState);
         //sets the layout to the inputted ID
         setContentView(R.layout.test_page);
+        final CheckBox want_user = (CheckBox) findViewById(R.id.longorshort);
+        if(want_user.isChecked()){
+            System.arraycopy(contrastR_true, 0, contrastR, 0, contrastR_true.length);
+            answer=new double[contrastR.length];left=new double[contrastR.length];right=new double[contrastR.length];
+        }else{
+            System.arraycopy(contrastR_false, 0, contrastR, 0, contrastR_false.length);
+            answer=new double[contrastR.length];left=new double[contrastR.length];right=new double[contrastR.length];
+
+        }
         rightimg = (ImageView) findViewById(R.id.rightGrating_test);
         leftimg = (ImageView) findViewById(R.id.leftGrating_test);
         ImageView leftring = (ImageView) findViewById(R.id.leftFocusRing_test);
@@ -72,7 +87,7 @@ public class TestPage extends WelcomeScreen {
 
 
 //Timer
-        waitTimer = new CountDownTimer((contrastR.length)*seconds*1000,(seconds)*1000) {
+        waitTimer = new CountDownTimer((contrastR.length)*seconds*1000+500,(seconds)*1000) {
             public void onTick(long millisUntilFinished) {
                 i++;
 //defining the right image
@@ -84,12 +99,6 @@ public class TestPage extends WelcomeScreen {
                 rightbmp = rightabmp.getBitmap();
                 right_pattern(contrastR[i]);
 
-if(millisUntilFinished==(seconds)*1000){right_pattern(contrastR[0]);}
-                if (Math.round((float)millisUntilFinished / 1000.0f) == (seconds)){
-                    i++;
-                    left_pattern(.5);
-                    right_pattern(contrastR[i]);}
-                    text.setText("seconds remaining: " + Math.round((float)millisUntilFinished / 1000.0f));
             }
 
             @Override

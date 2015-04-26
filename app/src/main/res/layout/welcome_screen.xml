@@ -32,7 +32,8 @@
         android:text="Add User Profile"
         android:id="@+id/newUserCheckBox"
         android:layout_alignParentBottom="true"
-        android:layout_toEndOf="@+id/startbutton" />
+        android:layout_toEndOf="@+id/startbutton"
+        android:checked="true" />
 
     <Button
         style="?android:attr/buttonStyleSmall"
@@ -42,5 +43,14 @@
         android:id="@+id/database_button"
         android:layout_alignBottom="@+id/startbutton"
         android:layout_alignParentStart="true" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check for long test"
+        android:id="@+id/longorshort"
+        android:checked="false"
+        android:layout_above="@+id/newUserCheckBox"
+        android:layout_toEndOf="@+id/startbutton" />
 
 </RelativeLayout>
