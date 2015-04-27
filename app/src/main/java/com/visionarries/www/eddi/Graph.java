@@ -29,7 +29,7 @@ public class Graph extends WelcomeScreen
 //        getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE,
 //                WindowManager.LayoutParams.FLAG_SECURE);
 //
-//        setContentView(R.layout.simple_xy_plot_example);
+       setContentView(R.layout.simple_xy_plot_example);
 
         // initialize our XYPlot reference:
         XYPlot plot = (XYPlot) findViewById(R.id.mySimpleXYPlot);

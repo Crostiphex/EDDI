@@ -37,7 +37,7 @@ public class TestPage extends WelcomeScreen {
     public static double answer[];
     double left[];
     double right[];
-    public static int seconds = 60;
+    public static int seconds = 10;
     ImageView rightimg;
     Bitmap rightbmp;
     ImageView leftimg;
@@ -61,10 +61,10 @@ public class TestPage extends WelcomeScreen {
         //sets the layout to the inputted ID
         setContentView(R.layout.test_page);
         if(WelcomeScreen.long_or_short){
-            System.arraycopy(contrastR_true, 0, contrastR, 0, contrastR_true.length);
+            contrastR=contrastR_true;
             answer=new double[contrastR.length];left=new double[contrastR.length];right=new double[contrastR.length];
         }else{
-            System.arraycopy(contrastR_false, 0, contrastR, 0, contrastR_false.length);
+            contrastR=contrastR_false;
             answer=new double[contrastR.length];left=new double[contrastR.length];right=new double[contrastR.length];
 
         }

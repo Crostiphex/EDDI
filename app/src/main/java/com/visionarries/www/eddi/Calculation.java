@@ -66,7 +66,7 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
     public static double a = 0.;
     public static double b = 0.;
     double k = 0.;
-    double x0 = 0.;
+    public static double x0 = 0.;
     double error_a;
     double error_b;
     double s;
@@ -129,7 +129,7 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
         s = Math.pow((SSyy - (Math.pow(SSxy, 2) / SSxx)) / (m - 2), 1 / 2);
         error_a = s * Math.pow((1 / m) + ((Math.pow(x_ave, 2) / SSxx)), (1 / 2));
         error_b = s / Math.pow(SSxx, 1 / 2);
-        error_x0 = x0*Math.pow(Math.pow(error_a / a, 2) + Math.pow(error_b / b, 2), 1 / 2);
+        error_x0 = (b/a)*Math.pow(Math.pow(error_a / a, 2) + Math.pow(error_b / b, 2), 1 / 2);
         r_x0 = Math.round(x0*100) / 100D;
         r_error_x0 = Math.round(error_x0*100) / 100D;
 

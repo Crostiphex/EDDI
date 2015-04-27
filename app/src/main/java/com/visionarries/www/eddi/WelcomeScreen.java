@@ -51,7 +51,6 @@ public class WelcomeScreen extends ActionBarActivity {
         final Button database =(Button)findViewById(R.id.database_button);
         final CheckBox want_user = (CheckBox) findViewById(R.id.newUserCheckBox);
         final  CheckBox test_time = (CheckBox) findViewById(R.id.longorshort);
-        long_or_short = test_time.isChecked();
 
 
         switchact.setOnClickListener(new View.OnClickListener() {
@@ -60,10 +59,12 @@ public class WelcomeScreen extends ActionBarActivity {
 
 
                 if(want_user.isChecked()){
-    Intent act2 = new Intent(view.getContext(),CustomerName.class);
+                    long_or_short = test_time.isChecked();
+                    Intent act2 = new Intent(view.getContext(),CustomerName.class);
                  startActivity(act2);}
 
                 else {
+                    long_or_short = test_time.isChecked();
                     Intent act2 = new Intent(view.getContext(),TestPage.class);
                     startActivity(act2);
 }}});
