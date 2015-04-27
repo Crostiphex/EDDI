@@ -14,6 +14,7 @@ import android.widget.ImageView;
 
 
 public class WelcomeScreen extends ActionBarActivity {
+    public static boolean long_or_short;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,8 @@ public class WelcomeScreen extends ActionBarActivity {
         final Button switchact =(Button)findViewById(R.id.startbutton);
         final Button database =(Button)findViewById(R.id.database_button);
         final CheckBox want_user = (CheckBox) findViewById(R.id.newUserCheckBox);
-
+        final  CheckBox test_time = (CheckBox) findViewById(R.id.longorshort);
+        long_or_short = test_time.isChecked();
 
 
         switchact.setOnClickListener(new View.OnClickListener() {
@@ -59,7 +61,7 @@ public class WelcomeScreen extends ActionBarActivity {
 
                 if(want_user.isChecked()){
     Intent act2 = new Intent(view.getContext(),CustomerName.class);
-    startActivity(act2);}
+                 startActivity(act2);}
 
                 else {
                     Intent act2 = new Intent(view.getContext(),TestPage.class);

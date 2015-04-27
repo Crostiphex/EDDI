@@ -8,9 +8,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 public class TestPage extends WelcomeScreen {
 
@@ -62,8 +60,7 @@ public class TestPage extends WelcomeScreen {
         super.onCreate(savedInstanceState);
         //sets the layout to the inputted ID
         setContentView(R.layout.test_page);
-        final CheckBox want_user = (CheckBox) findViewById(R.id.longorshort);
-        if(want_user.isChecked()){
+        if(WelcomeScreen.long_or_short){
             System.arraycopy(contrastR_true, 0, contrastR, 0, contrastR_true.length);
             answer=new double[contrastR.length];left=new double[contrastR.length];right=new double[contrastR.length];
         }else{
@@ -77,7 +74,6 @@ public class TestPage extends WelcomeScreen {
         ImageView rightring = (ImageView) findViewById(R.id.rightFocusRing_test);
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
         ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) rightring.getLayoutParams();
-        final TextView text  = (TextView) findViewById(R.id.textView);
         mlp.leftMargin = DataSave.from_left_left;
         mlp.topMargin = DataSave.from_top_left;
         leftring.setLayoutParams(mlp);
