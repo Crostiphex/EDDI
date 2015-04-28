@@ -7,9 +7,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-/**
- * Created by Christopher on 4/27/2015.
- */
 public class Password_screen extends WelcomeScreen{
 
     @Override
@@ -34,5 +31,6 @@ public class Password_screen extends WelcomeScreen{
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
+
         }
     }}

@@ -74,6 +74,7 @@ public class WelcomeScreen extends ActionBarActivity {
                 Intent act2 = new Intent(view.getContext(),Password_screen.class);
                 startActivity(act2);
 
+
                 }});
 
 

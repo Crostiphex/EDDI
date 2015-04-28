@@ -146,8 +146,10 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
     }
 
     public void onClick_GoHome(View v) {
-        Intent act2 = new Intent(v.getContext(), WelcomeScreen.class);
-        startActivity(act2);
+        Intent i = getBaseContext().getPackageManager()
+                .getLaunchIntentForPackage( getBaseContext().getPackageName() );
+        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(i);
     }
     public void onClick_Graph(View v) {
         Intent act2 = new Intent(v.getContext(), Graph.class);
