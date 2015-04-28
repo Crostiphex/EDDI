@@ -65,13 +65,13 @@ public class WelcomeScreen extends ActionBarActivity {
 
                 else {
                     long_or_short = test_time.isChecked();
-                    Intent act2 = new Intent(view.getContext(),TestPage.class);
+                    Intent act2 = new Intent(view.getContext(),Calibration.class);
                     startActivity(act2);
 }}});
         database.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent act2 = new Intent(view.getContext(),Database_main.class);
+                Intent act2 = new Intent(view.getContext(),Password_screen.class);
                 startActivity(act2);
 
                 }});

@@ -32,12 +32,15 @@ public class TestPage extends WelcomeScreen {
     public static double contrastR_false[] = {
             0.1,
             0.45,
-            0.9};
+            .3,
+            0.9,
+            .64
+           };
     public static double contrastR[];
     public static double answer[];
     double left[];
     double right[];
-    public static int seconds = 10;
+    public static int seconds = 60;
     ImageView rightimg;
     Bitmap rightbmp;
     ImageView leftimg;

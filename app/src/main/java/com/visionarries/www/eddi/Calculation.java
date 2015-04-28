@@ -16,8 +16,8 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
     double x[] = TestPage.contrastR;
     double y[] = TestPage.answer;
 
-    public static double joy[] =  new double[TestPage.contrastR.length];
-    public static double happy[] =  new double[TestPage.contrastR.length];
+    public static double joy[] =  new double[TestPage.contrastR_false.length];
+    public static double happy[] =  new double[TestPage.contrastR_false.length];
 //    double x[] =  { 0.1,
 //            0.35,
 //            0.5,
@@ -94,7 +94,7 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
         setContentView(R.layout.calc_page);
         tts = new TextToSpeech(this, this);
 
-        System.arraycopy(TestPage.contrastR, 0, joy, 0, joy.length);
+        System.arraycopy(TestPage.contrastR_false, 0, joy, 0, joy.length);
         System.arraycopy(y, 0, happy, 0, joy.length);
 
 
@@ -115,17 +115,17 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
             sy = sy + y[i];
         }
 
-        d = sx * sx - m * sxx;
+        d = (sx * sx) - (m * sxx);
         a = (1 / d) * (sx * sy - m * sxy);
         b = (1 / d) * (sx * sxy - sxx * sy);
         k = -a;
-        x0 =2* Math.pow(10, -b / a);
+        x0 =2 * Math.pow(10, -b / a);
         //error http://mathworld.wolfram.com/LeastSquaresFitting.html
         x_ave = x_ave / m;
         y_ave = y_ave / m;
-        SSxx = sxx - m * x_ave * x_ave;
-        SSyy = syy - m * y_ave * y_ave;
-        SSxy = sxy - m * x_ave * y_ave;
+        SSxx = sxx - (m * x_ave * x_ave);
+        SSyy = syy - (m * y_ave * y_ave);
+        SSxy = sxy - (m * x_ave * y_ave);
         s = Math.pow((SSyy - (Math.pow(SSxy, 2) / SSxx)) / (m - 2), 1 / 2);
         error_a = s * Math.pow((1 / m) + ((Math.pow(x_ave, 2) / SSxx)), (1 / 2));
         error_b = s / Math.pow(SSxx, 1 / 2);
