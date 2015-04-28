@@ -9,6 +9,7 @@ import android.widget.Toast;
 
 public class Password_screen extends WelcomeScreen{
 
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         //this is just needed
@@ -31,6 +32,8 @@ public class Password_screen extends WelcomeScreen{
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
-
+            WelcomeScreen.doRestart(this);
         }
-    }}
+    }
+
+    }
