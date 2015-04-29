@@ -22,6 +22,7 @@ public class WelcomeScreen extends ActionBarActivity {
     private static final String TAG = null;
     public static boolean long_or_short;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -106,10 +107,10 @@ public class WelcomeScreen extends ActionBarActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            return false;
         }
 
-        return super.onOptionsItemSelected(item);
+        return false;
     }
     public static void doRestart(Context c) {
         try {
@@ -149,5 +150,9 @@ public class WelcomeScreen extends ActionBarActivity {
             Log.e(TAG, "Was not able to restart application");
         }
     }
+
+
+
+
 
 }

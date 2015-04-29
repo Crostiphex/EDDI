@@ -16,6 +16,7 @@ import java.util.Arrays;
 /**
  * A straightforward example of using AndroidPlot to plot some data.
  */
+
 public class Graph extends WelcomeScreen
 {
 

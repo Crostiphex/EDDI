@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -52,10 +53,17 @@ public class TestPage extends WelcomeScreen {
     int c = 0;
     int d = 0;
     int x=0;
-    int y=0;
+    int a_r=0;
+    int b_r=0;
+    int c_r = 0;
+    int d_r = 0;
+    int x_r=0;
+
     //Button Recognizer
-    long lastDown;
-    long lastDuration;
+    long lastDown_left;
+    long lastDown_right;
+    long lastDuration_left;
+    long lastDuration_right;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -103,9 +111,12 @@ public class TestPage extends WelcomeScreen {
             @Override
             public void onFinish() {
                 if (d != c) {
-                    lastDuration = Math.abs(System.currentTimeMillis() - lastDown);
-                    if (x==1){left[i]=left[i]+lastDuration;x=0;}
-                    else if(y==1){right[i]=right[i]+lastDuration;y=0;}
+                    lastDuration_left = Math.abs(System.currentTimeMillis() - lastDown_left);
+                    if (x==1){left[i]=left[i]+lastDuration_left;x=0;}
+
+                }if (d_r != c_r) {
+                    lastDuration_right = Math.abs(System.currentTimeMillis() - lastDown_right);
+                    if(x_r==1){right[i]=right[i]+lastDuration_right;x_r=0;}
                 }
 
                 for (int i=0; i<contrastR.length; i++){
@@ -121,39 +132,63 @@ public class TestPage extends WelcomeScreen {
     public boolean onTouchEvent(MotionEvent event) {
 
         if(event.getAction() == MotionEvent.ACTION_DOWN && event.isButtonPressed(MotionEvent.BUTTON_PRIMARY )) {
-            lastDown = System.currentTimeMillis();
+            lastDown_left = System.currentTimeMillis();
             a=i;
             c++;
-            x=1;}
+            x=1;
+           }
 
-        if(event.getAction() == MotionEvent.ACTION_DOWN && event.isButtonPressed(MotionEvent.BUTTON_TERTIARY )) {
-            lastDown = System.currentTimeMillis();
-            a=i;
-            c++;
-            y=1;}
+                 if (event.getAction() == MotionEvent.ACTION_UP) {
 
-
-          if (event.getAction() == MotionEvent.ACTION_UP) {
-
-            lastDuration = Math.abs(System.currentTimeMillis() - lastDown);
+            lastDuration_left = Math.abs(System.currentTimeMillis() - lastDown_left);
             b=i;
             d++;
             if(a!=b){
-
-                if (x==1){left[i-1]=left[i-1]+lastDuration;x=0;}
-                else if(y==1){right[i-1]=right[i-1]+lastDuration;y=0;}
+                left[i-1]=left[i-1]+lastDuration_left;
+                x=0;
             }
             else{
-                if (x==1){left[i]=left[i]+lastDuration;x=0;}
-                else if(y==1){right[i]=right[i]+lastDuration;y=0;}
+                left[i]=left[i]+lastDuration_left;
+               x=0;
             }
-
         }
 
         // tell the system that we handled the event and no further processing is required
         return true;
     }
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event)  {
+        KeyEvent.changeTimeRepeat(event,0,0);
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0&& event.getAction()==KeyEvent.ACTION_DOWN) {
+            lastDown_right = System.currentTimeMillis();
+            a_r=i;
+            c_r++;
+            x_r=1;
+            return true;
+        }
 
+        return super.onKeyDown(keyCode,event);
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event)  {
+
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0&& event.getAction()==KeyEvent.ACTION_UP&&event.getFlags()==0) {
+            lastDuration_right = Math.abs(System.currentTimeMillis() - lastDown_right);
+            b_r=i;
+            d_r++;
+            if(a_r!=b_r){
+                right[i-1]=right[i-1]+lastDuration_right;
+                x_r=0;
+            }
+            else{
+                right[i]=right[i]+lastDuration_right;
+                x_r=0;
+            }
+        }
+
+        return super.onKeyUp(keyCode,event);
+    }
     //makes the right pattern
     public void right_pattern(Double contrast){
                Bitmap operation = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
@@ -204,6 +239,7 @@ public class TestPage extends WelcomeScreen {
         }
         leftimg.setImageBitmap(operation);
     }
+
         public int gamma_correction (int initial_value){
         int[ ] correction ={0, 9, 20, 28, 34, 39, 44, 48, 51, 55, 58, 61, 64, 67, 69, 72, 74, 76,
                 79, 81, 83, 85, 87, 89, 91, 92, 94, 96, 98, 99, 101, 102, 104, 105,
