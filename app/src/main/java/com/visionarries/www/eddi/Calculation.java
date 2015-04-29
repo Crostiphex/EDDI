@@ -15,6 +15,18 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
     //<editor-fold desc="Initialization">
     double x[] = TestPage.contrastR;
     double y[] = TestPage.answer;
+//    double x[] = {0.1,
+//            0.3,
+//            0.45,
+//            0.65,
+//            0.9
+//    };
+//    double y[] = {0.1055,
+//            0.4146,
+//            0.6077,
+//            0.8494,
+//            0.8648
+//    };
 
     public static double joy[] =  new double[TestPage.contrastR_false.length];
     public static double happy[] =  new double[TestPage.contrastR_false.length];
@@ -67,9 +79,9 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
     public static double b = 0.;
     double k = 0.;
     public static double x0 = 0.;
-    double error_a;
-    double error_b;
-    double s;
+    double error_a=0;
+    double error_b=0;
+    double s=0;
     double x_ave = 0.;
     double y_ave = 0.;
     double SSxx = 0.;
@@ -103,6 +115,7 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
         for (int i = 0; i < m; i++) {
             x[i] = Math.log10(x[i]); //This is you want the x to be on base 10
             x_ave = x_ave + x[i];
+            if(y[i]==0){y[i]=.01;}
             y[i] = Math.log((1 / y[i]) - 1);
             y_ave = y_ave + y[i];
             xx[i] = x[i] * x[i];
@@ -126,19 +139,20 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
         SSxx = sxx - (m * x_ave * x_ave);
         SSyy = syy - (m * y_ave * y_ave);
         SSxy = sxy - (m * x_ave * y_ave);
-        s = Math.pow((SSyy - (Math.pow(SSxy, 2) / SSxx)) / (m - 2), 1 / 2);
-        error_a = s * Math.pow((1 / m) + ((Math.pow(x_ave, 2) / SSxx)), (1 / 2));
-        error_b = s / Math.pow(SSxx, 1 / 2);
-        error_x0 = (b/a)*Math.pow(Math.pow(error_a / a, 2) + Math.pow(error_b / b, 2), 1 / 2);
+       // s = Math.pow((SSyy - (Math.pow(SSxy, 2) / SSxx)) / (m - 2), 1 / 2);
+      s  =Math.pow((SSyy-(SSxy*SSxy/SSxx))/(m-2),(.5));
+        error_a = s * Math.pow((1 / m) + ((Math.pow(x_ave, 2) / SSxx)), (.5));
+        error_b = s / Math.pow(SSxx,.5);
+        error_x0 = (b/a)*Math.pow(Math.pow(error_a / a, 2) + Math.pow(error_b / b, 2),.5);
         r_x0 = Math.round(x0*100) / 100D;
         r_error_x0 = Math.round(error_x0*100) / 100D;
 
 
         value = (TextView) findViewById(R.id.DomIndex);
-        text = "Calculation complete. The ocular dominance value is " + String.valueOf(r_x0)+". The error is " + String.valueOf(r_error_x0);
+        text = "Calculation complete. The ocular dominance value is " + String.valueOf(r_x0 )+". The error is " + String.valueOf(r_error_x0)+".";
         value.setText(text);
         if (!DataSave.name.equals("")) {
-            myDb.insertRow(DataSave.name, r_x0);
+            myDb.insertRow(DataSave.name, r_x0-1);
 //            Intent intent = new Intent(Calculation.this, Database_main.class);
 //            startActivity(intent);
         }

@@ -32,7 +32,7 @@ public class Password_screen extends WelcomeScreen{
 
             Toast toast = Toast.makeText(context, text, duration);
             toast.show();
-            WelcomeScreen.doRestart(this);
+
         }
     }
 

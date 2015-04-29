@@ -1,7 +1,6 @@
 package com.visionarries.www.eddi;
 
 
-import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.View;
@@ -66,8 +65,7 @@ public class Database_main extends WelcomeScreen {
 	}
 
 	public void onClick_GoHome(View v) {
-        Intent act2 = new Intent(v.getContext(),WelcomeScreen.class);
-        startActivity(act2);
+       WelcomeScreen.doRestart(this);
 	}
 	
 	// Display an entire recordset to the screen.
