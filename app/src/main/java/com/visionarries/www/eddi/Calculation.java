@@ -149,7 +149,7 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
 
 
         value = (TextView) findViewById(R.id.DomIndex);
-        text = "Calculation complete. The ocular dominance value is " + String.valueOf(r_x0 )+". The error is " + String.valueOf(r_error_x0)+".";
+        text = "Calculation complete. The ocular dominance value is " + String.valueOf(r_x0-1)+". The error is " + String.valueOf(r_error_x0)+".";
         value.setText(text);
         if (!DataSave.name.equals("")) {
             myDb.insertRow(DataSave.name, r_x0-1);
