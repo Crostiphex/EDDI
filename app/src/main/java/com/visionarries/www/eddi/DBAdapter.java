@@ -25,25 +25,28 @@ public class DBAdapter {
 	// DB Fields
 	public static final String KEY_ROWID = "_id";
 	public static final int COL_ROWID = 0;
+
 	/*
 	 * CHANGE 1:
 	 */
 	// TODO: Setup your fields here:
 	public static final String KEY_NAME = "name";
 	public static final String KEY_DOMINANCE_INDEX = "dom_index";
+	public static final String KEY_RIGHT_EYE_TIME = "right_time";
 
 	// TODO: Setup your field numbers here (0 = KEY_ROWID, 1=...)
 	public static final int COL_NAME = 1;
 	public static final int COL_DOMINANCE_INDEX = 2;
+	public static final int COL_RIGHT_EYE_TIME = 3;
 
 
-    public static final String[] ALL_KEYS = new String[] {KEY_ROWID, KEY_NAME, KEY_DOMINANCE_INDEX};
+    public static final String[] ALL_KEYS = new String[] {KEY_ROWID, KEY_NAME, KEY_DOMINANCE_INDEX,KEY_RIGHT_EYE_TIME};
 	
 	// DB info: it's name, and the table we are using (just one).
 	public static final String DATABASE_NAME = "MyDb";
 	public static final String DATABASE_TABLE = "mainTable";
 	// Track DB version if a new version of your app changes the format.
-	public static final int DATABASE_VERSION = 2;
+	public static final int DATABASE_VERSION = 3;
 	
 	private static final String DATABASE_CREATE_SQL = 
 			"create table " + DATABASE_TABLE 
@@ -60,7 +63,8 @@ public class DBAdapter {
 			//  - "not null" means it is a required field (must be given a value).
 			// NOTE: All must be comma separated (end of line!) Last one must have NO comma!!
 			+ KEY_NAME + " text not null, "
-			+ KEY_DOMINANCE_INDEX + " real not null "
+			+ KEY_DOMINANCE_INDEX + " real not null, "
+			+ KEY_RIGHT_EYE_TIME + " text not null "
 
 			// Rest  of creation:
 			+ ");";
@@ -92,7 +96,7 @@ public class DBAdapter {
 	}
 	
 	// Add a new set of values to the database.
-	public long insertRow(String name, double dom_index) {
+	public long insertRow(String name, double dom_index,String right_time) {
 		/*
 		 * CHANGE 3:
 		 */		
@@ -102,6 +106,7 @@ public class DBAdapter {
 		ContentValues initialValues = new ContentValues();
 		initialValues.put(KEY_NAME, name);
 		initialValues.put(KEY_DOMINANCE_INDEX, dom_index);
+		initialValues.put(KEY_RIGHT_EYE_TIME, right_time);
 
 		// Insert it into the database.
 		return db.insert(DATABASE_TABLE, null, initialValues);
@@ -147,7 +152,7 @@ public class DBAdapter {
 	}
 	
 	// Change an existing row to be equal to new data.
-	public boolean updateRow(long rowId, String name, double dom_index) {
+	public boolean updateRow(long rowId, String name, double dom_index,String right_time) {
 		String where = KEY_ROWID + "=" + rowId;
 
 		/*
@@ -159,6 +164,7 @@ public class DBAdapter {
 		ContentValues newValues = new ContentValues();
 		newValues.put(KEY_NAME, name);
 		newValues.put(KEY_DOMINANCE_INDEX, dom_index);
+		newValues.put(KEY_RIGHT_EYE_TIME, right_time);
 
 		// Insert it into the database.
 		return db.update(DATABASE_TABLE, newValues, where, null) != 0;

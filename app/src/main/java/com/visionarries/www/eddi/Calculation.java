@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
+import java.util.Arrays;
 import java.util.Locale;
 
 public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitListener {
@@ -21,7 +22,7 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
 //            0.65,
 //            0.9
 //    };
-//    double y[] = {
+//  double y[] = {
 //            0.1300,
 //            0.7600,
 //            0.5600,
@@ -29,6 +30,8 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
 //            0.7000
 //
 //    };
+
+    double database_save[]=new double[y.length];
 
     public static double joy[] =  new double[TestPage.contrastR_false.length];
     public static double happy[] =  new double[TestPage.contrastR_false.length];
@@ -110,6 +113,7 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
 
         System.arraycopy(TestPage.contrastR_false, 0, joy, 0, joy.length);
         System.arraycopy(y, 0, happy, 0, joy.length);
+        System.arraycopy(y, 0, database_save, 0, y.length);
 
 
 
@@ -154,7 +158,8 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
         text = "Calculation complete. The ocular dominance value is " + String.valueOf(r_x0)+". The error is " + String.valueOf(r_error_x0)+".";
         value.setText(text);
         if (!DataSave.name.equals("")) {
-            myDb.insertRow(DataSave.name, r_x0);
+for (int i=0;i<y.length; i++){database_save[i]=Math.round((database_save[i])*100) / 100D;}
+            myDb.insertRow(DataSave.name,r_x0,Arrays.toString(database_save));
 //            Intent intent = new Intent(Calculation.this, Database_main.class);
 //            startActivity(intent);
         }
