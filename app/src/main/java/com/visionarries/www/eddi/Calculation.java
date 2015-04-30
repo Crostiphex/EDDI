@@ -33,8 +33,8 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
 
     double database_save[]=new double[y.length];
 
-    public static double joy[] =  new double[TestPage.contrastR_false.length];
-    public static double happy[] =  new double[TestPage.contrastR_false.length];
+    public static double joy[] =  new double[TestPage.contrastR.length];
+    public static double happy[] =  new double[TestPage.contrastR.length];
 //    double x[] =  { 0.1,
 //            0.35,
 //            0.5,
@@ -111,7 +111,7 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
         setContentView(R.layout.calc_page);
         tts = new TextToSpeech(this, this);
 
-        System.arraycopy(TestPage.contrastR_false, 0, joy, 0, joy.length);
+        System.arraycopy(TestPage.contrastR, 0, joy, 0, joy.length);
         System.arraycopy(y, 0, happy, 0, joy.length);
         System.arraycopy(y, 0, database_save, 0, y.length);
 
