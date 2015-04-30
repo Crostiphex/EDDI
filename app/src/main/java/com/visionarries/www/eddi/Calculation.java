@@ -13,22 +13,22 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
 
 
     //<editor-fold desc="Initialization">
-//    double x[] = TestPage.contrastR;
-//    double y[] = TestPage.answer;
-    double x[] = {0.1,
-            0.3,
-            0.45,
-            0.65,
-            0.9
-    };
-    double y[] = {
-            0.1300,
-            0.7600,
-            0.5600,
-            0.8700,
-            0.7000
-
-    };
+    double x[] = TestPage.contrastR;
+    double y[] = TestPage.answer;
+//    double x[] = {0.1,
+//            0.3,
+//            0.45,
+//            0.65,
+//            0.9
+//    };
+//    double y[] = {
+//            0.1300,
+//            0.7600,
+//            0.5600,
+//            0.8700,
+//            0.7000
+//
+//    };
 
     public static double joy[] =  new double[TestPage.contrastR_false.length];
     public static double happy[] =  new double[TestPage.contrastR_false.length];
