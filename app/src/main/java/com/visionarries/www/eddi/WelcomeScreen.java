@@ -72,7 +72,7 @@ public class WelcomeScreen extends ActionBarActivity {
 
                 else {
                     long_or_short = test_time.isChecked();
-                    Intent act2 = new Intent(view.getContext(),Calibration.class);
+                    Intent act2 = new Intent(view.getContext(),Calculation.class);
                     startActivity(act2);
 }}});
         database.setOnClickListener(new View.OnClickListener() {
