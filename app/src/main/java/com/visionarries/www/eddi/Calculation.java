@@ -13,9 +13,9 @@ import java.util.Locale;
 public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitListener {
 
 
-    //<editor-fold desc="Initialization">
-    double x[] = TestPage.contrastR;
-    double y[] = TestPage.answer;
+    //this is just for the graphing
+    public static double joy[] = new double[TestPage.contrastR_false.length];
+    public static double happy[] = new double[TestPage.contrastR_false.length];
 //    double x[] = {0.1,
 //            0.3,
 //            0.45,
@@ -30,11 +30,9 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
 //            0.7000
 //
 //    };
-
-    double database_save[]=new double[y.length];
-
-    public static double joy[] =  new double[TestPage.contrastR_false.length];
-    public static double happy[] =  new double[TestPage.contrastR_false.length];
+public static double a = 0.;
+    public static double b = 0.;
+    public static double x0 = 0.;
 //    double x[] =  { 0.1,
 //            0.35,
 //            0.5,
@@ -70,7 +68,13 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
 //                    0.878
 //
 //            };
-
+public String text;
+    //<editor-fold desc="Initialization">
+    //gathers the contrast and answers from test page
+    double x[] = TestPage.contrastR;
+    double y[] = TestPage.answer;
+    double database_save[] = new double[y.length];
+    //initializing
     double xx[] = new double[x.length];
     double yy[] = new double[x.length];
     double xy[] = new double[x.length];
@@ -80,10 +84,7 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
     double sy = 0.;
     int m = x.length;
     double d = 0.;
-    public static double a = 0.;
-    public static double b = 0.;
     double k = 0.;
-    public static double x0 = 0.;
     double error_a=0;
     double error_b=0;
     double s=0;
@@ -99,7 +100,6 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
     TextView value;
     DBAdapter myDb;
     private TextToSpeech tts;
-    public String text;
 
     //</editor-fold>
 
@@ -116,12 +116,15 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
         System.arraycopy(y, 0, database_save, 0, y.length);
 
 
-
+//opens the database
         openDB();
+        //this for loop will go through the values for the least fit squares, it makes a fit for the sigmoidal function
         for (int i = 0; i < m; i++) {
             x[i] = Math.log10(x[i]); //This is you want the x to be on base 10
             x_ave = x_ave + x[i];
-            if(y[i]==0){y[i]=.01;}
+            if (y[i] == 0) {
+                y[i] = .01;
+            }//zero will give you a DNE error so we have to make it really low instead,
             y[i] = Math.log((1 / y[i]) - 1);
             y_ave = y_ave + y[i];
             xx[i] = x[i] * x[i];
@@ -139,7 +142,7 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
         b = (1 / d) * (sx * sxy - sxx * sy);
         k = -a;
         x0 =2 * Math.pow(10, -b / a);
-        //error http://mathworld.wolfram.com/LeastSquaresFitting.html
+        //error method was used from this http://mathworld.wolfram.com/LeastSquaresFitting.html
         x_ave = x_ave / m;
         y_ave = y_ave / m;
         SSxx = sxx - (m * x_ave * x_ave);
@@ -150,14 +153,14 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
         error_a = s * Math.pow((1 / m) + ((Math.pow(x_ave, 2) / SSxx)), (.5));
         error_b = s / Math.pow(SSxx,.5);
         error_x0 = x0*(b/a)*Math.pow(Math.pow(error_a / a, 2) + Math.pow(error_b / b, 2),.5);
-        r_x0 = Math.round((x0-1)*100) / 100D;
+        r_x0 = Math.round((x0 - 1) * 100) / 100D;//subtracted 1 to make values go from -1, to 1, rather than 0 to 2
         r_error_x0 = Math.round(error_x0*100) / 100D;
 
-
+//displaying the calculated values, the who thing basically takes less than a second to calculate.
         value = (TextView) findViewById(R.id.DomIndex);
         text = "Calculation complete. The ocular dominance value is " + String.valueOf(r_x0)+". The error is " + String.valueOf(r_error_x0)+".";
         value.setText(text);
-        if (!DataSave.name.equals("")) {
+        if (!DataSave.name.equals("")) {//if you made a profile (which is the same as having this field not be bland/null then you'll add these values to a database.
 for (int i=0;i<y.length; i++){database_save[i]=Math.round((database_save[i])*100) / 100D;}
             myDb.insertRow(DataSave.name,r_x0,Arrays.toString(database_save));
 //            Intent intent = new Intent(Calculation.this, Database_main.class);
@@ -174,6 +177,7 @@ for (int i=0;i<y.length; i++){database_save[i]=Math.round((database_save[i])*100
         startActivity(act2);
     }
 
+    //good to have stops the device from using power for tts
     @Override
     protected void onDestroy() {
         // Don't forget to shutdown!
@@ -192,6 +196,7 @@ for (int i=0;i<y.length; i++){database_save[i]=Math.round((database_save[i])*100
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null);
     }
 
+    //tts
     @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
@@ -210,11 +215,12 @@ for (int i=0;i<y.length; i++){database_save[i]=Math.round((database_save[i])*100
             }
 
         } else {
-            Log.e("TTS", "Initilization Failed");
+            Log.e("TTS", "Initialization Failed");
         }
 
     }
 
+    //opening and closing the database
     private void openDB() {
         myDb = new DBAdapter(this);
         myDb.open();

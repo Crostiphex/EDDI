@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.annotation.NonNull;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.ViewGroup;
@@ -39,13 +40,13 @@ public class TestPage extends WelcomeScreen {
            };
     public static double contrastR[];
     public static double answer[];
+    public static int seconds = 60;
     double left[];
     double right[];
-    public static int seconds = 60;
-    ImageView rightimg;
-    Bitmap rightbmp;
-    ImageView leftimg;
-    Bitmap leftbmp;
+    ImageView right_img;
+    Bitmap right_bmp;
+    ImageView left_img;
+    Bitmap left_bmp;
     CountDownTimer waitTimer;
     int i = -1;
     int a=0;
@@ -71,46 +72,50 @@ public class TestPage extends WelcomeScreen {
         super.onCreate(savedInstanceState);
         //sets the layout to the inputted ID
         setContentView(R.layout.test_page);
+        //if the long test was checked then it changes which contrast values you run through during the test.
         if(WelcomeScreen.long_or_short){
             contrastR=contrastR_true;
             answer=new double[contrastR.length];left=new double[contrastR.length];right=new double[contrastR.length];
         }else{
             contrastR=contrastR_false;
             answer=new double[contrastR.length];left=new double[contrastR.length];right=new double[contrastR.length];
-
         }
-        rightimg = (ImageView) findViewById(R.id.rightGrating_test);
-        leftimg = (ImageView) findViewById(R.id.leftGrating_test);
-        ImageView leftring = (ImageView) findViewById(R.id.leftFocusRing_test);
-        ImageView rightring = (ImageView) findViewById(R.id.rightFocusRing_test);
-        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
-        ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) rightring.getLayoutParams();
+        //initializing buttons and views.
+        right_img = (ImageView) findViewById(R.id.rightGrating_test);
+        left_img = (ImageView) findViewById(R.id.leftGrating_test);
+        ImageView left_ring = (ImageView) findViewById(R.id.leftFocusRing_test);
+        ImageView right_ring = (ImageView) findViewById(R.id.rightFocusRing_test);
+        //getting the layout from the calibration page and setting it up here.
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) left_ring.getLayoutParams();
+        ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) right_ring.getLayoutParams();
         mlp.leftMargin = DataSave.from_left_left;
         mlp.topMargin = DataSave.from_top_left;
-        leftring.setLayoutParams(mlp);
+        left_ring.setLayoutParams(mlp);
         plm.leftMargin = DataSave.from_left_right;
         plm.topMargin = DataSave.from_top_right;
-        rightring.setLayoutParams(plm);
+        right_ring.setLayoutParams(plm);
 
 
-//Timer
-        waitTimer = new CountDownTimer((contrastR.length)*seconds*1000+500,(seconds)*1000) {
+//Timer, will count down until zero, it's not perfect so you have to give some buffer time, which is why I have the .5 seconds added, .5 does not affect the test
+        //think of it as a for loop in respect to time.
+        waitTimer = new CountDownTimer((contrastR.length) * seconds * 1000 + 500, (seconds) * 1000) {
             public void onTick(long millisUntilFinished) {
-                i++;
+                //every time seconds*1000 has passed all of this code functions
+                i++;//it isn't a for loop though and that's why i started with negative 1.
 //defining the right image
-                BitmapDrawable leftabmp = (BitmapDrawable) leftimg.getDrawable();
-                leftbmp = leftabmp.getBitmap();
-                left_pattern(.5);
+                BitmapDrawable left_a_bmp = (BitmapDrawable) left_img.getDrawable();
+                left_bmp = left_a_bmp.getBitmap();
+                left_pattern(.5);//contrast value is always .5
 
-                BitmapDrawable rightabmp = (BitmapDrawable) rightimg.getDrawable();
-                rightbmp = rightabmp.getBitmap();
-                right_pattern(contrastR[i]);
+                BitmapDrawable right_a_bmp = (BitmapDrawable) right_img.getDrawable();
+                right_bmp = right_a_bmp.getBitmap();
+                right_pattern(contrastR[i]);//contrast value will cycle through the contrast values that were defined about
 
             }
 
             @Override
-            public void onFinish() {
-                if (d != c) {
+            public void onFinish() {//when finished this code is activated.
+                if (d != c) {//if the person is still holding down the button when the test is finished we take the time it was held down for.
                     lastDuration_left = Math.abs(System.currentTimeMillis() - lastDown_left);
                     if (x==1){left[i]=left[i]+lastDuration_left;x=0;}
 
@@ -119,25 +124,27 @@ public class TestPage extends WelcomeScreen {
                     if(x_r==1){right[i]=right[i]+lastDuration_right;x_r=0;}
                 }
 
-                for (int i=0; i<contrastR.length; i++){
+                for (int i = 0; i < contrastR.length; i++) {//this is the relative duration and the answer is what is getting passed onto the calculation page.
                     answer[i]=right[i]/(right[i]+left[i]);
                 }
 
                 Intent intent = new Intent(TestPage.this, Calculation.class);
                 startActivity(intent);
             }
-        }.start();
+        }.start();//starts thr count down
     }
 
+    //this is the code to calculate how long you've been holding down the left mouse button
     public boolean onTouchEvent(MotionEvent event) {
-
+//when you press down you get the current time
         if(event.getAction() == MotionEvent.ACTION_DOWN && event.isButtonPressed(MotionEvent.BUTTON_PRIMARY )) {
             lastDown_left = System.currentTimeMillis();
             a=i;
             c++;
             x=1;
            }
-
+//when you let go you get the current time and subtract it from the previous time and add it for the duration in this contras value,
+        //variables are for if you're holding down a button between the two contrast values, this is a fail-safe so you don't give the times to the wrong contrast values
                  if (event.getAction() == MotionEvent.ACTION_UP) {
 
             lastDuration_left = Math.abs(System.currentTimeMillis() - lastDown_left);
@@ -156,6 +163,12 @@ public class TestPage extends WelcomeScreen {
         // tell the system that we handled the event and no further processing is required
         return true;
     }
+
+    //this is for the right clicking
+    //we need a different method because android sees right clicking as back
+    //this means you can't click back throughout the test, which is actually pretty good
+    //also a lot more neater to have two different methods,
+    //essentially the code is repeated for the left clicking.
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event)  {
         KeyEvent.changeTimeRepeat(event,0,0);
@@ -171,7 +184,7 @@ public class TestPage extends WelcomeScreen {
     }
 
     @Override
-    public boolean onKeyUp(int keyCode, KeyEvent event)  {
+    public boolean onKeyUp(int keyCode, @NonNull KeyEvent event) {
 
         if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0&& event.getAction()==KeyEvent.ACTION_UP&&event.getFlags()==0) {
             lastDuration_right = Math.abs(System.currentTimeMillis() - lastDown_right);
@@ -189,16 +202,17 @@ public class TestPage extends WelcomeScreen {
 
         return super.onKeyUp(keyCode,event);
     }
+
     //makes the right pattern
     public void right_pattern(Double contrast){
-               Bitmap operation = Bitmap.createBitmap(rightbmp.getWidth(), rightbmp.getHeight(), rightbmp.getConfig());
+        Bitmap operation = Bitmap.createBitmap(right_bmp.getWidth(), right_bmp.getHeight(), right_bmp.getConfig());
 //the loop goes through each picture
-        for(int i=0; i< rightbmp.getWidth()-1; i++){
-            for(int j=0; j< rightbmp.getHeight()-1; j++){
+        for (int i = 0; i < right_bmp.getWidth() - 1; i++) {
+            for (int j = 0; j < right_bmp.getHeight() - 1; j++) {
 
-                double ij=(i-(rightbmp.getWidth()/2))*(i-(rightbmp.getWidth()/2))+(j-(rightbmp.getWidth()/2))*(j-(rightbmp.getWidth()/2));
-                double k = (rightbmp.getWidth()/2)*(rightbmp.getWidth()/2);
-                double dis=Math.sqrt(2*(rightbmp.getWidth()^2));
+                double ij = (i - (right_bmp.getWidth() / 2)) * (i - (right_bmp.getWidth() / 2)) + (j - (right_bmp.getWidth() / 2)) * (j - (right_bmp.getWidth() / 2));
+                double k = (right_bmp.getWidth() / 2) * (right_bmp.getWidth() / 2);
+                double dis = Math.sqrt(2 * (right_bmp.getWidth() ^ 2));
 
                 if (ij<=k){//displays pattern in a circle
 
@@ -212,18 +226,18 @@ public class TestPage extends WelcomeScreen {
 
             }
         }
-        rightimg.setImageBitmap(operation);
+        right_img.setImageBitmap(operation);
     }
     //makes the left pattern
     public void left_pattern(Double contrast){
-        Bitmap operation = Bitmap.createBitmap(leftbmp.getWidth(), leftbmp.getHeight(), leftbmp.getConfig());
+        Bitmap operation = Bitmap.createBitmap(left_bmp.getWidth(), left_bmp.getHeight(), left_bmp.getConfig());
 //the loop goes through each picture
-        for(int i=0; i< leftbmp.getWidth()-1; i++){
-            for(int j=leftbmp.getHeight()-1; j>0; j--){
+        for (int i = 0; i < left_bmp.getWidth() - 1; i++) {
+            for (int j = left_bmp.getHeight() - 1; j > 0; j--) {
 
-                double ij=(i-(leftbmp.getWidth()/2))*(i-(leftbmp.getWidth()/2))+(j-(leftbmp.getWidth()/2))*(j-(leftbmp.getWidth()/2));
-                double k = (leftbmp.getWidth()/2)*(leftbmp.getWidth()/2);
-                double dis=Math.sqrt(2*(leftbmp.getWidth()^2));
+                double ij = (i - (left_bmp.getWidth() / 2)) * (i - (left_bmp.getWidth() / 2)) + (j - (left_bmp.getWidth() / 2)) * (j - (left_bmp.getWidth() / 2));
+                double k = (left_bmp.getWidth() / 2) * (left_bmp.getWidth() / 2);
+                double dis = Math.sqrt(2 * (left_bmp.getWidth() ^ 2));
 
                 if (ij<=k){//displays pattern in a circle
 
@@ -237,9 +251,10 @@ public class TestPage extends WelcomeScreen {
 
             }
         }
-        leftimg.setImageBitmap(operation);
+        left_img.setImageBitmap(operation);
     }
 
+    //this remaps the gray levels so there is a linear increase in them, as the phone brightness as some sort of nonlinear increase in gamma levels.
         public int gamma_correction (int initial_value){
         int[ ] correction ={0, 9, 20, 28, 34, 39, 44, 48, 51, 55, 58, 61, 64, 67, 69, 72, 74, 76,
                 79, 81, 83, 85, 87, 89, 91, 92, 94, 96, 98, 99, 101, 102, 104, 105,

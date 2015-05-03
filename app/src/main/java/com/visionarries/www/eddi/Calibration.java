@@ -18,8 +18,8 @@ public class Calibration extends Activity implements TextToSpeech.OnInitListener
     int a = 0;
     private TextToSpeech tts;
     //defining the images
-    private ImageView leftring;
-    private ImageView rightring;
+    private ImageView left_ring;
+    private ImageView right_ring;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,26 +29,27 @@ public class Calibration extends Activity implements TextToSpeech.OnInitListener
         setContentView(R.layout.calibration_screen);
 
 
-
+//delete this line if you don't want it to talk
         tts = new TextToSpeech(this, this);
         text = "Calibration page initiated. Slide finger on middle button to move pattern, click the middle button to move other pattern. When finished, left click to continue to the test.";
 
 
-        leftring = (ImageView) findViewById(R.id.leftFocusRing);
-        rightring = (ImageView) findViewById(R.id.rightFocusRing);
+        left_ring = (ImageView) findViewById(R.id.leftFocusRing);
+        right_ring = (ImageView) findViewById(R.id.rightFocusRing);
 
 //this button makes the pattern
 
-        final ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
-        leftring.setLayoutParams(mlp);
-        final ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) rightring.getLayoutParams();
-        rightring.setLayoutParams(plm);
+        final ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) left_ring.getLayoutParams();
+        left_ring.setLayoutParams(mlp);
+        final ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) right_ring.getLayoutParams();
+        right_ring.setLayoutParams(plm);
 
     }
 
+    //moves the patter with the mouse touch pad
     public boolean onGenericMotionEvent(MotionEvent event) {
-        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) leftring.getLayoutParams();
-        ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) rightring.getLayoutParams();
+        ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) left_ring.getLayoutParams();
+        ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) right_ring.getLayoutParams();
         int scroll_action = event.getAction();
         int button_click = event.getButtonState();
 //        Toast toast_finger_move = Toast.makeText(context, "You moved me.", duration);
@@ -62,7 +63,7 @@ public class Calibration extends Activity implements TextToSpeech.OnInitListener
                 Intent intent = new Intent(Calibration.this, TestPage.class);
                 startActivity(intent);
                 break;
-            case MotionEvent.BUTTON_TERTIARY:
+            case MotionEvent.BUTTON_TERTIARY://every time you click it adds one
                 a = a + 1;
                 break;
         }
@@ -70,40 +71,40 @@ public class Calibration extends Activity implements TextToSpeech.OnInitListener
         switch (scroll_action) {
             case MotionEvent.ACTION_SCROLL:
                 // finger leaves the screen
-                if (a % 2 == 0) {
+                if (a % 2 == 0) {//if you click and the remainder is even or odd it will control a different mouse
                     if (event.getAxisValue(MotionEvent.AXIS_HSCROLL) < 0.0f) {
                         mlp.leftMargin = mlp.leftMargin - 5;
-                        leftring.setLayoutParams(mlp);
+                        left_ring.setLayoutParams(mlp);
                     }
                     if (event.getAxisValue(MotionEvent.AXIS_HSCROLL) > 0.0f) {
                         mlp.leftMargin = mlp.leftMargin + 5;
-                        leftring.setLayoutParams(mlp);
+                        left_ring.setLayoutParams(mlp);
                     }
                     if (event.getAxisValue(MotionEvent.AXIS_VSCROLL) < 0.0f) {
                         mlp.topMargin = mlp.topMargin + 5;
-                        leftring.setLayoutParams(mlp);
+                        left_ring.setLayoutParams(mlp);
                     }
                     if (event.getAxisValue(MotionEvent.AXIS_VSCROLL) > 0.0f) {
                         mlp.topMargin = mlp.topMargin - 5;
-                        leftring.setLayoutParams(mlp);
+                        left_ring.setLayoutParams(mlp);
                     }
                 }
                 if (a % 2 == 1) {
                     if (event.getAxisValue(MotionEvent.AXIS_HSCROLL) < 0.0f) {
                         plm.leftMargin = plm.leftMargin - 5;
-                        rightring.setLayoutParams(plm);
+                        right_ring.setLayoutParams(plm);
                     }
                     if (event.getAxisValue(MotionEvent.AXIS_HSCROLL) > 0.0f) {
                         plm.leftMargin = plm.leftMargin + 5;
-                        rightring.setLayoutParams(plm);
+                        right_ring.setLayoutParams(plm);
                     }
                     if (event.getAxisValue(MotionEvent.AXIS_VSCROLL) < 0.0f) {
                         plm.topMargin = plm.topMargin + 5;
-                        rightring.setLayoutParams(plm);
+                        right_ring.setLayoutParams(plm);
                     }
                     if (event.getAxisValue(MotionEvent.AXIS_VSCROLL) > 0.0f) {
                         plm.topMargin = plm.topMargin - 5;
-                        rightring.setLayoutParams(plm);
+                        right_ring.setLayoutParams(plm);
                     }
                 }
 
@@ -151,7 +152,7 @@ public class Calibration extends Activity implements TextToSpeech.OnInitListener
             }
 
         } else {
-            Log.e("TTS", "Initilization Failed");
+            Log.e("TTS", "Initialization Failed");
         }
 
     }

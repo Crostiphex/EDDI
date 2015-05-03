@@ -22,6 +22,7 @@ public class Password_screen extends WelcomeScreen{
 
     public void onClick_Password(View v) {
         EditText edit_text = (EditText) findViewById(R.id.pw);
+        //if the entered number is the same as the number below it will allow access, otherwise you get a toast
         if(edit_text.getText().toString().equals("3341")){
         Intent act2 = new Intent(v.getContext(), Database_main.class);
         startActivity(act2);}

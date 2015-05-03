@@ -1,4 +1,4 @@
-// ------------------------------------ DBADapter.java ---------------------------------------------
+// ------------------------------------ DB Adapter.java ---------------------------------------------
 
 // TODO: Change the package to match your project.
 package com.visionarries.www.eddi;
@@ -16,16 +16,9 @@ import android.util.Log;
 // Search for "TODO", and make the appropriate changes.
 public class DBAdapter {
 
-	/////////////////////////////////////////////////////////////////////
-	//	Constants & Data
-	/////////////////////////////////////////////////////////////////////
-	// For logging:
-	private static final String TAG = "DBAdapter";
-	
 	// DB Fields
-	public static final String KEY_ROWID = "_id";
-	public static final int COL_ROWID = 0;
-
+	public static final String KEY_ROW_ID = "_id";
+	public static final int COL_ROW_ID = 0;
 	/*
 	 * CHANGE 1:
 	 */
@@ -33,24 +26,24 @@ public class DBAdapter {
 	public static final String KEY_NAME = "name";
 	public static final String KEY_DOMINANCE_INDEX = "dom_index";
 	public static final String KEY_RIGHT_EYE_TIME = "right_time";
-
-	// TODO: Setup your field numbers here (0 = KEY_ROWID, 1=...)
+	// TODO: Setup your field numbers here (0 = KEY_ROW_ID, 1=...)
 	public static final int COL_NAME = 1;
 	public static final int COL_DOMINANCE_INDEX = 2;
 	public static final int COL_RIGHT_EYE_TIME = 3;
-
-
-    public static final String[] ALL_KEYS = new String[] {KEY_ROWID, KEY_NAME, KEY_DOMINANCE_INDEX,KEY_RIGHT_EYE_TIME};
-	
+	public static final String[] ALL_KEYS = new String[]{KEY_ROW_ID, KEY_NAME, KEY_DOMINANCE_INDEX, KEY_RIGHT_EYE_TIME};
 	// DB info: it's name, and the table we are using (just one).
 	public static final String DATABASE_NAME = "MyDb";
 	public static final String DATABASE_TABLE = "mainTable";
 	// Track DB version if a new version of your app changes the format.
 	public static final int DATABASE_VERSION = 3;
-	
-	private static final String DATABASE_CREATE_SQL = 
-			"create table " + DATABASE_TABLE 
-			+ " (" + KEY_ROWID + " integer primary key autoincrement, "
+	/////////////////////////////////////////////////////////////////////
+	//	Constants & Data
+	/////////////////////////////////////////////////////////////////////
+	// For logging:
+	private static final String TAG = "DBAdapter";
+	private static final String DATABASE_CREATE_SQL =
+			"create table " + DATABASE_TABLE
+					+ " (" + KEY_ROW_ID + " integer primary key autoincrement, "
 			
 			/*
 			 * CHANGE 2:
@@ -68,10 +61,7 @@ public class DBAdapter {
 
 			// Rest  of creation:
 			+ ");";
-	
-	// Context of application who uses us.
-	private final Context context;
-	
+
 	private DatabaseHelper myDBHelper;
 	private SQLiteDatabase db;
 
@@ -80,8 +70,7 @@ public class DBAdapter {
 	/////////////////////////////////////////////////////////////////////
 	
 	public DBAdapter(Context ctx) {
-		this.context = ctx;
-		myDBHelper = new DatabaseHelper(context);
+		myDBHelper = new DatabaseHelper(ctx);
 	}
 	
 	// Open the database connection.
@@ -114,13 +103,13 @@ public class DBAdapter {
 	
 	// Delete a row from the database, by rowId (primary key)
 	public boolean deleteRow(long rowId) {
-		String where = KEY_ROWID + "=" + rowId;
+		String where = KEY_ROW_ID + "=" + rowId;
 		return db.delete(DATABASE_TABLE, where, null) != 0;
 	}
 	
 	public void deleteAll() {
 		Cursor c = getAllRows();
-		long rowId = c.getColumnIndexOrThrow(KEY_ROWID);
+		long rowId = c.getColumnIndexOrThrow(KEY_ROW_ID);
 		if (c.moveToFirst()) {
 			do {
 				deleteRow(c.getLong((int) rowId));				
@@ -131,47 +120,16 @@ public class DBAdapter {
 	
 	// Return all data in the database.
 	public Cursor getAllRows() {
-		String where = null;
-		Cursor c = 	db.query(true, DATABASE_TABLE, ALL_KEYS, 
-							where, null, null, null, null, null);
+		//String where = null;
+		Cursor c = 	db.query(true, DATABASE_TABLE, ALL_KEYS,
+				null, null, null, null, null, null);
 		if (c != null) {
 			c.moveToFirst();
 		}
 		return c;
 	}
 
-	// Get a specific row (by rowId)
-	public Cursor getRow(long rowId) {
-		String where = KEY_ROWID + "=" + rowId;
-		Cursor c = 	db.query(true, DATABASE_TABLE, ALL_KEYS, 
-						where, null, null, null, null, null);
-		if (c != null) {
-			c.moveToFirst();
-		}
-		return c;
-	}
-	
-	// Change an existing row to be equal to new data.
-	public boolean updateRow(long rowId, String name, double dom_index,String right_time) {
-		String where = KEY_ROWID + "=" + rowId;
 
-		/*
-		 * CHANGE 4:
-		 */
-		// TODO: Update data in the row with new fields.
-		// TODO: Also change the function's arguments to be what you need!
-		// Create row's data:
-		ContentValues newValues = new ContentValues();
-		newValues.put(KEY_NAME, name);
-		newValues.put(KEY_DOMINANCE_INDEX, dom_index);
-		newValues.put(KEY_RIGHT_EYE_TIME, right_time);
-
-		// Insert it into the database.
-		return db.update(DATABASE_TABLE, newValues, where, null) != 0;
-	}
-	
-	
-	
 	/////////////////////////////////////////////////////////////////////
 	//	Private Helper Classes:
 	/////////////////////////////////////////////////////////////////////

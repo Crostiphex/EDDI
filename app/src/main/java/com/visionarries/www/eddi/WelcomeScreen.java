@@ -22,101 +22,11 @@ public class WelcomeScreen extends ActionBarActivity {
     private static final String TAG = null;
     public static boolean long_or_short;
 
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.welcome_screen);
-        final ImageView image = (ImageView)findViewById(R.id.imageView);
-        final Animation animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
-        final Animation animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fadeout);
-
-
-
-        Animation.AnimationListener animListener = new Animation.AnimationListener(){
-
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                image.setImageResource(R.drawable.eddi);
-                image.startAnimation(animationFadeIn);
-            }
-        };
-        image.startAnimation(animationFadeOut);
-        animationFadeIn.setAnimationListener(animListener);
-        animationFadeOut.setAnimationListener(animListener);
-
-
-        final Button switchact =(Button)findViewById(R.id.startbutton);
-        final Button database =(Button)findViewById(R.id.database_button);
-        final CheckBox want_user = (CheckBox) findViewById(R.id.newUserCheckBox);
-        final  CheckBox test_time = (CheckBox) findViewById(R.id.longorshort);
-
-
-        switchact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-                if(want_user.isChecked()){
-                    long_or_short = test_time.isChecked();
-                    Intent act2 = new Intent(view.getContext(),CustomerName.class);
-                 startActivity(act2);}
-
-                else {
-                    long_or_short = test_time.isChecked();
-                    Intent act2 = new Intent(view.getContext(),Calibration.class);
-                    startActivity(act2);
-}}});
-        database.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent act2 = new Intent(view.getContext(),Password_screen.class);
-                startActivity(act2);
-
-
-                }});
-
-
-
-
-
-    }
-
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return false;
-        }
-
-        return false;
-    }
     public static void doRestart(Context c) {
         try {
             //check if the context is given
             if (c != null) {
-                //fetch the packagemanager so we can get the default launch activity
+                //fetch the package manager so we can get the default launch activity
                 // (you can replace this intent with any other activity if you want
                 PackageManager pm = c.getPackageManager();
                 //check if we got the PackageManager
@@ -149,6 +59,99 @@ public class WelcomeScreen extends ActionBarActivity {
         } catch (Exception ex) {
             Log.e(TAG, "Was not able to restart application");
         }
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.welcome_screen);
+        final ImageView image = (ImageView)findViewById(R.id.imageView);
+
+        //The animation
+        final Animation animationFadeIn = AnimationUtils.loadAnimation(this, R.anim.fadein);
+        final Animation animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fadeout);
+        Animation.AnimationListener animListener = new Animation.AnimationListener(){
+
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                image.setImageResource(R.drawable.eddi);
+                image.startAnimation(animationFadeIn);
+            }
+        };
+        image.startAnimation(animationFadeOut);
+        animationFadeIn.setAnimationListener(animListener);
+        animationFadeOut.setAnimationListener(animListener);
+
+//buttons declaration
+        final Button switch_act = (Button) findViewById(R.id.startbutton);
+        final Button database =(Button)findViewById(R.id.database_button);
+        //checkbox declaration
+        final CheckBox want_user = (CheckBox) findViewById(R.id.newUserCheckBox);
+        final  CheckBox test_time = (CheckBox) findViewById(R.id.longorshort);
+
+
+        switch_act.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+//if they check yes to the adding profile part
+                if (want_user.isChecked()) {
+                    long_or_short = test_time.isChecked();
+                    Intent act2 = new Intent(view.getContext(), CustomerName.class);
+                    startActivity(act2);
+                }
+//if unchecked it goes to calibration
+                else {
+                    long_or_short = test_time.isChecked();
+                    Intent act2 = new Intent(view.getContext(), Calibration.class);
+                    startActivity(act2);
+                }
+            }
+        });
+        database.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent act2 = new Intent(view.getContext(),Password_screen.class);
+                startActivity(act2);
+
+
+                }});
+
+
+
+
+
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return true;
+    }
+    //call this if you want to fully restart the app using a button. put "this" inside the parenthesis
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return false;
+        }
+
+        return false;
     }
 
 

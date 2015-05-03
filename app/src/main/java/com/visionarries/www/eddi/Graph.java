@@ -15,6 +15,8 @@ import java.util.Arrays;
 
 /**
  * A straightforward example of using AndroidPlot to plot some data.
+ * This code is complicated and basically I just followed the library example given to me: http://androidplot.com/docs/quickstart/
+ * You'll notice I copy over things a lot, I'm not sure why, but the graphing on works if I do this instead of getting the arrays directly from the calc/test page
  */
 
 public class Graph extends WelcomeScreen

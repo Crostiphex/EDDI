@@ -67,8 +67,8 @@ public class Database_main extends WelcomeScreen {
 	public void onClick_GoHome(View v) {
        WelcomeScreen.doRestart(this);
 	}
-	
-	// Display an entire recordset to the screen.
+
+	// Display an entire recorded set to the screen.
 	private void displayRecordSet(Cursor cursor) {
 		String message = "";
         // populate the message from the cursor
@@ -79,8 +79,8 @@ public class Database_main extends WelcomeScreen {
 				// Process the data:
 				String name = cursor.getString(DBAdapter.COL_NAME);
 				double dom_index = cursor.getDouble(DBAdapter.COL_DOMINANCE_INDEX);
-				double id = cursor.getDouble(DBAdapter.COL_ROWID);
-                String right_time = cursor.getString(DBAdapter.COL_RIGHT_EYE_TIME);
+				double id = cursor.getDouble(DBAdapter.COL_ROW_ID);
+				String right_time = cursor.getString(DBAdapter.COL_RIGHT_EYE_TIME);
 
 				
 				// Append data to the message:
@@ -94,7 +94,9 @@ public class Database_main extends WelcomeScreen {
 		
 		// Close the cursor to avoid a resource leak.
 		cursor.close();
-		
+		//person can scroll through long list of test. They can click and seemingly edit but that's
+		// just the field it is displayed in there is  no way to edit the text, but rather just
+		// clear it or add more by retaking the test.
 		displayText(message);
 	}
 }
