@@ -16,58 +16,62 @@ public class Calculation extends WelcomeScreen implements TextToSpeech.OnInitLis
     //this is just for the graphing
     public static double joy[] = new double[TestPage.contrastR_false.length];
     public static double happy[] = new double[TestPage.contrastR_false.length];
-//    double x[] = {0.1,
-//            0.3,
-//            0.45,
-//            0.65,
-//            0.9
-//    };
-//  double y[] = {
-//            0.1300,
-//            0.7600,
-//            0.5600,
-//            0.8700,
-//            0.7000
-//
-//    };
+/*
+double x[] = {0.1,
+0.3,
+0.45,
+0.65,
+0.9
+};
+double y[] = {
+0.1300,
+0.7600,
+0.5600,
+0.8700,
+0.7000
+
+};
+*/
 public static double a = 0.;
     public static double b = 0.;
     public static double x0 = 0.;
-//    double x[] =  { 0.1,
-//            0.35,
-//            0.5,
-//            0.7,
-//            0.85,
-//            0.2,
-//            0.3,
-//            0.45,
-//            0.75,
-//            0.9,
-//            0.15,
-//            0.25,
-//            0.55,
-//            0.65,
-//            0.6
-//
-//    };
-//    double y[] =
-//            {0.1055,
-//             0.4836,
-//             0.7712,
-//             0.7554,
-//             0.8531,
-//                    0.1671,
-//                    0.4146,
-//                    0.6077,
-//                    0.9079,
-//                    0.8648,
-//                    0.1874,
-//                    0.3254,
-//                    0.6852,
-//                    0.8494,
-//                    0.878
-//
-//            };
+/*
+double x[] =  { 0.1,
+0.35,
+0.5,
+0.7,
+0.85,
+0.2,
+0.3,
+0.45,
+0.75,
+0.9,
+0.15,
+0.25,
+0.55,
+0.65,
+0.6
+
+};
+double y[] =
+{0.1055,
+0.4836,
+0.7712,
+0.7554,
+0.8531,
+0.1671,
+0.4146,
+0.6077,
+0.9079,
+0.8648,
+0.1874,
+0.3254,
+0.6852,
+0.8494,
+0.878
+
+};
+*/
 public String text;
     //<editor-fold desc="Initialization">
     //gathers the contrast and answers from test page
