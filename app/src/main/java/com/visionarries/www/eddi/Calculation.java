@@ -145,7 +145,7 @@ public String text;
         a = (1 / d) * (sx * sy - m * sxy);
         b = (1 / d) * (sx * sxy - sxx * sy);
         k = -a;
-        x0 =2 * Math.pow(10, -b / a);
+        x0 = 2 * Math.pow(10, -b / a);
         //error method was used from this http://mathworld.wolfram.com/LeastSquaresFitting.html
         x_ave = x_ave / m;
         y_ave = y_ave / m;
@@ -153,7 +153,7 @@ public String text;
         SSyy = syy - (m * y_ave * y_ave);
         SSxy = sxy - (m * x_ave * y_ave);
        // s = Math.pow((SSyy - (Math.pow(SSxy, 2) / SSxx)) / (m - 2), 1 / 2);
-      s  =Math.pow((SSyy-(SSxy*SSxy/SSxx))/(m-2),(.5));
+        s = Math.pow((SSyy - (SSxy * SSxy / SSxx)) / (m - 2), (.5));
         error_a = s * Math.pow((1 / m) + ((Math.pow(x_ave, 2) / SSxx)), (.5));
         error_b = s / Math.pow(SSxx,.5);
         error_x0 = x0*(b/a)*Math.pow(Math.pow(error_a / a, 2) + Math.pow(error_b / b, 2),.5);
