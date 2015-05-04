@@ -122,7 +122,7 @@ public String text;
 
 //opens the database
         openDB();
-        //this for loop will go through the values for the least fit squares, it makes a fit for the sigmoidal function
+        //this for loop will go through the values for the least fit squares, it makes a fit for the sigmoidal function, the theory is shown here: http://web.cecs.pdx.edu/~gerry/nmm/course/slides/ch09Slides.pdf
         for (int i = 0; i < m; i++) {
             x[i] = Math.log10(x[i]); //This is you want the x to be on base 10
             x_ave = x_ave + x[i];
