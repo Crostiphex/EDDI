@@ -46,7 +46,7 @@ public class Calibration extends Activity implements TextToSpeech.OnInitListener
 
     }
 
-    //moves the patter with the mouse touch pad
+    //moves the pattern with the mouse touch pad
     public boolean onGenericMotionEvent(MotionEvent event) {
         ViewGroup.MarginLayoutParams mlp = (ViewGroup.MarginLayoutParams) left_ring.getLayoutParams();
         ViewGroup.MarginLayoutParams plm = (ViewGroup.MarginLayoutParams) right_ring.getLayoutParams();
@@ -71,7 +71,7 @@ public class Calibration extends Activity implements TextToSpeech.OnInitListener
         switch (scroll_action) {
             case MotionEvent.ACTION_SCROLL:
                 // finger leaves the screen
-                if (a % 2 == 0) {//if you click and the remainder is even or odd it will control a different mouse
+                if (a % 2 == 0) {//if you click and the remainder is even or odd it will control a different image (left or right)
                     if (event.getAxisValue(MotionEvent.AXIS_HSCROLL) < 0.0f) {
                         mlp.leftMargin = mlp.leftMargin - 5;
                         left_ring.setLayoutParams(mlp);
